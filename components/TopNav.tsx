@@ -29,10 +29,6 @@ const TopNav = () => (
     </div>
 
     <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: 'Roboto Condensed', sans-serif;;
-      }
       nav {
         box-sizing: border-box;
         height: 44px;

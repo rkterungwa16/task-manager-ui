@@ -6,7 +6,7 @@ import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
 
 const client = new W3CWebSocket('ws://127.0.0.1:8000');
 
-const Home = () => {
+const Dashboard = () => {
   useEffect(() => {
     client.onopen = () => {
       console.log('WebSocket Client Connected');
@@ -35,4 +35,4 @@ const Home = () => {
     </div>
   )
 }
-export default Home
+export default Dashboard

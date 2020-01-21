@@ -1,20 +1,7 @@
-import React, { useEffect } from 'react'
-import Head from 'next/head'
-import TopNav from '../components/TopNav'
+import React, { useEffect } from 'react';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
-
-const client = new W3CWebSocket('ws://127.0.0.1:8000');
 
 const Home = () => {
-  useEffect(() => {
-    client.onopen = () => {
-      console.log('WebSocket Client Connected');
-    };
-    client.onmessage = (message) => {
-      console.log(message);
-    };
-  });
   return (
     <div>
       <div className="container">
@@ -31,7 +18,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <style jsx>{`
+      <style jsx global>{`
+        body {
+          margin: 0;
+          font-family: 'Source Sans Pro', sans-serif;
+        }
         .container {
           top: 0;
           width: 100%;
