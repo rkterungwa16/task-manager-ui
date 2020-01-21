@@ -20,11 +20,11 @@ const TopNav = () => (
     <div className="nav_right-icon">
       <Notifications
         color="#c23d38"
-        fontSize="35px"
+        fontSize="30px"
       />
       <Settings
         color="#c23d38"
-        fontSize="35px"
+        fontSize="30px"
       />
     </div>
 
