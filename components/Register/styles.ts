@@ -1,17 +1,17 @@
 
 export const inputTextStyle = {
-  fontSize: 15,
-  marginTop: 10,
-  marginLeft: 30,
+  fontSize: "15px",
+  marginTop: "10px",
+  marginLeft: "30px",
   fontWeight: 600,
-  width: 80,
+  width: "80%",
   lineHeight: "normal",
-  letterSpacing: 1,
+  letterSpacing: "1",
   color: "#e1e1e1"
 }
 
 export const welcomeTextStyle = {
-  fontSize: 32,
+  fontSize: "32px",
   lineHeight: "normal",
   textAlign: "center",
   color: "#767676",
@@ -19,16 +19,16 @@ export const welcomeTextStyle = {
 }
 
 export const getStartedTextStyle = {
-  fontSize: 14,
-  width: 80,
+  fontSize: "14px",
+  width: "80%",
   lineHeight: "normal",
   textAlign: "center",
   color: "#767676"
 }
 
 export const buttonStyle = {
-  marginTop: 10,
-  marginBottom: 20,
+  marginTop: "10px",
+  marginBottom: "20px",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
   width: 80
@@ -39,10 +39,10 @@ export const alreadyHaveAnAccountTextStyle = {
   alignSelf: "center",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: 10,
-  marginBottom: 20,
-  width: 80,
-  fontSize: 16,
+  marginTop: "10px",
+  marginBottom: "20px",
+  width: "80%",
+  fontSize: "16px",
   lineHeight: "normal",
   textAlign: "center",
   color: "#767676"
@@ -52,8 +52,8 @@ export const formWrapperStyle = {
   display: "flex",
   flexDirection: "column",
   width: "40%",
-  height: 100,
-  padding: 15,
+  height: "100%",
+  padding: "15px",
   backgroundColor: "#F8F8F8"
 }
 

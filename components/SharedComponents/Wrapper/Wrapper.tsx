@@ -11,7 +11,7 @@ export interface WrapperStyleProps {
   width?: string | number;
   height?: string | number;
   flexDirection?: string | number;
-  padding?: number;
+  padding?: string;
   backgroundColor?: string;
 }
 export const Wrapper = (props: WrapperProps) => (

@@ -40,7 +40,7 @@ const TopNav = () => (
         align-items: center;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
-        justify-content: space-around;
+        justify-content: space-between;
         width: 100vw;
         border-bottom: solid 1px #e1e1e1;
         -webkit-transition: height 200ms ease-in;
@@ -52,7 +52,11 @@ const TopNav = () => (
         text-decoration: none;
         font-size: 13px;
       }
+      .nav_left-icon {
+        margin-left: 88px;
+      }
       .nav_right-icon {
+        margin-right: 60px;
         width: 15%;
         display: flex;
         justify-content: space-around;

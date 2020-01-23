@@ -25,11 +25,12 @@ const Dashboard = () => {
       <div className="dashboard-container">
         <LeftSideBar />
       </div>
-      <style jsx>{`
+      <style jsx global>{`
         .dashboard-container {
           top: 0;
           width: 100%;
           position: absolute;
+          font-family: Source Sans Pro, sans-serif;
         }
       `}</style>
     </div>
