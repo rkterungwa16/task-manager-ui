@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
+import React from 'react';
 
 const Home = () => {
   return (
-    <div>
+    <>
       <div className="container">
         <div className="home_wrapper">
           <img
@@ -72,7 +71,7 @@ const Home = () => {
           padding: 10px;
         }
       `}</style>
-    </div>
+    </>
   )
 }
 export default Home

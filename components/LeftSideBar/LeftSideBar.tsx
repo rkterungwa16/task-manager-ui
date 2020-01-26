@@ -19,7 +19,7 @@ const LeftSideBar = () => (
           overflow-x: hidden;
           overflow-y: hidden;
           border-right: 1px solid #e1e1e1;
-          background-color: #fff;
+          background-color: #ededed;
           padding-left: 42px;
           padding-right: 10px;
           margin-left: 0;

@@ -18,6 +18,7 @@ class NabiDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div id="modal-root" />
         </body>
       </html>
     );
