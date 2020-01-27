@@ -1,5 +1,5 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 import Notifications from "react-ionicons/lib/IosNotificationsOutline";
 import Settings from "react-ionicons/lib/IosSettingsOutline";
@@ -13,19 +13,14 @@ const TopNav = () => (
             className="nav_logo-image"
             src="https://res.cloudinary.com/doy0uyv63/image/upload/c_scale,h_40/v1579521214/task-manager_zob3ne.png"
             alt="Task Manager"
-          /></a>
+          />
+        </a>
       </Link>
     </div>
 
     <div className="nav_right-icon">
-      <Notifications
-        color="#c23d38"
-        fontSize="30px"
-      />
-      <Settings
-        color="#c23d38"
-        fontSize="30px"
-      />
+      <Notifications color="#c23d38" fontSize="30px" />
+      <Settings color="#c23d38" fontSize="30px" />
     </div>
 
     <style jsx>{`
@@ -45,7 +40,7 @@ const TopNav = () => (
         border-bottom: solid 1px #e1e1e1;
         -webkit-transition: height 200ms ease-in;
         transition: height 200ms ease-in;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
       }
       a {
         color: #067df7;
@@ -67,6 +62,6 @@ const TopNav = () => (
       }
     `}</style>
   </nav>
-)
+);
 
-export default TopNav
+export default TopNav;

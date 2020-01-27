@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Home = () => {
   return (
@@ -20,7 +20,7 @@ const Home = () => {
       <style jsx global>{`
         body {
           margin: 0;
-          font-family: 'Source Sans Pro', sans-serif;
+          font-family: "Source Sans Pro", sans-serif;
         }
         .container {
           top: 0;
@@ -72,6 +72,6 @@ const Home = () => {
         }
       `}</style>
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;

@@ -1,37 +1,43 @@
-export interface TextProps {
-  text?: string;
-  style?: TextStyleProps;
-  children?: React.ReactNode;
-}
-
-export interface TextStyleProps {
+export interface StyleProps {
+  // Margin Props
   marginTop?: string;
   marginLeft?: string;
   marginBottom?: string;
   marginRight?: string;
   margin?: string;
+  // Padding Props
   paddingLeft?: string;
   paddingRight?: string;
   paddingTop?: string;
   paddingBottom?: string;
   padding?: string;
   textAlign?: string;
+  textIndent?: string;
   color?: string;
-  fontWeight?: string | number;
   lineHeight?: string;
+  fontWeight?: string | number;
   fontSize?: string;
   textTransform?: string;
+  textDecoration?: string;
   letterSpacing?: string;
   width?: string;
+  height?: string;
   display?: string;
   justifyContent?: string;
   alignItems?: string;
   alignSelf?: string;
   wordBreak?: string;
+  // Border Props
+  borderRadius?: string;
+  border?: string;
+  borderBottom?: string;
+  backgroundColor?: string;
+  zIndex?: string;
+  boxShadow?: string;
   [x: string]: any;
 }
 
-const cssProperties = {
+export const cssProperties = {
   marginTop: "margin-top",
   marginLeft: "margin-left",
   marginBottom: "margin-bottom",
@@ -49,44 +55,36 @@ const cssProperties = {
   fontSize: "font-size",
   textTransform: "text-transform",
   letterSpacing: "letter-spacing",
+  textIndent: "text-indent",
+  textDecoration: "text-decoration",
   width: "width",
+  height: "height",
   display: "display",
   justifyContent: "justify-content",
   alignItems: "align-items",
   alignSelf: "align-self",
-  wordBreak: "word-break"
-}
+  wordBreak: "word-break",
+  borderRadius: "border-radius",
+  border: "border",
+  borderBottom: "border-bottom",
+  backgroundColor: "background-color",
+  zIndex: "z-index",
+  boxShadow: "box-shadow"
+};
 
-const mapToCssProperties = (props: TextStyleProps) => {
-  const cssStyle = Object.keys(props).reduce((previousValue: any, currentValue: string) => {
-    let containsCssProps = cssProperties[currentValue];
-    return {
-      ...previousValue,
-      [containsCssProps]: props[currentValue]
-    }
-  }, {});
+export const mapToCssProperties = (props: StyleProps) => {
+  const cssStyle = Object.keys(props).reduce(
+    (previousValue: any, currentValue: string) => {
+      const containsCssProps = cssProperties[currentValue];
+      return {
+        ...previousValue,
+        [containsCssProps]: props[currentValue]
+      };
+    },
+    {}
+  );
 
   return `${JSON.stringify(cssStyle)}`
-  .replace(/[\" {}]/g, "")
-  .replace(/,/g, ";");
-}
-
-export const Text = (props: TextProps) => {
-  return (
-    <>
-      <span className="text">
-        {props.text}
-        {props.children}
-      </span>
-      <style jsx>
-        {
-          `
-        .text {
-          ${mapToCssProperties(props.style)}
-        }
-        `
-        }
-      </style>
-    </>
-  )
-}
+    .replace(/(\",\")/g, ";")
+    .replace(/[\"{}]/g, "");
+};

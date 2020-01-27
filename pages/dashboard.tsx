@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
-import Head from 'next/head'
-import TopNav from '../components/TopNav'
+import Head from "next/head";
+import React, { useEffect } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import LeftSideBar from "../components/LeftSideBar/LeftSideBar";
-import { ModalProvider } from "../components/Modal";
+import LeftSideBar from "../src/components/LeftSideBar/LeftSideBar";
+import { ModalProvider } from "../src/components/Modal";
+import TopNav from "../src/components/TopNav";
 
-const client = new W3CWebSocket('ws://127.0.0.1:8000');
+const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
 const Dashboard = () => {
   useEffect(() => {
     client.onopen = () => {
-      console.log('WebSocket Client Connected');
+      console.log("WebSocket Client Connected");
     };
-    client.onmessage = (message) => {
+    client.onmessage = message => {
       console.log(message);
     };
   });
@@ -26,9 +26,7 @@ const Dashboard = () => {
         <TopNav />
         <div className="dashboard-container">
           <LeftSideBar />
-          <div className="right-view">
-
-          </div>
+          <div className="right-view"></div>
         </div>
       </ModalProvider>
       <style jsx global>{`
@@ -50,6 +48,6 @@ const Dashboard = () => {
         }
       `}</style>
     </div>
-  )
-}
-export default Dashboard
+  );
+};
+export default Dashboard;

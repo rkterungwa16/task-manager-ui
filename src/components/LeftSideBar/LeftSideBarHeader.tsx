@@ -5,14 +5,10 @@ const LeftSideBarHeader = () => (
   <>
     <header className="project-list_header">
       <button type="button" className="btn-long">
-        <ArrowForward
-          fontSize="25px"
-        />
+        <ArrowForward fontSize="25px" />
         Projects
       </button>
-      <Add
-        fontSize="45px"
-      />
+      <Add fontSize="45px" />
     </header>
     <style jsx>{`
       .project-list_header {
@@ -40,5 +36,5 @@ const LeftSideBarHeader = () => (
       }
     `}</style>
   </>
-)
+);
 export default LeftSideBarHeader;

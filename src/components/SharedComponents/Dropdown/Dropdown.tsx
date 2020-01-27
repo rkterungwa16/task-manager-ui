@@ -16,58 +16,37 @@ const dropdownItemTextStyle = {
   color: "#8d8d8d",
   fontWeight: "100",
   marginLeft: "5px"
-}
+};
 export const Dropdown = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log("is modal open", isModalOpen);
   return (
     <>
-      <div className="dropdown-content">
-        <DropdownItem
-          onClick={() => setIsModalOpen(true)}
-        >
+      <div>
+        <DropdownItem onClick={() => setIsModalOpen(true)}>
           <ArrowUpIcon />
-          <Text
-            text="Add Project Above"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Add Project Above" style={dropdownItemTextStyle} />
         </DropdownItem>
         <DropdownItem>
           <ArrowDownIcon />
-          <Text
-            text="Add Project Below"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Add Project Below" style={dropdownItemTextStyle} />
         </DropdownItem>
         <Separator />
         <DropdownItem>
           <EditIcon />
-          <Text
-            text="Edit Project"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Edit Project" style={dropdownItemTextStyle} />
         </DropdownItem>
         <DropdownItem>
           <FavoriteIcon />
-          <Text
-            text="Add to favorite"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Add to favorite" style={dropdownItemTextStyle} />
         </DropdownItem>
         <Separator />
         <DropdownItem>
           <DeleteIcon />
-          <Text
-            text="Delete Project"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Delete Project" style={dropdownItemTextStyle} />
         </DropdownItem>
         <DropdownItem>
           <ArchiveIcon />
-          <Text
-            text="Archive Project"
-            style={dropdownItemTextStyle}
-          />
+          <Text text="Archive Project" style={dropdownItemTextStyle} />
         </DropdownItem>
       </div>
       {isModalOpen && (
@@ -77,16 +56,12 @@ export const Dropdown = () => {
               event.preventDefault();
               console.log("modal submit");
             }}
-          >
-            <p>App Modal</p>
-            <button type="submit">Go</button>
-          </form>
+          ></form>
         </Modal>
       )}
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             display: block;
             position: absolute;
             background-color: #fff;
@@ -97,9 +72,8 @@ export const Dropdown = () => {
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
             border-radius: 4px;
           }
-        `
-        }
+        `}
       </style>
     </>
-  )
-}
+  );
+};

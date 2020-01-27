@@ -1,4 +1,3 @@
-
 export const inputTextStyle = {
   fontSize: "15px",
   marginTop: "10px",
@@ -8,7 +7,7 @@ export const inputTextStyle = {
   lineHeight: "normal",
   letterSpacing: "1",
   color: "#e1e1e1"
-}
+};
 
 export const welcomeTextStyle = {
   fontSize: "32px",
@@ -16,7 +15,7 @@ export const welcomeTextStyle = {
   textAlign: "center",
   color: "#767676",
   fontWeight: 600
-}
+};
 
 export const getStartedTextStyle = {
   fontSize: "14px",
@@ -24,7 +23,7 @@ export const getStartedTextStyle = {
   lineHeight: "normal",
   textAlign: "center",
   color: "#767676"
-}
+};
 
 export const buttonStyle = {
   marginTop: "10px",
@@ -32,7 +31,7 @@ export const buttonStyle = {
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
   width: 80
-}
+};
 
 export const alreadyHaveAnAccountTextStyle = {
   display: "flex",
@@ -46,7 +45,7 @@ export const alreadyHaveAnAccountTextStyle = {
   lineHeight: "normal",
   textAlign: "center",
   color: "#767676"
-}
+};
 
 export const formWrapperStyle = {
   display: "flex",
@@ -55,7 +54,7 @@ export const formWrapperStyle = {
   height: "100%",
   padding: "15px",
   backgroundColor: "#F8F8F8"
-}
+};
 
 export const formImageWrapperStyle = {
   position: "relative",
@@ -63,4 +62,34 @@ export const formImageWrapperStyle = {
   alignItems: "center",
   display: "flex",
   flexDirection: "column"
-}
+};
+
+export const registerFormInputStyle = {
+  display: "flex",
+  zIndex: "3",
+  alignSelf: "center",
+  marginTop: "10px",
+  marginBottom: "20px",
+  backgroundColor: "#FFFFFF",
+  borderRadius: "8px",
+  border: "none",
+  width: "80%",
+  height: "48px",
+  textIndent: "25px",
+  fontSize: "14px",
+  lineHeight: "normal",
+  color: "#767676",
+  fontWeight: "600",
+  letterSpacing: "1.5px",
+  boxShadow: "0 1px 2px rgba(0,0,0,0.15)"
+};
+
+export const linkButtonStyle = {
+  textDecoration: "none",
+  fontSize: "16px",
+  lineHeight: "normal",
+  textAlign: "center",
+  color: "#767676",
+  padding: "3px",
+  borderBottom: "2px solid #767676"
+};

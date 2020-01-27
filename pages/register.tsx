@@ -1,3 +1,3 @@
-import Register from "../components/Register/Register";
+import Register from "../src/components/Register/Register";
 
 export default Register;

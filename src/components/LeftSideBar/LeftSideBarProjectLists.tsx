@@ -5,10 +5,10 @@ import { Text, Dropdown } from "../SharedComponents";
 const projectTextStyle = {
   fontSize: "16px",
   color: "#8d8d8d",
-  fontWeight: "600",
+  fontWeight: "100",
   wordBreak: "break-all",
   marginLeft: "5px"
-}
+};
 const LeftSideBarProjectLists = () => (
   <>
     <div className="project_lists-wrapper">
@@ -17,15 +17,9 @@ const LeftSideBarProjectLists = () => (
           <div className="project_item-container">
             <div className="project_item-wrapper">
               <div className="project_color" />
-              <Text
-                text="Tiv Language Studies"
-                style={projectTextStyle}
-              />
+              <Text text="Tiv Language Studies" style={projectTextStyle} />
               <div className="project_menu-icon">
-                <MoreIcon
-                  fontSize="35px"
-                  color="#8d8d8d"
-                />
+                <MoreIcon fontSize="35px" color="#8d8d8d" />
               </div>
             </div>
           </div>
@@ -39,10 +33,7 @@ const LeftSideBarProjectLists = () => (
                 style={projectTextStyle}
               />
               <div className="project_menu-icon">
-                <MoreIcon
-                  fontSize="35px"
-                  color="#8d8d8d"
-                />
+                <MoreIcon fontSize="35px" color="#8d8d8d" />
               </div>
             </div>
           </div>
@@ -92,8 +83,7 @@ const LeftSideBarProjectLists = () => (
         position: absolute;
         right: 4px;
       }
-
     `}</style>
   </>
-)
+);
 export default LeftSideBarProjectLists;

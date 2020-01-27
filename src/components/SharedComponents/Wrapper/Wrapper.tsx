@@ -1,4 +1,3 @@
-
 export interface WrapperProps {
   style?: WrapperStyleProps;
   children?: React.ReactNode;
@@ -16,13 +15,10 @@ export interface WrapperStyleProps {
 }
 export const Wrapper = (props: WrapperProps) => (
   <>
-    <div className="wrapper">
-      {props.children}
-    </div>
+    <div>{props.children}</div>
     <style jsx>
-      {
-        `
-        .wrapper {
+      {`
+         {
           display: ${props.style.display};
           position: ${props.style.position};
           width: ${props.style.width};
@@ -31,8 +27,7 @@ export const Wrapper = (props: WrapperProps) => (
           padding: ${props.style.padding}px;
           background-color: ${props.style.backgroundColor};
         }
-        `
-      }
+      `}
     </style>
   </>
-)
+);
