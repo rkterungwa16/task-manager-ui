@@ -1,6 +1,7 @@
+import { mapToCssProperties, StyleProps } from "../../../utils";
 export interface ButtonProps {
   text?: string;
-  style?: ButtonStyleProps;
+  style?: StyleProps;
 }
 
 export interface ButtonStyleProps {
@@ -16,24 +17,7 @@ export const Button = (props: ButtonProps) => (
     <button>{props.text}</button>
     <style jsx>{`
        {
-        display: flex;
-        align-self: center;
-        justify-content: center;
-        margin-top: ${props.style.marginTop}px;
-        margin-bottom: ${props.style.marginBottom}px;
-        background-color: ${props.style.backgroundColor};
-        border-radius: 8px;
-        border: none;
-        width: ${props.style.width}%;
-        height: 48px;
-        font-size: 14px;
-        line-height: normal;
-        text-align: center;
-        letter-spacing: 2px;
-        align-items: center;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: ${props.style.color};
+        ${mapToCssProperties(props.style)}
       }
     `}</style>
   </>

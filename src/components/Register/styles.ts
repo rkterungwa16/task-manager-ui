@@ -26,11 +26,24 @@ export const getStartedTextStyle = {
 };
 
 export const buttonStyle = {
+  display: "flex",
+  alignSelf: "center",
+  justifyContent: "center",
+  borderRadius: "8px",
+  border: "none",
+  height: "48px",
+  fontSize: "14px",
+  lineHeight: "normal",
+  textAlign: "center",
+  letterSpacing: "2px",
+  alignItems: "center",
+  textTransform: "uppercase",
+  fontWeight: "600",
   marginTop: "10px",
   marginBottom: "20px",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
-  width: 80
+  width: "80%"
 };
 
 export const alreadyHaveAnAccountTextStyle = {

@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 
 const Context = React.createContext(null);
@@ -26,7 +26,6 @@ export function Modal({ onClose, children, ...props }) {
         <ModalOverlay>
           <ModalDialog {...props}>
             {children}
-            <button onClick={onClose}>Close</button>
           </ModalDialog>
         </ModalOverlay>,
         modalNode
@@ -89,15 +88,15 @@ export const ModalDialog = (props: ModalDialogProps) => (
         display: flex;
         flex-direction: column;
         background-color: #fff;
-        min-width: 210px;
+        min-width: 270px;
         border: 0px solid rgba(0, 0, 0, 0.25);
         box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
         border-radius: 4px;
         background: white;
         padding: 20px;
         position: absolute;
-        top: 50%;
-        left: 50%;
+        left: 56%;
+        top: 30%;
         transform: translate(-50%, -50%);
         z-index: 1;
       `}

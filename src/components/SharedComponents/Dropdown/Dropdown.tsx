@@ -1,15 +1,18 @@
 import { useState } from "react";
-import EditIcon from "react-ionicons/lib/IosCreateOutline";
-import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
-import FavoriteIcon from "react-ionicons/lib/IosHeartOutline";
 import ArchiveIcon from "react-ionicons/lib/IosArchiveOutline";
-import ArrowUpIcon from "react-ionicons/lib/IosArrowRoundUp";
 import ArrowDownIcon from "react-ionicons/lib/IosArrowRoundDown";
+import ArrowUpIcon from "react-ionicons/lib/IosArrowRoundUp";
+import EditIcon from "react-ionicons/lib/IosCreateOutline";
+import FavoriteIcon from "react-ionicons/lib/IosHeartOutline";
+import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
 
 import { Modal } from "../../Modal";
+import { Button } from "../Button";
+import {FormInput } from "../FormInput"
+import { Separator } from "../Separator";
 import { Text } from "../Text";
 import { DropdownItem } from "./DropdownItem";
-import { Separator } from "../Separator";
+import { buttonStyle, dropdownFormInputStyle } from "./style";
 
 const dropdownItemTextStyle = {
   fontSize: "16px",
@@ -51,12 +54,13 @@ export const Dropdown = () => {
       </div>
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
-          <form
-            onSubmit={event => {
-              event.preventDefault();
-              console.log("modal submit");
-            }}
-          ></form>
+          {/* conditional render different form types based on item clicked */}
+          <FormInput
+            type="password"
+            style={dropdownFormInputStyle}
+            name="confirmPassword"
+          />
+          <Button text="Add" style={buttonStyle} />
         </Modal>
       )}
       <style jsx>

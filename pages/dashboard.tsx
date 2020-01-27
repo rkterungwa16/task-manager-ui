@@ -40,7 +40,7 @@ const Dashboard = () => {
         .right-view {
           width: 100%;
           height: 100vh;
-          position: relative;
+          position: fixed;
           top: 0;
           left: 352px;
           border-left: 1px solid #ededed;
