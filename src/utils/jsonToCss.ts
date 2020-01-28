@@ -34,6 +34,7 @@ export interface StyleProps {
   backgroundColor?: string;
   zIndex?: string;
   boxShadow?: string;
+  cursor?: string;
   [x: string]: any;
 }
 
@@ -69,7 +70,8 @@ export const cssProperties = {
   borderBottom: "border-bottom",
   backgroundColor: "background-color",
   zIndex: "z-index",
-  boxShadow: "box-shadow"
+  boxShadow: "box-shadow",
+  cursor: "cursor"
 };
 
 export const mapToCssProperties = (props: StyleProps) => {

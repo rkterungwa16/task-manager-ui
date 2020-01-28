@@ -2,7 +2,7 @@ export const dropdownFormInputStyle = {
   display: "flex",
   zIndex: "3",
   alignSelf: "center",
-  marginTop: "10px",
+  marginTop: "20px",
   marginBottom: "20px",
   backgroundColor: "#FFFFFF",
   borderRadius: "8px",
@@ -32,5 +32,6 @@ export const buttonStyle = {
   alignItems: "center",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
-  width: "70px"
+  width: "70px",
+  cursor: "pointer"
 };

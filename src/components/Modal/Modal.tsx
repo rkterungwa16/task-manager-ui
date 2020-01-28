@@ -93,7 +93,6 @@ export const ModalDialog = (props: ModalDialogProps) => (
         box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
         border-radius: 4px;
         background: white;
-        padding: 20px;
         position: absolute;
         left: 56%;
         top: 30%;

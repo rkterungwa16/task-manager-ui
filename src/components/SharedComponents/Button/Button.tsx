@@ -1,6 +1,7 @@
 import { mapToCssProperties, StyleProps } from "../../../utils";
 export interface ButtonProps {
   text?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   style?: StyleProps;
 }
 
@@ -14,7 +15,9 @@ export interface ButtonStyleProps {
 
 export const Button = (props: ButtonProps) => (
   <>
-    <button>{props.text}</button>
+    <button
+      onClick={props.onClick}
+    >{props.text}</button>
     <style jsx>{`
        {
         ${mapToCssProperties(props.style)}

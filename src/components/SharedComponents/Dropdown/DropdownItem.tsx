@@ -5,7 +5,9 @@ export interface DropdownItemProps {
 
 export const DropdownItem = (props: DropdownItemProps) => (
   <>
-    <div onClick={props.onClick}>{props.children}</div>
+    <div
+      onClick={props.onClick}
+    >{props.children}</div>
     <style jsx>
       {`
          {

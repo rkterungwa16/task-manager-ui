@@ -8,7 +8,7 @@ import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
 
 import { Modal } from "../../Modal";
 import { Button } from "../Button";
-import {FormInput } from "../FormInput"
+import { FormInput } from "../FormInput"
 import { Separator } from "../Separator";
 import { Text } from "../Text";
 import { DropdownItem } from "./DropdownItem";
@@ -20,21 +20,50 @@ const dropdownItemTextStyle = {
   fontWeight: "100",
   marginLeft: "5px"
 };
+
+export interface DefaultDropdownModalStateInterface {
+  addProjectAbove?: boolean;
+  addProjectBelow?: boolean;
+  editProject?: boolean;
+  addToFavorite?: boolean;
+  deleteProject?: boolean;
+  archiveProject?: boolean;
+}
+
 export const Dropdown = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const defaultDropdownModalStates = {
+    addProject: false,
+    editProject: false,
+    addToFavorite: false,
+    deleteProject: false,
+    archiveProject: false
+  }
+  const [isModalOpen, setIsModalOpen] = useState(defaultDropdownModalStates);
   return (
     <>
       <div>
-        <DropdownItem onClick={() => setIsModalOpen(true)}>
+        <DropdownItem
+          onClick={
+            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
+          }
+        >
           <ArrowUpIcon />
           <Text text="Add Project Above" style={dropdownItemTextStyle} />
         </DropdownItem>
-        <DropdownItem>
+        <DropdownItem
+          onClick={
+            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
+          }
+        >
           <ArrowDownIcon />
           <Text text="Add Project Below" style={dropdownItemTextStyle} />
         </DropdownItem>
         <Separator />
-        <DropdownItem>
+        <DropdownItem
+           onClick={
+            () => setIsModalOpen({ ...defaultDropdownModalStates, editProject: true })
+          }
+        >
           <EditIcon />
           <Text text="Edit Project" style={dropdownItemTextStyle} />
         </DropdownItem>
@@ -52,16 +81,33 @@ export const Dropdown = () => {
           <Text text="Archive Project" style={dropdownItemTextStyle} />
         </DropdownItem>
       </div>
-      {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          {/* conditional render different form types based on item clicked */}
+      {isModalOpen.addProject && (
+        <DropdownModalContent
+          headerText="Add project"
+          onClick={
+            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: false })
+          }
+        >
           <FormInput
             type="password"
             style={dropdownFormInputStyle}
             name="confirmPassword"
           />
-          <Button text="Add" style={buttonStyle} />
-        </Modal>
+        </DropdownModalContent>
+      )}
+      {isModalOpen.editProject && (
+        <DropdownModalContent
+          headerText="Edit project"
+          onClick={
+            () => setIsModalOpen({ ...defaultDropdownModalStates, editProject: false })
+          }
+        >
+          <FormInput
+            type="password"
+            style={dropdownFormInputStyle}
+            name="confirmPassword"
+          />
+        </DropdownModalContent>
       )}
       <style jsx>
         {`
@@ -81,3 +127,82 @@ export const Dropdown = () => {
     </>
   );
 };
+
+export interface ModalHeaderProps {
+  children?: React.ReactNode;
+}
+
+export const ModalHeader = (props: ModalHeaderProps) => (
+  <>
+    <div>
+      {props.children}
+    </div>
+    <style jsx>
+      {
+        `
+        {
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+          background-color: #ededed;
+          color: #767676;
+          font-size: 20px;
+        }
+        `
+      }
+    </style>
+  </>
+)
+
+export interface RowProps {
+  children?: React.ReactNode;
+}
+export const Row = (props: RowProps) => (
+  <>
+    <div>
+      {props.children}
+    </div>
+    <style jsx>
+      {
+        `
+          {
+            display: flex;
+            align-self: center;
+            width: 80%;
+            justify-content: space-between;
+            padding: 15px;
+          }
+        `
+      }
+    </style>
+  </>
+)
+
+export interface DropdownModalContentProps {
+  children?: React.ReactNode;
+  headerText?: string;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+export const DropdownModalContent = (props: DropdownModalContentProps) => (
+  <>
+    <Modal
+      onClose={props.onClick}
+    >
+      <ModalHeader>
+        {props.headerText}
+      </ModalHeader>
+      {props.children}
+      <Row>
+        <Button text="add" style={buttonStyle} />
+        <Button
+          text="cancel"
+          style={buttonStyle}
+          onClick={props.onClick}
+        />
+      </Row>
+    </Modal>
+  </>
+)
