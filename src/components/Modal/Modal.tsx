@@ -58,13 +58,15 @@ export const ModalOverlay = (props: ModalOverlayProps) => (
     {props.children}
     <style jsx>
       {`
-        animation: fadeIn 200ms ease-out;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.3);
+        {
+          animation: fadeIn 200ms ease-out;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.3);
+        }
 
         @keyframes fadeIn {
           from {

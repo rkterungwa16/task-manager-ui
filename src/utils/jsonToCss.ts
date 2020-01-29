@@ -31,6 +31,9 @@ export interface StyleProps {
   borderRadius?: string;
   border?: string;
   borderBottom?: string;
+  borderLeft?: string;
+  borderTop?: string;
+  borderRight?: string;
   backgroundColor?: string;
   zIndex?: string;
   boxShadow?: string;
@@ -68,6 +71,9 @@ export const cssProperties = {
   borderRadius: "border-radius",
   border: "border",
   borderBottom: "border-bottom",
+  borderLeft: "border-left",
+  borderRight: "border-right",
+  borderTop: "border-top",
   backgroundColor: "background-color",
   zIndex: "z-index",
   boxShadow: "box-shadow",

@@ -111,7 +111,8 @@ export const Dropdown = () => {
       )}
       <style jsx>
         {`
-           {
+          {
+            animation: fadeIn 200ms ease-out;
             display: block;
             position: absolute;
             background-color: #fff;
@@ -121,6 +122,11 @@ export const Dropdown = () => {
             border: 0px solid rgba(0, 0, 0, 0.25);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
             border-radius: 4px;
+          }
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
           }
         `}
       </style>
