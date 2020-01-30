@@ -24,9 +24,7 @@ export function Modal({ onClose, children, ...props }) {
   return modalNode
     ? ReactDOM.createPortal(
         <ModalOverlay>
-          <ModalDialog {...props}>
-            {children}
-          </ModalDialog>
+          <ModalDialog {...props}>{children}</ModalDialog>
         </ModalOverlay>,
         modalNode
       )
@@ -58,7 +56,7 @@ export const ModalOverlay = (props: ModalOverlayProps) => (
     {props.children}
     <style jsx>
       {`
-        {
+         {
           animation: fadeIn 200ms ease-out;
           position: absolute;
           top: 0;

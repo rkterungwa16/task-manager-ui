@@ -15,9 +15,7 @@ export interface ButtonStyleProps {
 
 export const Button = (props: ButtonProps) => (
   <>
-    <button
-      onClick={props.onClick}
-    >{props.text}</button>
+    <button onClick={props.onClick}>{props.text}</button>
     <style jsx>{`
        {
         ${mapToCssProperties(props.style)}

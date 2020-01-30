@@ -8,7 +8,7 @@ import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
 
 import { Modal } from "../../Modal";
 import { Button } from "../Button";
-import { FormInput } from "../FormInput"
+import { FormInput } from "../FormInput";
 import { Separator } from "../Separator";
 import { Text } from "../Text";
 import { DropdownItem } from "./DropdownItem";
@@ -37,22 +37,22 @@ export const Dropdown = () => {
     addToFavorite: false,
     deleteProject: false,
     archiveProject: false
-  }
+  };
   const [isModalOpen, setIsModalOpen] = useState(defaultDropdownModalStates);
   return (
     <>
       <div>
         <DropdownItem
-          onClick={
-            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
+          onClick={() =>
+            setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
           }
         >
           <ArrowUpIcon />
           <Text text="Add Project Above" style={dropdownItemTextStyle} />
         </DropdownItem>
         <DropdownItem
-          onClick={
-            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
+          onClick={() =>
+            setIsModalOpen({ ...defaultDropdownModalStates, addProject: true })
           }
         >
           <ArrowDownIcon />
@@ -60,8 +60,8 @@ export const Dropdown = () => {
         </DropdownItem>
         <Separator />
         <DropdownItem
-           onClick={
-            () => setIsModalOpen({ ...defaultDropdownModalStates, editProject: true })
+          onClick={() =>
+            setIsModalOpen({ ...defaultDropdownModalStates, editProject: true })
           }
         >
           <EditIcon />
@@ -84,8 +84,8 @@ export const Dropdown = () => {
       {isModalOpen.addProject && (
         <DropdownModalContent
           headerText="Add project"
-          onClick={
-            () => setIsModalOpen({ ...defaultDropdownModalStates, addProject: false })
+          onClick={() =>
+            setIsModalOpen({ ...defaultDropdownModalStates, addProject: false })
           }
         >
           <FormInput
@@ -98,8 +98,11 @@ export const Dropdown = () => {
       {isModalOpen.editProject && (
         <DropdownModalContent
           headerText="Edit project"
-          onClick={
-            () => setIsModalOpen({ ...defaultDropdownModalStates, editProject: false })
+          onClick={() =>
+            setIsModalOpen({
+              ...defaultDropdownModalStates,
+              editProject: false
+            })
           }
         >
           <FormInput
@@ -111,7 +114,7 @@ export const Dropdown = () => {
       )}
       <style jsx>
         {`
-          {
+           {
             animation: fadeIn 200ms ease-out;
             display: block;
             position: absolute;
@@ -140,13 +143,10 @@ export interface ModalHeaderProps {
 
 export const ModalHeader = (props: ModalHeaderProps) => (
   <>
-    <div>
-      {props.children}
-    </div>
+    <div>{props.children}</div>
     <style jsx>
-      {
-        `
-        {
+      {`
+         {
           border-radius: 4px;
           display: flex;
           align-items: center;
@@ -156,35 +156,30 @@ export const ModalHeader = (props: ModalHeaderProps) => (
           color: #767676;
           font-size: 20px;
         }
-        `
-      }
+      `}
     </style>
   </>
-)
+);
 
 export interface RowProps {
   children?: React.ReactNode;
 }
 export const Row = (props: RowProps) => (
   <>
-    <div>
-      {props.children}
-    </div>
+    <div>{props.children}</div>
     <style jsx>
-      {
-        `
-          {
-            display: flex;
-            align-self: center;
-            width: 80%;
-            justify-content: space-between;
-            padding: 15px;
-          }
-        `
-      }
+      {`
+         {
+          display: flex;
+          align-self: center;
+          width: 80%;
+          justify-content: space-between;
+          padding: 15px;
+        }
+      `}
     </style>
   </>
-)
+);
 
 export interface DropdownModalContentProps {
   children?: React.ReactNode;
@@ -194,21 +189,13 @@ export interface DropdownModalContentProps {
 
 export const DropdownModalContent = (props: DropdownModalContentProps) => (
   <>
-    <Modal
-      onClose={props.onClick}
-    >
-      <ModalHeader>
-        {props.headerText}
-      </ModalHeader>
+    <Modal onClose={props.onClick}>
+      <ModalHeader>{props.headerText}</ModalHeader>
       {props.children}
       <Row>
         <Button text="add" style={buttonStyle} />
-        <Button
-          text="cancel"
-          style={buttonStyle}
-          onClick={props.onClick}
-        />
+        <Button text="cancel" style={buttonStyle} onClick={props.onClick} />
       </Row>
     </Modal>
   </>
-)
+);

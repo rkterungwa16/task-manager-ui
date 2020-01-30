@@ -1,21 +1,19 @@
 import LeftSideBarHeader from "./LeftSideBarHeader";
-import LeftSideBarProjectLists from "./LeftSideBarProjectLists";
 
 const LeftSideBar = () => (
   <>
     <div className="left_side-bar">
       <div className="list_container">
         <LeftSideBarHeader />
-        <LeftSideBarProjectLists />
       </div>
     </div>
     <style jsx>{`
       .left_side-bar {
-        width: 300px;
-        height: calc(100vh - 50px);
+        width: 50%;
+        height: 100vh;
         padding-top: 74px;
         margin-left: -32px;
-        position: fixed;
+        position: relative;
         overflow-x: hidden;
         overflow-y: hidden;
         border-right: 1px solid #e1e1e1;

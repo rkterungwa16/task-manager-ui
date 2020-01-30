@@ -1,14 +1,17 @@
 import Add from "react-ionicons/lib/IosAdd";
 import ArrowForward from "react-ionicons/lib/IosArrowForward";
 
+import { Text } from "../SharedComponents/Text";
+import { sidebarProjectTextStyle } from "./style";
+
 const LeftSideBarHeader = () => (
   <>
     <header className="project-list_header">
       <button type="button" className="btn-long">
-        <ArrowForward fontSize="25px" />
-        Projects
+        <ArrowForward fontSize="20px" />
+        <Text text="Projects" style={sidebarProjectTextStyle} />
       </button>
-      <Add fontSize="45px" />
+      <Add fontSize="30px" />
     </header>
     <style jsx>{`
       .project-list_header {

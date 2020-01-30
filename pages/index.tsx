@@ -19,8 +19,11 @@ const Home = () => {
       </div>
       <style jsx global>{`
         body {
-          margin: 0;
           font-family: "Source Sans Pro", sans-serif;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+          position: absolute;
         }
         .container {
           top: 0;

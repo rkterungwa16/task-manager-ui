@@ -27,22 +27,19 @@ export const Project = (props: ProjectProps) => {
             />
           </ProjectItemIconWrapper>
         </ProjectItemInnerWrapper>
-        {
-          dropdownIsOpen && <Dropdown />
-        }
+        {dropdownIsOpen && <Dropdown />}
       </li>
       <style jsx>
-        {
-          `
-            {
-              width: 96%;
-            }
-          `
-        }
+        {`
+           {
+            width: 100%;
+            padding: 5px;
+          }
+        `}
       </style>
     </>
-  )
-}
+  );
+};
 
 export interface ProjectListProps {
   projects: ProjectInterface[];
@@ -51,54 +48,52 @@ export interface ProjectListProps {
 export const ProjectList = (props: ProjectListProps) => (
   <>
     <ul>
-      {
-        props.projects.map((project) => (
-          <Project key={uniqid(`${project.name} - `)} name={project.name} />
-        ))
-      }
+      {props.projects.map(project => (
+        <Project key={uniqid(`${project.name} - `)} name={project.name} />
+      ))}
     </ul>
     <style jsx>
-      {
-        `
-          {
-            width: 100%;
-            list-style: none;
-            padding: 0;
-          }
-        `
-      }
+      {`
+         {
+          width: 100%;
+          list-style: none;
+          padding: 0;
+        }
+      `}
     </style>
   </>
-)
+);
 
 export interface ProjectItemInnerWrapperProps {
   children?: React.ReactNode;
 }
 
-export const ProjectItemInnerWrapper = (props: ProjectItemInnerWrapperProps) => (
+export const ProjectItemInnerWrapper = (
+  props: ProjectItemInnerWrapperProps
+) => (
   <>
-    <div>
-      {props.children}
-    </div>
+    <div>{props.children}</div>
     <style jsx>
-      {
-        `
-          {
-            cursor: pointer;
-            padding: 5px 0px 5px 0;
-            border-radius: 4px;
-            width: 105%;
-            display: flex;
-            align-items: center;
-          }
-          :hover {
-            background-color: #fff;
-          }
-        `
-      }
+      {`
+         {
+          cursor: pointer;
+          height: 60px;
+          margin-bottom: 10px;
+          padding: 5px 5px 5px 0;
+          border-radius: 4px;
+          background-color: #fff;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        :hover {
+          background-color: #fff;
+        }
+      `}
     </style>
   </>
-)
+);
 
 export interface ProjectItemIconWrapperProps {
   children?: React.ReactNode;
@@ -106,18 +101,12 @@ export interface ProjectItemIconWrapperProps {
 
 export const ProjectItemIconWrapper = (props: ProjectItemIconWrapperProps) => (
   <>
-    <div>
-      {props.children}
-    </div>
+    <div>{props.children}</div>
     <style jsx>
-      {
-        `
-          {
-            position: absolute;
-            right: 4px;
-          }
-        `
-      }
+      {`
+         {
+        }
+      `}
     </style>
   </>
-)
+);
