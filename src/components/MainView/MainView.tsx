@@ -1,6 +1,6 @@
-import { ProjectList } from "../Project";
+import { TaskList } from "../Task";
 
-const projects = [
+const tasks = [
   {
     name: "Tiv Language Studies"
   },
@@ -15,7 +15,7 @@ export interface MainViewProps {
 export const MainView = (props: MainViewProps) => (
   <>
     <div>
-      <ProjectList projects={projects} />
+      <TaskList tasks={tasks} />
       {props.children}
     </div>
     <style jsx>

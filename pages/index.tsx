@@ -24,6 +24,7 @@ const Home = () => {
           height: 100%;
           width: 100%;
           position: absolute;
+          overflow: hidden;
         }
         .container {
           top: 0;

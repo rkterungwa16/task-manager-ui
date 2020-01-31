@@ -14,7 +14,7 @@ export const Text = (props: TextProps) => {
       </span>
       <style jsx>
         {`
-           {
+          {
             ${mapToCssProperties(props.style)}
           }
         `}

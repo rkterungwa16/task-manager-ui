@@ -77,8 +77,7 @@ export const ProjectItemInnerWrapper = (
       {`
          {
           cursor: pointer;
-          height: 60px;
-          margin-bottom: 10px;
+          height: 40px;
           padding: 5px 5px 5px 0;
           border-radius: 4px;
           background-color: #fff;

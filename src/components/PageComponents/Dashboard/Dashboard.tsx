@@ -31,7 +31,15 @@ export const Dashboard = () => {
         </DashboardContentContainer>
       </ModalProvider>
       <style jsx global>{`
-         {
+        body {
+          font-family: "Source Sans Pro", sans-serif;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          overflow: hidden;
+        }
+        {
           font-family: Source Sans Pro, sans-serif;
           height: 100%;
           position: relative;
