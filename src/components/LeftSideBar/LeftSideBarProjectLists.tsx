@@ -15,7 +15,7 @@ const LeftSideBarProjectLists = () => (
     </div>
     <style jsx>
       {`
-         {
+        {
           width: 100%;
         }
       `}

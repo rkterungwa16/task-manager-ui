@@ -26,19 +26,22 @@ export interface TaskProps {
 }
 export const Task = (props: TaskProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
+  const [taskIsComplete, setTaskStatus] = useState(false);
   return (
     <>
       <li>
         <TaskItemInnerWrapper>
-          <div className="checkbox_wrapper">
-            <div className="checkmark_icon-wrapper">
-              <CheckMarkIcon
-                fontSize="35px"
-                color="#767676"
-              />
-            </div>
+          <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
+            {
+              taskIsComplete && (
+                <CheckMarkIcon
+                  fontSize="50px"
+                  color="#767676"
+                />
+              )
+            }
             <FormInput type="checkbox" style={taskCheckboxStyle} />
-          </div>
+          </CheckboxWrapper>
           <Text text={props.name} style={taskTextStyle} />
           <TaskItemIconWrapper>
             <MoreIcon
@@ -55,23 +58,6 @@ export const Task = (props: TaskProps) => {
            {
             width: 100%;
             padding: 5px;
-          }
-          .checkbox_wrapper {
-            border: 2px solid #767676;
-            color: transparent;
-            transition: .2s;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #eee;
-          }
-          .checkmark_icon-wrapper {
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            margin-top: -9px;
-            margin-left: -10px;
           }
         `}
       </style>
@@ -148,3 +134,35 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
     </style>
   </>
 );
+
+export interface CheckboxWrapperProps {
+  children?: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}
+
+export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
+  <>
+    <div
+      onClick={props.onClick}
+    >
+      {props.children}
+      <style jsx>
+        {
+          `
+            {
+              border: 3px solid #767676;
+              color: transparent;
+              transition: .2s;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              background-color: #eee;
+              display: flex;
+              align-items: center;
+            }
+          `
+        }
+      </style>
+    </div>
+  </>
+)
