@@ -8,18 +8,20 @@ const projects = [
     name: "Tiv Language Studies and all things"
   }
 ];
-const LeftSideBarProjectLists = () => (
+
+export interface SideBarProjectListsProps {
+  openProjectList?: boolean;
+}
+
+export const SideBarProjectLists = (props: SideBarProjectListsProps) => (
   <>
-    <div>
-      <ProjectList projects={projects} />
-    </div>
+    <div>{props.openProjectList && <ProjectList projects={projects} />}</div>
     <style jsx>
       {`
-        {
+         {
           width: 100%;
         }
       `}
     </style>
   </>
 );
-export default LeftSideBarProjectLists;

@@ -19,7 +19,7 @@ const taskCheckboxStyle = {
   borderRadius: "50%",
   backgroundColor: "#eee",
   display: "none"
-}
+};
 
 export interface TaskProps {
   name?: string;
@@ -32,14 +32,9 @@ export const Task = (props: TaskProps) => {
       <li>
         <TaskItemInnerWrapper>
           <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
-            {
-              taskIsComplete && (
-                <CheckMarkIcon
-                  fontSize="50px"
-                  color="#767676"
-                />
-              )
-            }
+            {taskIsComplete && (
+              <CheckMarkIcon fontSize="50px" color="#767676" />
+            )}
             <FormInput type="checkbox" style={taskCheckboxStyle} />
           </CheckboxWrapper>
           <Text text={props.name} style={taskTextStyle} />
@@ -92,13 +87,11 @@ export interface TaskItemInnerWrapperProps {
   children?: React.ReactNode;
 }
 
-export const TaskItemInnerWrapper = (
-  props: TaskItemInnerWrapperProps
-) => (
-    <>
-      <div>{props.children}</div>
-      <style jsx>
-        {`
+export const TaskItemInnerWrapper = (props: TaskItemInnerWrapperProps) => (
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
          {
           cursor: pointer;
           height: 40px;
@@ -115,9 +108,9 @@ export const TaskItemInnerWrapper = (
           background-color: #fff;
         }
       `}
-      </style>
-    </>
-  );
+    </style>
+  </>
+);
 
 export interface TaskItemIconWrapperProps {
   children?: React.ReactNode;
@@ -142,27 +135,23 @@ export interface CheckboxWrapperProps {
 
 export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
   <>
-    <div
-      onClick={props.onClick}
-    >
+    <div onClick={props.onClick}>
       {props.children}
       <style jsx>
-        {
-          `
-            {
-              border: 3px solid #767676;
-              color: transparent;
-              transition: .2s;
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-              background-color: #eee;
-              display: flex;
-              align-items: center;
-            }
-          `
-        }
+        {`
+           {
+            border: 3px solid #767676;
+            color: transparent;
+            transition: 0.2s;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+          }
+        `}
       </style>
     </div>
   </>
-)
+);

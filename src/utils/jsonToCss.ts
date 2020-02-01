@@ -23,6 +23,7 @@ export interface StyleProps {
   width?: string;
   height?: string;
   display?: string;
+  flex?: string;
   justifyContent?: string;
   alignItems?: string;
   alignSelf?: string;
@@ -68,6 +69,7 @@ export const cssProperties = {
   justifyContent: "justify-content",
   alignItems: "align-items",
   alignSelf: "align-self",
+  flex: "flex",
   wordBreak: "word-break",
   borderRadius: "border-radius",
   border: "border",

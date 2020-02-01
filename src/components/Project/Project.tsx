@@ -55,9 +55,15 @@ export const ProjectList = (props: ProjectListProps) => (
     <style jsx>
       {`
          {
-          width: 100%;
           list-style: none;
           padding: 0;
+          width: 100%;
+          margin: 2px 0;
+          transition: all 0.5s;
+          height: 0;
+        }
+        :focus {
+          height: 100%;
         }
       `}
     </style>

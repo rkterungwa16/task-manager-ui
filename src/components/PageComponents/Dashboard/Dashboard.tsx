@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React, { useEffect } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import LeftSideBar from "../../../components/LeftSideBar/LeftSideBar";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import TopNav from "../../../components/TopNav";
+import { SideBar } from "../../SideBar/SideBar";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
@@ -26,7 +26,7 @@ export const Dashboard = () => {
         </Head>
         <TopNav />
         <DashboardContentContainer>
-          <LeftSideBar />
+          <SideBar />
           <MainView />
         </DashboardContentContainer>
       </ModalProvider>
@@ -39,7 +39,7 @@ export const Dashboard = () => {
           position: absolute;
           overflow: hidden;
         }
-        {
+         {
           font-family: Source Sans Pro, sans-serif;
           height: 100%;
           position: relative;
