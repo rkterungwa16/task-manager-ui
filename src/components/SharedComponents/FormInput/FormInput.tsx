@@ -2,7 +2,7 @@ import { mapToCssProperties, StyleProps } from "../../../utils";
 // TODO: Make background color dynamic for theme creation
 export interface InputProps {
   disabled?: boolean;
-  error?: boolean;
+  error?: string;
   helperText?: React.ReactNode;
   id?: string;
   inputRef?: React.Ref<any> | React.RefObject<any>;
@@ -20,18 +20,63 @@ export interface InputProps {
 export const FormInput = (props: InputProps) => {
   return (
     <>
-      <input
-        type={props.type}
-        onChange={props.onChange}
-        name={props.name}
-        value={props.value}
-        placeholder={props.placeholder}
-      />
+      <InputWrapper>
+        <input
+          type={props.type}
+          onChange={props.onChange}
+          name={props.name}
+          value={props.value}
+          placeholder={props.placeholder}
+        />
+        <InputErrorText text={props.error} />
+      </InputWrapper>
       <style jsx>
         {`
-          ${mapToCssProperties(props.style)}
+          ${props.style ? mapToCssProperties(props.style) : ""}
         `}
       </style>
     </>
   );
 };
+
+export interface InputErrorTextProps {
+  text?: string;
+  style?: StyleProps;
+}
+
+export const InputErrorText = (props: InputErrorTextProps) => (
+  <>
+    <span>{props.text}</span>
+    <style jsx>
+      {`
+         {
+          width: 80%;
+          align-self: center;
+          display: flex;
+          font-size: 12px;
+          color: #c23d38;
+          text-transform: lowercase;
+        }
+      `}
+    </style>
+  </>
+);
+
+export interface InputWrapperProps {
+  children?: React.ReactNode;
+}
+
+export const InputWrapper = (props: InputWrapperProps) => (
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
+         {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      `}
+    </style>
+  </>
+);

@@ -82,7 +82,7 @@ export const registerFormInputStyle = {
   zIndex: "3",
   alignSelf: "center",
   marginTop: "10px",
-  marginBottom: "20px",
+  marginBottom: "10px",
   backgroundColor: "#FFFFFF",
   borderRadius: "8px",
   border: "none",
