@@ -31,6 +31,7 @@ export const FormImageWrapper = (props: FormImageWrapperProps) => (
           align-items: center;
           display: flex;
           flex-direction: column;
+          padding: 10px;
         }
       `}
     </style>
@@ -46,7 +47,6 @@ export const WelcomeTextWrapper = (props: WelcomeTextWrapperProps) => (
     <style jsx>
       {`
          {
-          margin-top: 30px;
           position: relative;
           align-items: center;
           display: flex;

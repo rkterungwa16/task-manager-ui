@@ -25,6 +25,7 @@ export interface StyleProps {
   display?: string;
   flex?: string;
   justifyContent?: string;
+  flexDirection?: string;
   alignItems?: string;
   alignSelf?: string;
   wordBreak?: string;
@@ -67,6 +68,7 @@ export const cssProperties = {
   height: "height",
   display: "display",
   justifyContent: "justify-content",
+  flexDirection: "flex-direction",
   alignItems: "align-items",
   alignSelf: "align-self",
   flex: "flex",

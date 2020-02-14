@@ -43,7 +43,8 @@ export const buttonStyle = {
   marginBottom: "20px",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
-  width: "80%"
+  width: "80%",
+  cursor: "pointer"
 };
 
 export const alreadyHaveAnAccountTextStyle = {
@@ -63,7 +64,7 @@ export const alreadyHaveAnAccountTextStyle = {
 export const formWrapperStyle = {
   display: "flex",
   flexDirection: "column",
-  width: "40%",
+  width: "30%",
   height: "100%",
   padding: "15px",
   backgroundColor: "#F8F8F8"

@@ -1,31 +1,30 @@
+import { mapToCssProperties, StyleProps } from "../../../utils";
 export interface WrapperProps {
-  style?: WrapperStyleProps;
+  style?: StyleProps;
   children?: React.ReactNode;
   className?: string;
 }
 
-export interface WrapperStyleProps {
-  display?: string;
-  position?: string;
-  width?: string | number;
-  height?: string | number;
-  flexDirection?: string | number;
-  padding?: string;
-  backgroundColor?: string;
-}
 export const Wrapper = (props: WrapperProps) => (
   <>
     <div>{props.children}</div>
     <style jsx>
       {`
          {
-          display: ${props.style.display};
-          position: ${props.style.position};
-          width: ${props.style.width};
-          height: ${props.style.height};
-          flex-direction: ${props.style.flexDirection};
-          padding: ${props.style.padding}px;
-          background-color: ${props.style.backgroundColor};
+          ${mapToCssProperties(props.style)}
+        }
+        @media only screen and (max-width: 992px) {
+          width: 40%;
+        }
+        @media only screen and (max-width: 768px) {
+          width: 50%;
+        }
+        @media only screen and (max-width: 600px) {
+          width: 60%;
+        }
+
+        @media only screen and (max-width: 600px) {
+          width: 80%;
         }
       `}
     </style>

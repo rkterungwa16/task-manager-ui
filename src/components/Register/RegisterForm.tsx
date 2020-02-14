@@ -26,6 +26,8 @@ import {
   WelcomeTextWrapper
 } from "./RegisterFormUtilTemplates";
 
+import { useRegistration } from "../../hooks";
+
 export const RegisterForm = () => {
   const defaultRegistrationStates = {
     name: "",
@@ -34,6 +36,7 @@ export const RegisterForm = () => {
     confirmPassword: ""
   };
   const [registrationInput, setInputs] = useState(defaultRegistrationStates);
+  const { user, createUser } = useRegistration();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): any => {
     const target = event.target;
@@ -41,6 +44,9 @@ export const RegisterForm = () => {
     const name = target.name;
 
     setInputs({ ...defaultRegistrationStates, [name]: value });
+  };
+  const handleSubmit = () => {
+    createUser(defaultRegistrationStates);
   };
   return (
     <>
@@ -65,36 +71,40 @@ export const RegisterForm = () => {
             />
           </WelcomeTextWrapper>
           <FormWrapper>
-            <Text text="Name" style={inputTextStyle} />
             <FormInput
               type="text"
               style={registerFormInputStyle}
               name="name"
               onChange={handleChange}
               error="My name error"
+              placeholder="Name"
             />
-            <Text text="Email" style={inputTextStyle} />
             <FormInput
               type="email"
               style={registerFormInputStyle}
               name="email"
               onChange={handleChange}
+              placeholder="Email"
             />
-            <Text text="Password" style={inputTextStyle} />
             <FormInput
               type="password"
               style={registerFormInputStyle}
               name="password"
               onChange={handleChange}
+              placeholder="Password"
             />
-            <Text text="Type Password Again" style={inputTextStyle} />
             <FormInput
               type="password"
               style={registerFormInputStyle}
               name="confirmPassword"
               onChange={handleChange}
+              placeholder="Confirm Password"
             />
-            <Button text="Register" style={buttonStyle} />
+            <Button
+              text="Register"
+              style={buttonStyle}
+              onClick={handleSubmit}
+            />
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?
               <Link href="/login">
