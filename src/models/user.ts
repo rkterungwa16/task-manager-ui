@@ -6,6 +6,12 @@ export interface UserType {
   token?: string;
 }
 
+export interface UserRegistrationDetails {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export interface UserState extends UserType {
   actions: {
     createUser: ActionStatus;

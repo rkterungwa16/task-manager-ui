@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import {
   Button,
+  CircleSpinner,
   FormInput,
   LinkButton,
   Text,
@@ -29,13 +30,13 @@ import {
 import { useRegistration } from "../../hooks";
 
 export const RegisterForm = () => {
-  const defaultRegistrationStates = {
+  const defaultRegistrationState = {
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
   };
-  const [registrationInput, setInputs] = useState(defaultRegistrationStates);
+  const [registrationInput, setInputs] = useState(defaultRegistrationState);
   const { user, createUser } = useRegistration();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): any => {
@@ -43,10 +44,10 @@ export const RegisterForm = () => {
     const value = target.value;
     const name = target.name;
 
-    setInputs({ ...defaultRegistrationStates, [name]: value });
+    setInputs({ ...defaultRegistrationState, [name]: value });
   };
   const handleSubmit = () => {
-    createUser(defaultRegistrationStates);
+    createUser(defaultRegistrationState);
   };
   return (
     <>
@@ -100,11 +101,14 @@ export const RegisterForm = () => {
               onChange={handleChange}
               placeholder="Confirm Password"
             />
-            <Button
-              text="Register"
-              style={buttonStyle}
-              onClick={handleSubmit}
-            />
+
+            <Button text="" style={buttonStyle} onClick={handleSubmit}>
+              {user.actions.createUser.isRequesting ? (
+                <CircleSpinner height={20} />
+              ) : (
+                "Register"
+              )}
+            </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?
               <Link href="/login">

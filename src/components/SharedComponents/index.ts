@@ -4,3 +4,4 @@ export * from "./Button";
 export * from "./Wrapper";
 export * from "./Dropdown";
 export * from "./LinkButton";
+export * from "./Spinner";
