@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useState } from "react";
 import {
   Button,
   CircleSpinner,
@@ -27,8 +26,32 @@ import {
   WelcomeTextWrapper
 } from "./RegisterFormUtilTemplates";
 
-import { useRegistration } from "../../hooks";
+import { useFormValidation, useRegistration} from "../../hooks";
 
+export interface ValidatorInterface {
+  func: (value: string) => boolean,
+  error: string;
+}
+export interface StateValidatorSchemaInterface {
+  [x: string]: {
+    isEmpty?: ValidatorInterface;
+    isString?: ValidatorInterface;
+    isEmail?: ValidatorInterface;
+    isValidPassword?: ValidatorInterface;
+    isEqual?: {
+      func: (password: string, confirmPassword: string) => boolean;
+      error: string
+    }
+  }
+};
+
+export interface FormStateInterface {
+  [x: string]: string;
+}
+
+export interface FormErrorInterface {
+  [x: string]: string;
+}
 export const RegisterForm = () => {
   const defaultRegistrationState = {
     name: "",
@@ -36,18 +59,63 @@ export const RegisterForm = () => {
     password: "",
     confirmPassword: ""
   };
-  const [registrationInput, setInputs] = useState(defaultRegistrationState);
-  const { user, createUser } = useRegistration();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): any => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    setInputs({ ...defaultRegistrationState, [name]: value });
+  const stateValidatorSchema = {
+    name: {
+      isEmpty: {
+        func: value => Boolean(value.length),
+        error: "Must not be empty"
+      },
+      isString: {
+        func: value => /^[a-zA-Z]+$/.test(value),
+        error: "Invalid name format"
+      },
+    },
+    email: {
+      isEmpty: {
+        func: value => Boolean(value.length),
+        error: "Must not be empty"
+      },
+      isEmail: {
+        func: value => (
+          /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/
+        ).test(value),
+        error: "Invalid email format"
+      }
+    },
+    password: {
+      isEmpty: {
+        func: value => Boolean(value.length),
+        error: "Must not be empty"
+      },
+      isValidPassword: {
+        func: value => (
+          (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/).test(value)
+        ),
+        error: "Invalid password format: must be greater than 5"
+      }
+    },
+    confirmPassword: {
+      isEmpty: {
+        func: value => Boolean(value.length),
+        error: "Must not be empty"
+      },
+      isEqual: {
+        func: (password: string, confirmPassword: string) => password === confirmPassword,
+        error: "Password not the same"
+      }
+    }
   };
+
+  const { user, createUser } = useRegistration();
+  const {
+    handleChange,
+    formValues,
+    errors,
+  } = useFormValidation(defaultRegistrationState, stateValidatorSchema);
+
   const handleSubmit = () => {
-    createUser(defaultRegistrationState);
+    createUser(formValues);
   };
   return (
     <>
@@ -77,13 +145,14 @@ export const RegisterForm = () => {
               style={registerFormInputStyle}
               name="name"
               onChange={handleChange}
-              error="My name error"
+              error={errors.name}
               placeholder="Name"
             />
             <FormInput
               type="email"
               style={registerFormInputStyle}
               name="email"
+              error={errors.email}
               onChange={handleChange}
               placeholder="Email"
             />
@@ -91,6 +160,7 @@ export const RegisterForm = () => {
               type="password"
               style={registerFormInputStyle}
               name="password"
+              error={errors.password}
               onChange={handleChange}
               placeholder="Password"
             />
@@ -99,6 +169,7 @@ export const RegisterForm = () => {
               style={registerFormInputStyle}
               name="confirmPassword"
               onChange={handleChange}
+              error={errors.confirmPassword}
               placeholder="Confirm Password"
             />
 
@@ -106,8 +177,8 @@ export const RegisterForm = () => {
               {user.actions.createUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                "Register"
-              )}
+                  "Register"
+                )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?

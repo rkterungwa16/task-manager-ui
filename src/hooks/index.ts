@@ -1,1 +1,2 @@
-export * from "./registration";
+export * from "./services/registration";
+export * from "./form-validation";

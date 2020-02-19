@@ -10,6 +10,9 @@ export interface InputProps {
   onChange?: React.ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   >;
+  onFocus?: React.FocusEventHandler<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  >
   placeholder?: string;
   required?: boolean;
   type?: string;
@@ -24,6 +27,7 @@ export const FormInput = (props: InputProps) => {
         <input
           type={props.type}
           onChange={props.onChange}
+          onFocus={props.onFocus}
           name={props.name}
           value={props.value}
           placeholder={props.placeholder}
