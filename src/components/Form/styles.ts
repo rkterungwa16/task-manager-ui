@@ -79,7 +79,7 @@ export const formImageWrapperStyle = {
   flexDirection: "column"
 };
 
-export const registerFormInputStyle = {
+export const formInputStyle = {
   display: "flex",
   zIndex: "3",
   alignSelf: "center",

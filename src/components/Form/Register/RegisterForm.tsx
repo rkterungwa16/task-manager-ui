@@ -6,105 +6,35 @@ import {
   LinkButton,
   Text,
   Wrapper
-} from "../SharedComponents";
+} from "../../SharedComponents";
 
 import {
   alreadyHaveAnAccountTextStyle,
   buttonStyle,
+  formInputStyle,
   formWrapperStyle,
   getStartedTextStyle,
   inputTextStyle,
   linkButtonStyle,
-  registerFormInputStyle,
   welcomeTextStyle
-} from "./styles";
+} from "../styles";
 
 import {
+  FormContainer,
   FormImageWrapper,
   FormWrapper,
-  RegisterFormContainer,
   WelcomeTextWrapper
-} from "./RegisterFormUtilTemplates";
+} from "../FormTemplates";
 
-import { useFormValidation, useRegistration } from "../../hooks";
+import { useFormValidation, useRegistration } from "../../../hooks";
+import { registrationStateValidatorSchema as stateValidatorSchema } from "../validationSchema";
 
-export interface ValidatorInterface {
-  func: (value: string) => boolean,
-  error: string;
-}
-export interface StateValidatorSchemaInterface {
-  [x: string]: {
-    isEmpty?: ValidatorInterface;
-    isString?: ValidatorInterface;
-    isEmail?: ValidatorInterface;
-    isValidPassword?: ValidatorInterface;
-    isEqual?: {
-      func: (password: string, confirmPassword: string) => boolean;
-      error: string
-    }
-  }
-};
-
-export interface FormStateInterface {
-  [x: string]: string;
-}
-
-export interface FormErrorInterface {
-  [x: string]: string;
-}
 export const RegisterForm = () => {
   const defaultRegistrationState = {
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
-  };
-
-  const stateValidatorSchema = {
-    name: {
-      isEmpty: {
-        func: value => Boolean(value.length),
-        error: "Must not be empty"
-      },
-      isString: {
-        func: value => /^[a-zA-Z]+$/.test(value),
-        error: "Invalid name format"
-      },
-    },
-    email: {
-      isEmpty: {
-        func: value => Boolean(value.length),
-        error: "Must not be empty"
-      },
-      isEmail: {
-        func: value => (
-          /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/
-        ).test(value),
-        error: "Invalid email format"
-      }
-    },
-    password: {
-      isEmpty: {
-        func: value => Boolean(value.length),
-        error: "Must not be empty"
-      },
-      isValidPassword: {
-        func: value => (
-          (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/).test(value)
-        ),
-        error: "Invalid password format: must be greater than 5"
-      }
-    },
-    confirmPassword: {
-      isEmpty: {
-        func: value => Boolean(value.length),
-        error: "Must not be empty"
-      },
-      isEqual: {
-        func: (password: string, confirmPassword: string) => password === confirmPassword,
-        error: "Password not the same"
-      }
-    }
   };
 
   const { user, createUser } = useRegistration();
@@ -130,7 +60,7 @@ export const RegisterForm = () => {
           alt="Task Manager"
         />
       </FormImageWrapper>
-      <RegisterFormContainer>
+      <FormContainer>
         <Wrapper style={formWrapperStyle}>
           <WelcomeTextWrapper>
             <Text text="Welcome!" style={welcomeTextStyle} />
@@ -142,7 +72,7 @@ export const RegisterForm = () => {
           <FormWrapper>
             <FormInput
               type="text"
-              style={registerFormInputStyle}
+              style={formInputStyle}
               name="name"
               onChange={handleChange}
               error={errors.name}
@@ -150,7 +80,7 @@ export const RegisterForm = () => {
             />
             <FormInput
               type="email"
-              style={registerFormInputStyle}
+              style={formInputStyle}
               name="email"
               error={errors.email}
               onChange={handleChange}
@@ -158,7 +88,7 @@ export const RegisterForm = () => {
             />
             <FormInput
               type="password"
-              style={registerFormInputStyle}
+              style={formInputStyle}
               name="password"
               error={errors.password}
               onChange={handleChange}
@@ -166,7 +96,7 @@ export const RegisterForm = () => {
             />
             <FormInput
               type="password"
-              style={registerFormInputStyle}
+              style={formInputStyle}
               name="confirmPassword"
               onChange={handleChange}
               error={errors.confirmPassword}
@@ -183,12 +113,15 @@ export const RegisterForm = () => {
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?
               <Link href="/login">
-                <LinkButton style={linkButtonStyle}>Login</LinkButton>
+                <LinkButton
+                  style={linkButtonStyle}
+                  link="/login"
+                >Login</LinkButton>
               </Link>
             </Text>
           </FormWrapper>
         </Wrapper>
-      </RegisterFormContainer>
+      </FormContainer>
       <style jsx>{`
         .form-img {
           height: 50px;

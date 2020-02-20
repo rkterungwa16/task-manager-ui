@@ -1,7 +1,7 @@
-export interface RegisterFormContainerProps {
+export interface FormContainerProps {
   children?: React.ReactNode;
 }
-export const RegisterFormContainer = (props: RegisterFormContainerProps) => (
+export const FormContainer = (props: FormContainerProps) => (
   <>
     <div>{props.children}</div>
     <style jsx>
