@@ -14,7 +14,6 @@ import {
   formInputStyle,
   formWrapperStyle,
   getStartedTextStyle,
-  inputTextStyle,
   linkButtonStyle,
   welcomeTextStyle
 } from "../styles";
@@ -26,7 +25,7 @@ import {
   WelcomeTextWrapper
 } from "../FormTemplates";
 
-import { useFormValidation, useRegistration } from "../../../hooks";
+import { useFormValidation, useUserApiActions } from "../../../hooks";
 import { registrationStateValidatorSchema as stateValidatorSchema } from "../validationSchema";
 
 export const RegisterForm = () => {
@@ -37,12 +36,11 @@ export const RegisterForm = () => {
     confirmPassword: ""
   };
 
-  const { user, createUser } = useRegistration();
-  const {
-    handleChange,
-    formValues,
-    errors,
-  } = useFormValidation(defaultRegistrationState, stateValidatorSchema);
+  const { user, createUser } = useUserApiActions();
+  const { handleChange, formValues, errors } = useFormValidation(
+    defaultRegistrationState,
+    stateValidatorSchema
+  );
 
   const handleSubmit = () => {
     createUser(formValues);
@@ -107,16 +105,15 @@ export const RegisterForm = () => {
               {user.actions.createUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                  "Register"
-                )}
+                "Register"
+              )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?
               <Link href="/login">
-                <LinkButton
-                  style={linkButtonStyle}
-                  link="/login"
-                >Login</LinkButton>
+                <LinkButton style={linkButtonStyle} link="/login">
+                  Login
+                </LinkButton>
               </Link>
             </Text>
           </FormWrapper>

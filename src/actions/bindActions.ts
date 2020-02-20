@@ -20,13 +20,20 @@ export function bindActions(actions: any, dispatch: any) {
     );
   }
   const boundActions: INameToValueMap = {};
-  for (const key in actions) {
-    if (actions.hasOwnProperty(key)) {
-      const action: any = actions[key];
-      if (typeof action === "function") {
-        boundActions[key] = bindAction(action, dispatch);
-      }
-      return boundActions;
+  Object.keys(actions).forEach(key => {
+    const action: any = actions[key];
+    if (typeof action === "function") {
+      boundActions[key] = bindAction(action, dispatch);
     }
-  }
+  });
+
+  return boundActions;
+  // for (const key of Object.keys(actions)) {
+  //   const action: any = actions[key];
+  //   console.log("key --->>>>", key);
+  //   if (typeof action === "function") {
+  //     boundActions[key] = bindAction(action, dispatch);
+  //   }
+  //   return boundActions;
+  // }
 }

@@ -1,4 +1,4 @@
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "../../Form/Login/LoginForm";
 
 const Login = () => <LoginForm />;
 

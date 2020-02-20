@@ -12,7 +12,7 @@ export interface InputProps {
   >;
   onFocus?: React.FocusEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-  >
+  >;
   placeholder?: string;
   required?: boolean;
   type?: string;

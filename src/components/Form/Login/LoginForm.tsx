@@ -13,16 +13,12 @@ import {
   buttonStyle,
   formInputStyle,
   formWrapperStyle,
-  linkButtonStyle,
+  linkButtonStyle
 } from "../styles";
 
-import {
-  FormContainer,
-  FormImageWrapper,
-  FormWrapper
-} from "../FormTemplates";
+import { FormContainer, FormImageWrapper, FormWrapper } from "../FormTemplates";
 
-import { useFormValidation, useRegistration } from "../../../hooks";
+import { useFormValidation, useUserApiActions } from "../../../hooks";
 import { loginStateValidatorSchema as stateValidatorSchema } from "../validationSchema";
 
 export const LoginForm = () => {
@@ -31,15 +27,14 @@ export const LoginForm = () => {
     password: ""
   };
 
-  const { user, createUser } = useRegistration();
-  const {
-    handleChange,
-    formValues,
-    errors,
-  } = useFormValidation(defaultLoginState, stateValidatorSchema);
+  const { user, authenticateUser } = useUserApiActions();
+  const { handleChange, formValues, errors } = useFormValidation(
+    defaultLoginState,
+    stateValidatorSchema
+  );
 
   const handleSubmit = () => {
-    createUser(formValues);
+    authenticateUser(formValues);
   };
   return (
     <>
@@ -75,19 +70,17 @@ export const LoginForm = () => {
             />
 
             <Button text="" style={buttonStyle} onClick={handleSubmit}>
-              {user.actions.createUser.isRequesting ? (
+              {user.actions.authenticateUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                  "Login"
-                )}
+                "Login"
+              )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Create an account
               <Link href="/register">
-                <LinkButton
-                  style={linkButtonStyle}
-                  link="/register"
-                >Register
+                <LinkButton style={linkButtonStyle} link="/register">
+                  Register
                 </LinkButton>
               </Link>
             </Text>

@@ -1,12 +1,14 @@
 import { useGlobalStore } from "../../components/Provider/Provider";
 
-import { bindActions, createUser } from "../../actions";
+import { authenticateUser, bindActions, createUser } from "../../actions";
 
-export const useRegistration: any = () => {
+export const useUserApiActions: any = () => {
   const { state, dispatch } = useGlobalStore();
   const { user } = state;
-  const registerActions = bindActions({
-      createUser
+  const registerActions = bindActions(
+    {
+      createUser,
+      authenticateUser
     },
     dispatch
   );

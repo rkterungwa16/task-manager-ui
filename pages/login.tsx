@@ -1,3 +1,3 @@
-import Login from "../src/components/Form/Login/Login";
+import Login from "../src/components/PageComponents/Login/Login";
 
 export default Login;

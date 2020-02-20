@@ -8,25 +8,24 @@ export interface StateValidatorSchemaInterface {
     isValidPassword?: ValidatorInterface;
     isEqual?: {
       func: (password: string, confirmPassword: string) => boolean;
-      error: string
-    }
-  }
-};
+      error: string;
+    };
+  };
+}
 
 export interface ValidatorInterface {
-  func: (value: string) => boolean,
+  func: (value: string) => boolean;
   error: string;
 }
 
 export interface StateSchemaInterface {
   [x: string]: string;
-};
+}
 
 export function useFormValidation(
   stateSchema: StateSchemaInterface,
   stateValidatorSchema: StateValidatorSchemaInterface
 ) {
-
   const [formValues, setValues] = useState(stateSchema);
   const [errors, setErrors] = useState(stateSchema);
 
@@ -40,27 +39,26 @@ export function useFormValidation(
       }
 
       if (field.isString) {
-        error = !field.isString.func(value) ?
-        field.isString.error :
-        "";
+        error = !field.isString.func(value) ? field.isString.error : "";
       }
 
       if (field.isEmail) {
-        error = !field.isEmail.func(value) ?
-        field.isEmail.error :
-        "";
+        error = !field.isEmail.func(value) ? field.isEmail.error : "";
       }
 
       if (field.isValidPassword) {
-        error = !field.isValidPassword.func(value) ?
-          field.isValidPassword.error:
-          "";
+        error = !field.isValidPassword.func(value)
+          ? field.isValidPassword.error
+          : "";
       }
 
       if (field.isEqual) {
-        error = !field.isEqual.func(formValues.password, formValues.confirmPassword) ?
-          field.isEqual.error:
-          "";
+        error = !field.isEqual.func(
+          formValues.password,
+          formValues.confirmPassword
+        )
+          ? field.isEqual.error
+          : "";
       }
       return error;
     },
@@ -90,7 +88,7 @@ export function useFormValidation(
   return {
     handleChange,
     formValues,
-    errors,
+    errors
     // disable,
   };
 }

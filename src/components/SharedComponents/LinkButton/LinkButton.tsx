@@ -9,7 +9,9 @@ export interface LinkButtonProps {
 export const LinkButton = React.forwardRef(
   (props: LinkButtonProps, ref: Ref<any>) => (
     <>
-      <a ref={ref} href={props.link ? props.link : ""}>{props.children}</a>
+      <a ref={ref} href={props.link ? props.link : ""}>
+        {props.children}
+      </a>
       <style jsx>
         {`
            {

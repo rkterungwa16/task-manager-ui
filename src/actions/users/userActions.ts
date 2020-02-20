@@ -18,3 +18,23 @@ export const createUser = (user: UserRegistrationDetails) => async (
     );
   }
 };
+
+export const authenticateUser = (user: UserRegistrationDetails) => async (
+  dispatch: any
+) => {
+  dispatch(requestAction(UserActions.AUTHENTICATE_USER));
+  try {
+    const url = apiEndPoints.login; // ApiEndpoints.register;
+    const response = await axios.post(url, user);
+    dispatch(
+      withDataAction(UserActions.AUTHENTICATE_USER_SUCCESS, response.data)
+    );
+  } catch (e) {
+    dispatch(
+      withErrorAction(
+        UserActions.AUTHENTICATE_USER_FAILURE,
+        e.response.data.message
+      )
+    );
+  }
+};

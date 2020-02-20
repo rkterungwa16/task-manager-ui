@@ -7,14 +7,15 @@ export interface UserType {
 }
 
 export interface UserRegistrationDetails {
-  name: string;
-  email: string;
-  password: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface UserState extends UserType {
   actions: {
     createUser: ActionStatus;
+    authenticateUser: ActionStatus;
   };
 }
 
@@ -24,6 +25,10 @@ export const defaultUsersState: UserState = {
   token: "",
   actions: {
     createUser: {
+      isRequesting: false,
+      error: ""
+    },
+    authenticateUser: {
       isRequesting: false,
       error: ""
     }

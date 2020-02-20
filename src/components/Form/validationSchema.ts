@@ -5,9 +5,10 @@ export const loginStateValidatorSchema = {
       error: "Must not be empty"
     },
     isEmail: {
-      func: value => (
-        /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/
-      ).test(value),
+      func: value =>
+        /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/.test(
+          value
+        ),
       error: "Invalid email format"
     }
   },
@@ -17,9 +18,7 @@ export const loginStateValidatorSchema = {
       error: "Must not be empty"
     },
     isValidPassword: {
-      func: value => (
-        (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/).test(value)
-      ),
+      func: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/.test(value),
       error: "Invalid password format: must be greater than 5"
     }
   }
@@ -34,7 +33,7 @@ export const registrationStateValidatorSchema = {
     isString: {
       func: value => /^[a-zA-Z]+$/.test(value),
       error: "Invalid name format"
-    },
+    }
   },
   email: {
     isEmpty: {
@@ -42,9 +41,10 @@ export const registrationStateValidatorSchema = {
       error: "Must not be empty"
     },
     isEmail: {
-      func: value => (
-        /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/
-      ).test(value),
+      func: value =>
+        /^([a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]{1,64}@([a-zA-Z0-9-]+.[a-zA-Z0-9-]{2,}){1,255}){1,320}$/.test(
+          value
+        ),
       error: "Invalid email format"
     }
   },
@@ -54,9 +54,7 @@ export const registrationStateValidatorSchema = {
       error: "Must not be empty"
     },
     isValidPassword: {
-      func: value => (
-        (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/).test(value)
-      ),
+      func: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/.test(value),
       error: "Invalid password format: must be greater than 5"
     }
   },
@@ -66,7 +64,8 @@ export const registrationStateValidatorSchema = {
       error: "Must not be empty"
     },
     isEqual: {
-      func: (password: string, confirmPassword: string) => password === confirmPassword,
+      func: (password: string, confirmPassword: string) =>
+        password === confirmPassword,
       error: "Password not the same"
     }
   }

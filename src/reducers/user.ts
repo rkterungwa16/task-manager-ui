@@ -47,6 +47,46 @@ export function usersReducer(
           }
         }
       };
+
+    case UserActions.AUTHENTICATE_USER:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          authenticateUser: {
+            ...state.actions.authenticateUser,
+            isRequesting: true
+          }
+        }
+      };
+
+    case UserActions.AUTHENTICATE_USER_SUCCESS:
+      const { data: userLoginDetails } = action;
+      return {
+        ...state,
+        token: userLoginDetails.token,
+        actions: {
+          ...state.actions,
+          authenticateUser: {
+            ...state.actions.authenticateUser,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case UserActions.AUTHENTICATE_USER_FAILURE:
+      const { error: loginUserError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          authenticateUser: {
+            isRequesting: false,
+            error: loginUserError
+          }
+        }
+      };
     default:
       return state;
   }
