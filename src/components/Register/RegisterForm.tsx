@@ -26,7 +26,7 @@ import {
   WelcomeTextWrapper
 } from "./RegisterFormUtilTemplates";
 
-import { useFormValidation, useRegistration} from "../../hooks";
+import { useFormValidation, useRegistration } from "../../hooks";
 
 export interface ValidatorInterface {
   func: (value: string) => boolean,
@@ -119,19 +119,19 @@ export const RegisterForm = () => {
   };
   return (
     <>
+      <FormImageWrapper>
+        <img
+          className="form-img"
+          src="https://res.cloudinary.com/doy0uyv63/image/upload/v1579600963/task-manager-ico_inceiw.png"
+          alt="Task Manager Icon"
+        />
+        <img
+          src="https://res.cloudinary.com/doy0uyv63/image/upload/v1579521214/task-manager_zob3ne.png"
+          alt="Task Manager"
+        />
+      </FormImageWrapper>
       <RegisterFormContainer>
         <Wrapper style={formWrapperStyle}>
-          <FormImageWrapper>
-            <img
-              className="form-img"
-              src="https://res.cloudinary.com/doy0uyv63/image/upload/v1579600963/task-manager-ico_inceiw.png"
-              alt="Task Manager Icon"
-            />
-            <img
-              src="https://res.cloudinary.com/doy0uyv63/image/upload/v1579521214/task-manager_zob3ne.png"
-              alt="Task Manager"
-            />
-          </FormImageWrapper>
           <WelcomeTextWrapper>
             <Text text="Welcome!" style={welcomeTextStyle} />
             <Text

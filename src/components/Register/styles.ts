@@ -67,7 +67,8 @@ export const formWrapperStyle = {
   width: "30%",
   height: "100%",
   padding: "15px",
-  backgroundColor: "#F8F8F8"
+  backgroundColor: "#F8F8F8",
+  borderRadius: "10px"
 };
 
 export const formImageWrapperStyle = {
@@ -105,5 +106,6 @@ export const linkButtonStyle = {
   textAlign: "center",
   color: "#767676",
   padding: "3px",
-  borderBottom: "2px solid #767676"
+  borderBottom: "2px solid #767676",
+  cursor: "pointer"
 };
