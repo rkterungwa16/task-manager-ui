@@ -121,7 +121,6 @@ export const Dropdown = () => {
             background-color: #fff;
             min-width: 210px;
             right: 10px;
-            z-index: 1;
             border: 0px solid rgba(0, 0, 0, 0.25);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
             border-radius: 4px;

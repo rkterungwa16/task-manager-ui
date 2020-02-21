@@ -26,7 +26,6 @@ export function bindActions(actions: any, dispatch: any) {
       boundActions[key] = bindAction(action, dispatch);
     }
   });
-
   return boundActions;
   // for (const key of Object.keys(actions)) {
   //   const action: any = actions[key];
