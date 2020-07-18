@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import Router from "next/router";
 import Link from "next/link";
 import {
   Button,
@@ -20,6 +22,7 @@ import { FormContainer, FormImageWrapper, FormWrapper } from "../FormTemplates";
 
 import { useFormValidation, useUserApiActions } from "../../../hooks";
 import { loginStateValidatorSchema as stateValidatorSchema } from "../validationSchema";
+import { Routes } from "../../../routes/client";
 
 export const LoginForm = () => {
   const defaultLoginState = {
@@ -33,6 +36,11 @@ export const LoginForm = () => {
     stateValidatorSchema
   );
 
+    useEffect(() => {
+      if (user.token.length) {
+        Router.push(Routes.Dashboard);
+      }
+    }, [user.token])
   const handleSubmit = () => {
     authenticateUser(formValues);
   };

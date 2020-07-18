@@ -64,7 +64,7 @@ export function usersReducer(
       const { data: userLoginDetails } = action;
       return {
         ...state,
-        token: userLoginDetails.token,
+        token: userLoginDetails.data.token,
         actions: {
           ...state.actions,
           authenticateUser: {

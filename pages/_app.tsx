@@ -4,6 +4,7 @@ interface TaskManagerProps {
   Component?: React.FC;
 }
 
+
 const TaskManagerApp = (props: TaskManagerProps) => {
   return (
     <Provider>

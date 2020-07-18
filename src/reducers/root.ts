@@ -14,7 +14,6 @@ export const initialState = {
 export const rootReducer = (state: StoreState, action: AnyAction) => {
   const { user } = state;
   const currentState = { user: usersReducer(user, action) };
-  console.log("action -->>>>", action);
   logger(action, state, currentState);
   return currentState;
 };

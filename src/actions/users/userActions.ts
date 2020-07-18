@@ -1,5 +1,5 @@
 import axios from "axios";
-import * as apiEndPoints from "../../constants/apiEndPoints";
+import * as apiEndPoints from "../../routes/api";
 import { UserRegistrationDetails } from "../../models";
 import { requestAction, withDataAction, withErrorAction } from "../actions";
 import { UserActions } from "./actionTypes";
