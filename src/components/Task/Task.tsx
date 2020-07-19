@@ -33,7 +33,7 @@ export const Task = (props: TaskProps) => {
         <TaskItemInnerWrapper>
           <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
             {taskIsComplete && (
-              <CheckMarkIcon fontSize="50px" color="#767676" />
+              <CheckMarkIcon fontSize="500px" color="#767676" />
             )}
             <FormInput type="checkbox" style={taskCheckboxStyle} />
           </CheckboxWrapper>
