@@ -36,11 +36,12 @@ export const LoginForm = () => {
     stateValidatorSchema
   );
 
-    useEffect(() => {
-      if (user.token.length) {
-        Router.push(Routes.Dashboard);
-      }
-    }, [user.token])
+  useEffect(() => {
+    if (user.token.length) {
+      localStorage.setItem("currentUser", user.token);
+      Router.push(Routes.Dashboard);
+    }
+  }, [user.token]);
   const handleSubmit = () => {
     authenticateUser(formValues);
   };

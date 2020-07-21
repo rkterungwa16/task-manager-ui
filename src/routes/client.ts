@@ -1,6 +1,6 @@
 export enum Routes {
-  HomePage = '/',
-  Registration = '/registration',
-  Login = '/login',
-  Dashboard = '/dashboard'
+  HomePage = "/",
+  Registration = "/registration",
+  Login = "/login",
+  Dashboard = "/dashboard"
 }

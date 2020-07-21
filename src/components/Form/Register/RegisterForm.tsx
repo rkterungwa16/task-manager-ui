@@ -105,8 +105,8 @@ export const RegisterForm = () => {
               {user.actions.createUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                  "Register"
-                )}
+                "Register"
+              )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Already have an account?
