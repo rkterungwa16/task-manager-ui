@@ -1,14 +1,40 @@
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import TopNav from "../../../components/TopNav";
 import { SideBar } from "../../SideBar/SideBar";
+import { useProjectsApiActions } from "../../../hooks";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
+const initialProjectsState = [
+  {
+    title: "",
+    description: "",
+    color: "",
+    owner: "",
+    tasks: [],
+    isFavourite: false,
+    isArchived: false,
+    isDeleted: false,
+    collaborators: [],
+    createdAt: "",
+    updatedAt: ""
+  }
+];
+
 export const Dashboard = () => {
+  const { project, fetchUserProjects } = useProjectsApiActions();
+  const [projects, setProjects] = useState(initialProjectsState);
+  useEffect(() => {
+    fetchUserProjects();
+    if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
+      setProjects(project.projects);
+    }
+  }, [JSON.stringify(project.projects)]);
+
   useEffect(() => {
     client.onopen = () => {
       console.log("WebSocket Client Connected");
@@ -26,7 +52,7 @@ export const Dashboard = () => {
         </Head>
         <TopNav />
         <DashboardContentContainer>
-          <SideBar />
+          <SideBar projects={projects} />
           <MainView />
         </DashboardContentContainer>
       </ModalProvider>

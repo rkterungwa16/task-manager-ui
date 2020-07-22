@@ -4,13 +4,14 @@ import uniqid from "uniqid";
 
 import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
+import { ProjectType } from "../../models";
 
 export interface ProjectInterface {
   name: string;
 }
 
 export interface ProjectProps {
-  name?: string;
+  title?: string;
 }
 export const Project = (props: ProjectProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -18,7 +19,7 @@ export const Project = (props: ProjectProps) => {
     <>
       <li>
         <ProjectItemInnerWrapper>
-          <Text text={props.name} style={projectTextStyle} />
+          <Text text={props.title} style={projectTextStyle} />
           <ProjectItemIconWrapper>
             <MoreIcon
               fontSize="35px"
@@ -42,14 +43,14 @@ export const Project = (props: ProjectProps) => {
 };
 
 export interface ProjectListProps {
-  projects: ProjectInterface[];
+  projects: ProjectType[];
 }
 
 export const ProjectList = (props: ProjectListProps) => (
   <>
     <ul>
       {props.projects.map(project => (
-        <Project key={uniqid(`${project.name} - `)} name={project.name} />
+        <Project key={uniqid(`${project.title} - `)} title={project.title} />
       ))}
     </ul>
     <style jsx>

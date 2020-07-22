@@ -1,21 +1,16 @@
 import { ProjectList } from "../Project";
-
-const projects = [
-  {
-    name: "Tiv Language Studies"
-  },
-  {
-    name: "Tiv Language Studies and all things"
-  }
-];
+import { ProjectType } from "../../models";
 
 export interface SideBarProjectListsProps {
   openProjectList?: boolean;
+  projects?: ProjectType[];
 }
 
 export const SideBarProjectLists = (props: SideBarProjectListsProps) => (
   <>
-    <div>{props.openProjectList && <ProjectList projects={projects} />}</div>
+    <div>
+      {props.openProjectList && <ProjectList projects={props.projects} />}
+    </div>
     <style jsx>
       {`
          {

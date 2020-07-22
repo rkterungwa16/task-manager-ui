@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { SideBarHeader } from "./SideBarHeader";
 import { SideBarProjectLists } from "./SideBarProjectLists";
+import { ProjectType } from "../../models";
 
-export const SideBar = () => {
+export interface SideBarProps {
+  projects?: ProjectType[];
+}
+export const SideBar = (props: SideBarProps) => {
   const [projectListIsOpen, setProjectListOpen] = useState(true);
 
   return (
@@ -13,7 +17,10 @@ export const SideBar = () => {
             openProjectList={projectListIsOpen}
             onClick={() => setProjectListOpen(!projectListIsOpen)}
           />
-          <SideBarProjectLists openProjectList={projectListIsOpen} />
+          <SideBarProjectLists
+            projects={props.projects}
+            openProjectList={projectListIsOpen}
+          />
         </SidebarContentWrapper>
       </SidebarContainer>
     </>
