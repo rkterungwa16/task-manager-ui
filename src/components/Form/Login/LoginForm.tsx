@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Router from "next/router";
 import Link from "next/link";
 import {
@@ -19,7 +19,7 @@ import {
 } from "../styles";
 
 import { FormContainer, FormImageWrapper, FormWrapper } from "../FormTemplates";
-
+import { Toast, ToastProvider } from "../../Toast";
 import { useFormValidation, useUserApiActions } from "../../../hooks";
 import { loginStateValidatorSchema as stateValidatorSchema } from "../validationSchema";
 import { Routes } from "../../../routes/client";
@@ -30,23 +30,35 @@ export const LoginForm = () => {
     password: ""
   };
 
+  const [error, setError] = useState('');
+  const [toastIsOpen, setToastOpen] = useState(false);
+
   const { user, authenticateUser } = useUserApiActions();
   const { handleChange, formValues, errors } = useFormValidation(
     defaultLoginState,
     stateValidatorSchema
   );
-
   useEffect(() => {
     if (user.token.length) {
       window.localStorage.setItem("currentUser", user.token);
       Router.push(Routes.Dashboard);
     }
   }, [user.token]);
+
+  useEffect(() => {
+    console.log('user', user)
+    const error = user.actions.authenticateUser.error
+    if (error) {
+      setError(error);
+      setToastOpen(true)
+    }
+
+  }, [user.actions.authenticateUser.error])
   const handleSubmit = () => {
     authenticateUser(formValues);
   };
   return (
-    <>
+    <ToastProvider>
       <FormImageWrapper>
         <img
           className="form-img"
@@ -82,8 +94,8 @@ export const LoginForm = () => {
               {user.actions.authenticateUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                "Login"
-              )}
+                  "Login"
+                )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Create an account
@@ -96,6 +108,7 @@ export const LoginForm = () => {
           </FormWrapper>
         </Wrapper>
       </FormContainer>
+      <Toast isOpen={toastIsOpen} message={error} />
       <style jsx>{`
         .form-img {
           height: 50px;
@@ -103,6 +116,6 @@ export const LoginForm = () => {
 
         .link__text;
       `}</style>
-    </>
+    </ToastProvider>
   );
 };
