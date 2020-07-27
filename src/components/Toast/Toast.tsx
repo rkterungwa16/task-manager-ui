@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, createContext, useState, useContext } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  createContext,
+  useState,
+  useContext
+} from "react";
 import { createPortal } from "react-dom";
 
 import { Button } from "../SharedComponents";
@@ -30,17 +36,13 @@ export const ToastContainer = ({ children, remove }) => {
 
   return (
     <ToastWrapper>
-      <ToastText>
-        {children}
-      </ToastText>
-      <Button
-        text=""
-        style={toastCloseBtnStyle}
-        onClick={remove}
-      >x</Button>
+      <ToastText>{children}</ToastText>
+      <Button text="" style={toastCloseBtnStyle} onClick={remove}>
+        x
+      </Button>
     </ToastWrapper>
   );
-}
+};
 
 export interface ToastContainerProps {
   isOpen: boolean;
@@ -50,9 +52,8 @@ export interface ToastContainerProps {
 export const Toast = (props: ToastContainerProps) => {
   const toastNode = useContext(ToastContext);
   const [toastIsOpen, setToastOpen] = useState(false);
-
   useEffect(() => {
-    setToastOpen(props.isOpen)
+    setToastOpen(props.isOpen);
   }, [props.isOpen]);
 
   const remove = () => {
@@ -61,21 +62,21 @@ export const Toast = (props: ToastContainerProps) => {
 
   return (
     <>
-      {toastNode ? (
-        createPortal(
-          <ToastContainerWrapper>
-            {toastIsOpen && (
-              <ToastContainer remove={() => remove()}>
-                {props.message}
-              </ToastContainer>
-            )}
-          </ToastContainerWrapper>,
-          toastNode
-        )
-      ): null}
+      {toastNode
+        ? createPortal(
+            <ToastContainerWrapper>
+              {toastIsOpen && (
+                <ToastContainer remove={() => remove()}>
+                  {props.message}
+                </ToastContainer>
+              )}
+            </ToastContainerWrapper>,
+            toastNode
+          )
+        : null}
     </>
-  )
-}
+  );
+};
 
 export interface ToastContainerWrapperProps {
   children?: React.ReactNode;
@@ -85,7 +86,7 @@ export const ToastContainerWrapper = (props: ToastContainerWrapperProps) => (
     {props.children}
     <style jsx>
       {`
-        {
+         {
           position: absolute;
           top: 20px;
           right: 20px;
@@ -93,7 +94,7 @@ export const ToastContainerWrapper = (props: ToastContainerWrapperProps) => (
       `}
     </style>
   </div>
-)
+);
 
 export const toastCloseBtnStyle = {
   border: "none",
@@ -113,12 +114,12 @@ export const ToastWrapper = (props: ToastWrapperProps) => (
     {props.children}
     <style jsx>
       {`
-        {
+         {
           border: 2px solid transparent;
           background-color: #fafafa;
           border-radius: 4px;
           max-width: 480px;
-          box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);
+          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
           margin-top: 16px;
           display: flex;
           position: relative;
@@ -138,7 +139,7 @@ export const ToastText = (props: ToastTextProps) => (
     {props.children}
     <style jsx>
       {`
-        {
+         {
           padding: 16px 24px;
           line-height: 1.4;
         }

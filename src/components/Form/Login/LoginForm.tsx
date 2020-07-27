@@ -30,7 +30,7 @@ export const LoginForm = () => {
     password: ""
   };
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [toastIsOpen, setToastOpen] = useState(false);
 
   const { user, authenticateUser } = useUserApiActions();
@@ -46,14 +46,13 @@ export const LoginForm = () => {
   }, [user.token]);
 
   useEffect(() => {
-    console.log('user', user)
-    const error = user.actions.authenticateUser.error
+    console.log("user", user);
+    const error = user.actions.authenticateUser.error;
     if (error) {
       setError(error);
-      setToastOpen(true)
+      setToastOpen(true);
     }
-
-  }, [user.actions.authenticateUser.error])
+  }, [user.actions.authenticateUser.error]);
   const handleSubmit = () => {
     authenticateUser(formValues);
   };
@@ -94,8 +93,8 @@ export const LoginForm = () => {
               {user.actions.authenticateUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
-                  "Login"
-                )}
+                "Login"
+              )}
             </Button>
             <Text style={alreadyHaveAnAccountTextStyle}>
               Create an account
