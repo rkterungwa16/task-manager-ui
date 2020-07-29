@@ -45,6 +45,46 @@ export function projectsReducer(
           }
         }
       };
+
+    case ProjectActions.ADD_PROJECT:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          addProject: {
+            ...state.actions.addProject,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.ADD_PROJECT_SUCCESS:
+      const { data: addedProject } = action;
+      return {
+        ...state,
+        projects: [...state.projects, addedProject.data.project],
+        actions: {
+          ...state.actions,
+          addProject: {
+            ...state.actions.addProject,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.ADD_PROJECT_FAILURE:
+      const { error: addProjectError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          addProject: {
+            isRequesting: false,
+            error: addProjectError
+          }
+        }
+      };
     default:
       return state;
   }

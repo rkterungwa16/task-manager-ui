@@ -16,7 +16,7 @@ export interface ProjectType {
 export interface ProjectState {
   projects: ProjectType[];
   actions: {
-    createProject: ActionStatus;
+    addProject: ActionStatus;
     fetchUserProjects: ActionStatus;
   };
 }
@@ -38,7 +38,7 @@ export const defaultProjectsState: ProjectState = {
     }
   ],
   actions: {
-    createProject: {
+    addProject: {
       isRequesting: false,
       error: ""
     },
