@@ -98,6 +98,7 @@ export const ModalDialog = (props: ModalDialogProps) => (
         top: 30%;
         transform: translate(-50%, -50%);
         z-index: 1;
+        align-items: center !important;
       `}
     </style>
   </div>

@@ -6,7 +6,7 @@ import ArrowForward from "react-ionicons/lib/IosArrowForward";
 
 import { Button, Text } from "../SharedComponents";
 import { Modal } from "../Modal";
-import { FormInput } from "../SharedComponents/FormInput";
+import { FormInput, CircleSpinner } from "../SharedComponents";
 import { useProjectsApiActions } from "../../hooks";
 import {
   sidebarHeaderButtonHoverStyle,
@@ -15,7 +15,6 @@ import {
   buttonStyle,
   formInputStyle
 } from "./style";
-import { addProject } from "../../actions";
 
 export interface SideBarHeaderProps {
   onClick?: (event: React.MouseEvent<any, MouseEvent>) => void;
@@ -64,6 +63,7 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
             headerText="Add project"
             onClick={() => setModalOpen(false)}
             handleSubmit={handleSubmit}
+            isRequesting={isRequesting}
           >
             <FormInput
               type="text"
@@ -107,6 +107,7 @@ export const ModalHeader = (props: ModalHeaderProps) => (
           background-color: #ededed;
           color: #767676;
           font-size: 20px;
+          width: 100%;
         }
       `}
     </style>
@@ -137,6 +138,7 @@ export interface AddProjectModalProps {
   children?: React.ReactNode;
   headerText?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  isRequesting?: boolean;
   handleSubmit?: (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
@@ -146,7 +148,9 @@ export const AddProjectModal = (props: AddProjectModalProps) => (
   <>
     <Modal onClose={props.onClick}>
       <ModalHeader>{props.headerText}</ModalHeader>
-      {props.children}
+      { props.isRequesting ? <CircleSpinner height={20} /> :
+        props.children
+      }
       <Row>
         <Button text="add" onClick={props.handleSubmit} style={buttonStyle} />
         <Button text="cancel" style={buttonStyle} onClick={props.onClick} />
