@@ -4,6 +4,7 @@ import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
 import { Dropdown, FormInput, Text } from "../SharedComponents";
+import { TaskType } from "../../models";
 import { taskTextStyle } from "./style";
 
 export interface TaskInterface {
@@ -22,7 +23,7 @@ const taskCheckboxStyle = {
 };
 
 export interface TaskProps {
-  name?: string;
+  content?: string;
 }
 export const Task = (props: TaskProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -37,7 +38,7 @@ export const Task = (props: TaskProps) => {
             )}
             <FormInput type="checkbox" style={taskCheckboxStyle} />
           </CheckboxWrapper>
-          <Text text={props.name} style={taskTextStyle} />
+          <Text text={props.content} style={taskTextStyle} />
           <TaskItemIconWrapper>
             <MoreIcon
               fontSize="35px"
@@ -61,14 +62,14 @@ export const Task = (props: TaskProps) => {
 };
 
 export interface TaskListProps {
-  tasks: TaskInterface[];
+  tasks: TaskType[];
 }
 
 export const TaskList = (props: TaskListProps) => (
   <>
     <ul>
       {props.tasks.map(task => (
-        <Task key={uniqid(`${task.name} - `)} name={task.name} />
+        <Task key={uniqid(`${task.content} - `)} content={task.content} />
       ))}
     </ul>
     <style jsx>

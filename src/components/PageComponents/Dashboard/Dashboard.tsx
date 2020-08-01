@@ -1,11 +1,16 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import TopNav from "../../../components/TopNav";
 import { SideBar } from "../../SideBar/SideBar";
-import { useProjectsApiActions } from "../../../hooks";
+import {
+  useProjectsApiActions,
+  useProjectTasksApiActions
+} from "../../../hooks";
+import { TaskType } from "../../../models";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
@@ -25,15 +30,44 @@ const initialProjectsState = [
   }
 ];
 
+const initalTasksState = [
+  {
+    _id: "",
+    content: "",
+    createdAt: "",
+    dueDate: "",
+    label: [],
+    priority: null,
+    project: "",
+    updatedAt: "",
+    userId: ""
+  }
+];
+
 export const Dashboard = () => {
   const { project, fetchUserProjects } = useProjectsApiActions();
+  const { task, fetchProjectTasks } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
+  const [tasks, setTasks] = useState([]);
+  const {
+    query: { id }
+  } = useRouter();
+
   useEffect(() => {
     fetchUserProjects();
     if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
       setProjects(project.projects);
     }
   }, [JSON.stringify(project.projects)]);
+
+  useEffect(() => {
+    if (id) {
+      fetchProjectTasks(id);
+      if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
+        setTasks(task.tasks);
+      }
+    }
+  }, [id, JSON.stringify(task.tasks)]);
 
   useEffect(() => {
     client.onopen = () => {
@@ -43,6 +77,7 @@ export const Dashboard = () => {
       console.log(message);
     };
   });
+
   return (
     <div>
       <ModalProvider>
@@ -53,7 +88,7 @@ export const Dashboard = () => {
         <TopNav />
         <DashboardContentContainer>
           <SideBar projects={projects} />
-          <MainView />
+          <MainView tasks={tasks} />
         </DashboardContentContainer>
       </ModalProvider>
       <style jsx global>{`

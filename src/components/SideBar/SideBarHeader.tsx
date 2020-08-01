@@ -148,9 +148,7 @@ export const AddProjectModal = (props: AddProjectModalProps) => (
   <>
     <Modal onClose={props.onClick}>
       <ModalHeader>{props.headerText}</ModalHeader>
-      { props.isRequesting ? <CircleSpinner height={20} /> :
-        props.children
-      }
+      {props.isRequesting ? <CircleSpinner height={20} /> : props.children}
       <Row>
         <Button text="add" onClick={props.handleSubmit} style={buttonStyle} />
         <Button text="cancel" style={buttonStyle} onClick={props.onClick} />

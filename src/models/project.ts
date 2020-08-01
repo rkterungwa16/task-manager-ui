@@ -1,5 +1,6 @@
 import { ActionStatus } from "../actions";
 export interface ProjectType {
+  _id?: string;
   title?: string;
   description?: string;
   color?: string;

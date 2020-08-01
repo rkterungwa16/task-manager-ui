@@ -3,12 +3,13 @@ export interface TextProps {
   text?: string;
   style?: StyleProps;
   children?: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 export const Text = (props: TextProps) => {
   return (
     <>
-      <span>
+      <span onClick={props.onClick}>
         {props.text}
         {props.children}
       </span>

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import Router from "next/router";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
 import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
+import { Routes } from "../../routes/client";
 
 export interface ProjectInterface {
   name: string;
@@ -12,6 +14,7 @@ export interface ProjectInterface {
 
 export interface ProjectProps {
   title?: string;
+  id?: string;
 }
 export const Project = (props: ProjectProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -19,7 +22,13 @@ export const Project = (props: ProjectProps) => {
     <>
       <li>
         <ProjectItemInnerWrapper>
-          <Text text={props.title} style={projectTextStyle} />
+          <Text
+            onClick={() => {
+              Router.push(`${Routes.Dashboard}/${props.id}`);
+            }}
+            text={props.title}
+            style={projectTextStyle}
+          />
           <ProjectItemIconWrapper>
             <MoreIcon
               fontSize="35px"
@@ -46,30 +55,36 @@ export interface ProjectListProps {
   projects: ProjectType[];
 }
 
-export const ProjectList = (props: ProjectListProps) => (
-  <>
-    <ul>
-      {props.projects.map(project => (
-        <Project key={uniqid(`${project.title} - `)} title={project.title} />
-      ))}
-    </ul>
-    <style jsx>
-      {`
-         {
-          list-style: none;
-          padding: 0;
-          width: 100%;
-          margin: 2px 0;
-          transition: all 0.5s;
-          height: 0;
-        }
-        :focus {
-          height: 100%;
-        }
-      `}
-    </style>
-  </>
-);
+export const ProjectList = (props: ProjectListProps) => {
+  return (
+    <>
+      <ul>
+        {props.projects.map(project => (
+          <Project
+            key={uniqid(`${project.title} - `)}
+            title={project.title}
+            id={project._id}
+          />
+        ))}
+      </ul>
+      <style jsx>
+        {`
+           {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            margin: 2px 0;
+            transition: all 0.5s;
+            height: 0;
+          }
+          :focus {
+            height: 100%;
+          }
+        `}
+      </style>
+    </>
+  );
+};
 
 export interface ProjectItemInnerWrapperProps {
   children?: React.ReactNode;
@@ -115,4 +130,21 @@ export const ProjectItemIconWrapper = (props: ProjectItemIconWrapperProps) => (
       `}
     </style>
   </>
+);
+
+export interface ProjectLinkProps {
+  children?: React.ReactNode;
+}
+
+export const ProjectLink = (props: ProjectLinkProps) => (
+  <a>
+    {props.children}
+    <style jsx>
+      {`
+         {
+          text-decoration: none;
+        }
+      `}
+    </style>
+  </a>
 );
