@@ -37,7 +37,7 @@ export const SidebarContainer = (props: SidebarContainerProps) => (
     <style jsx>
       {`
          {
-          width: 50%;
+          width: 35%;
           height: 100vh;
           padding-top: 74px;
           padding-left: 25px;

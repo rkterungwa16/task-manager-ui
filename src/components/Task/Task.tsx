@@ -74,7 +74,7 @@ export const TaskList = (props: TaskListProps) => (
     <style jsx>
       {`
          {
-          width: 100%;
+          width: 70%;
           list-style: none;
           padding: 0;
         }
