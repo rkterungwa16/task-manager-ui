@@ -46,7 +46,6 @@ export const LoginForm = () => {
   }, [user.token]);
 
   useEffect(() => {
-    console.log("user", user);
     const error = user.actions.authenticateUser.error;
     if (error) {
       setError(error);

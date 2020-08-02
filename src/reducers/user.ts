@@ -77,7 +77,6 @@ export function usersReducer(
 
     case UserActions.AUTHENTICATE_USER_FAILURE:
       const { error: loginUserError } = action as WithError<string>;
-      console.log("login user -->>", loginUserError);
       return {
         ...state,
         actions: {

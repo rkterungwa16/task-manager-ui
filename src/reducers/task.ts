@@ -7,7 +7,6 @@ export function tasksReducer(
 ): TaskState {
   switch (action.type) {
     case TaskActions.FETCH_PROJECT_TASKS:
-      console.log("fetching reducers -->>>");
       return {
         ...state,
         actions: {
@@ -21,7 +20,6 @@ export function tasksReducer(
 
     case TaskActions.FETCH_PROJECT_TASKS_SUCCESS:
       const { data: projectTasks } = action;
-      console.log("reducer project tasks -->>", projectTasks);
       return {
         ...state,
         tasks: projectTasks.data.tasks,

@@ -11,7 +11,6 @@ export const fetchProjectTasks = (id: string) => async (dispatch: any) => {
     const response = await axios.get(url, {
       headers: { Authorization: `Bearer ${authToken}` }
     });
-    console.log("response -->>", response);
     dispatch(
       withDataAction(TaskActions.FETCH_PROJECT_TASKS_SUCCESS, response.data)
     );
