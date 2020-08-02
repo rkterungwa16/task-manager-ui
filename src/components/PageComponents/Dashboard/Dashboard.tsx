@@ -10,12 +10,12 @@ import {
   useProjectsApiActions,
   useProjectTasksApiActions
 } from "../../../hooks";
-import { TaskType } from "../../../models";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
 const initialProjectsState = [
   {
+    id: "",
     title: "",
     description: "",
     color: "",
@@ -63,6 +63,7 @@ export const Dashboard = () => {
   useEffect(() => {
     if (id) {
       fetchProjectTasks(id);
+      // const tasks = projects.find((project) => project.id === id)
       if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
         setTasks(task.tasks);
       }

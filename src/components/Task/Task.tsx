@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CheckMarkIcon from "react-ionicons/lib/IosCheckmark";
-import MoreIcon from "react-ionicons/lib/IosMore";
+import CalendarIcon from "react-ionicons/lib/IosCalendarOutline";
+import EditIcon from "react-ionicons/lib/MdCreate";
 import uniqid from "uniqid";
 
 import { Dropdown, FormInput, Text } from "../SharedComponents";
@@ -40,10 +41,13 @@ export const Task = (props: TaskProps) => {
           </CheckboxWrapper>
           <Text text={props.content} style={taskTextStyle} />
           <TaskItemIconWrapper>
-            <MoreIcon
-              fontSize="35px"
+            <EditIcon
+              fontSize="22px"
               color="#8d8d8d"
-              onClick={() => openDropdown(!dropdownIsOpen)}
+            />
+            <CalendarIcon
+              fontSize="25px"
+              color="#8d8d8d"
             />
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
@@ -122,7 +126,11 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-         {
+        {
+           display: flex;
+           width: 70px;
+           align-items: center;
+           justify-content: space-evenly;
         }
       `}
     </style>
