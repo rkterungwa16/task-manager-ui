@@ -13,22 +13,22 @@ import {
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
-const initialProjectsState = [
-  {
-    id: "",
-    title: "",
-    description: "",
-    color: "",
-    owner: "",
-    tasks: [],
-    isFavourite: false,
-    isArchived: false,
-    isDeleted: false,
-    collaborators: [],
-    createdAt: "",
-    updatedAt: ""
-  }
-];
+const initialProjectState = {
+  _id: "",
+  title: "",
+  description: "",
+  color: "",
+  owner: "",
+  tasks: [],
+  isFavourite: false,
+  isArchived: false,
+  isDeleted: false,
+  collaborators: [],
+  createdAt: "",
+  updatedAt: ""
+}
+
+const initialProjectsState = [initialProjectState];
 
 const initalTasksState = [
   {
@@ -48,6 +48,7 @@ export const Dashboard = () => {
   const { project, fetchUserProjects } = useProjectsApiActions();
   const { task, fetchProjectTasks } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
+  const [selectedProject, setSelectedProject] = useState(initialProjectState)
   const [tasks, setTasks] = useState([]);
   const {
     query: { id }
@@ -63,7 +64,8 @@ export const Dashboard = () => {
   useEffect(() => {
     if (id) {
       fetchProjectTasks(id);
-      // const tasks = projects.find((project) => project.id === id)
+      const selectedProject = projects.find((project) => project._id === id);
+      setSelectedProject(selectedProject);
       if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
         setTasks(task.tasks);
       }
@@ -88,8 +90,13 @@ export const Dashboard = () => {
         </Head>
         <TopNav />
         <DashboardContentContainer>
-          <SideBar projects={projects} />
-          <MainView tasks={tasks} />
+          <SideBar
+            projects={projects}
+          />
+          <MainView
+            tasks={tasks}
+            project={selectedProject}
+          />
         </DashboardContentContainer>
       </ModalProvider>
       <style jsx global>{`
