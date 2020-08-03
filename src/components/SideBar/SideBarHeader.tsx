@@ -3,15 +3,15 @@ import { useState, useEffect, useCallback } from "react";
 import Add from "react-ionicons/lib/IosAdd";
 import ArrowDown from "react-ionicons/lib/IosArrowDown";
 import ArrowForward from "react-ionicons/lib/IosArrowForward";
+import TodayIcon from "react-ionicons/lib/IosAlarmOutline";
+import OverduceIcon from "react-ionicons/lib/IosCalendarOutline";
+import ProjectsIcon from "react-ionicons/lib/IosList";
 
-import { Button, Text } from "../SharedComponents";
+import { Button } from "../SharedComponents";
 import { Modal } from "../Modal";
 import { FormInput, CircleSpinner } from "../SharedComponents";
 import { useProjectsApiActions } from "../../hooks";
 import {
-  sidebarHeaderButtonHoverStyle,
-  sidebarHeaderButtonStyle,
-  sidebarProjectTextStyle,
   buttonStyle,
   formInputStyle
 } from "./style";
@@ -30,7 +30,7 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
       addProject: { isRequesting, error }
     }
   } = project;
-  useEffect(() => {}, [JSON.stringify(project.projects)]);
+  useEffect(() => { }, [JSON.stringify(project.projects)]);
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const target = event.currentTarget;
@@ -48,16 +48,29 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
   return (
     <>
       <header>
-        <Button
-          style={sidebarHeaderButtonStyle}
-          hoverStyle={sidebarHeaderButtonHoverStyle}
-          onClick={props.onClick}
-        >
-          {props.openProjectList && <ArrowDown fontSize="20px" />}
-          {!props.openProjectList && <ArrowForward fontSize="20px" />}
-          <Text text="Projects" style={sidebarProjectTextStyle} />
-        </Button>
-        <Add fontSize="30px" onClick={() => setModalOpen(true)} />
+        <LinkWrapper>
+          <TodayIcon fontSize="20px" />
+          <LinkText>
+            Today
+          </LinkText>
+        </LinkWrapper>
+        <LinkWrapper>
+          <OverduceIcon fontSize="20px" />
+          <LinkText>
+            Overdue
+          </LinkText>
+        </LinkWrapper>
+        <LinkWrapper>
+          <ProjectsIcon fontSize="20px" />
+          <LinkText>
+            Projects
+          </LinkText>
+          <IconWrapper>
+            {props.openProjectList && <ArrowDown onClick={props.onClick} fontSize="20px" />}
+            {!props.openProjectList && <ArrowForward onClick={props.onClick} fontSize="20px" />}
+            <Add fontSize="30px" onClick={() => setModalOpen(true)} />
+          </IconWrapper>
+        </LinkWrapper>
         {isModalOpen && (
           <AddProjectModal
             headerText="Add project"
@@ -78,11 +91,11 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
       </header>
       <style jsx>{`
          {
-          border-bottom: 1px solid #e1e1e1;
           display: flex;
+          flex-direction: column;
           justify-content: space-between;
-          align-items: center;
           cursor: pointer;
+          width: 100%;
         }
       `}</style>
     </>
@@ -156,3 +169,68 @@ export const AddProjectModal = (props: AddProjectModalProps) => (
     </Modal>
   </>
 );
+
+export interface LinkWrapperProps {
+  children?: React.ReactNode;
+}
+
+export const LinkWrapper = (props: LinkWrapperProps) => {
+  return (
+    <div>
+      {props.children}
+      <style jsx>
+        {
+          `
+          {
+            display: flex;
+            align-items: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+          }
+          `
+        }
+      </style>
+    </div>
+  );
+}
+
+export interface LinkTextProps {
+  children?: React.ReactNode;
+}
+
+export const LinkText = (props: LinkTextProps) => (
+  <span>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            margin-left: 10px;
+          }
+        `
+      }
+    </style>
+  </span>
+)
+
+export interface IconWrapperProps {
+  children?: React.ReactNode;
+}
+
+export const IconWrapper = (props: IconWrapperProps) => (
+  <div>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+          }
+        `
+      }
+    </style>
+  </div>
+)

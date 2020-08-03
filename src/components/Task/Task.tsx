@@ -99,10 +99,9 @@ export const TaskItemInnerWrapper = (props: TaskItemInnerWrapperProps) => (
       {`
          {
           cursor: pointer;
-          height: 40px;
+          height: 30px;
           padding: 5px 5px 5px 0;
           border-radius: 4px;
-          background-color: #fff;
           width: 100%;
           display: flex;
           align-items: center;

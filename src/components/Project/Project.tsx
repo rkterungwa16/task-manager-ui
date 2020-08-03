@@ -42,7 +42,7 @@ export const Project = (props: ProjectProps) => {
       <style jsx>
         {`
            {
-            width: 100%;
+            width: 95%;
             padding: 5px;
           }
         `}
@@ -75,7 +75,7 @@ export const ProjectList = (props: ProjectListProps) => {
             width: 100%;
             margin: 2px 0;
             transition: all 0.5s;
-            height: 0;
+            height: 100%;
           }
           :focus {
             height: 100%;
@@ -99,7 +99,7 @@ export const ProjectItemInnerWrapper = (
       {`
          {
           cursor: pointer;
-          height: 40px;
+          height: 30px;
           padding: 5px 5px 5px 0;
           border-radius: 4px;
           background-color: #fff;

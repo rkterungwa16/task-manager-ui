@@ -13,8 +13,9 @@ export const SideBarProjectLists = (props: SideBarProjectListsProps) => (
     </div>
     <style jsx>
       {`
-         {
+        {
           width: 100%;
+          margin-left: 10px;
         }
       `}
     </style>
