@@ -6,7 +6,9 @@ import uniqid from "uniqid";
 import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
-import { Routes } from "../../routes/client";
+import {
+  useProjectTasksApiActions
+} from "../../hooks";
 
 export interface ProjectInterface {
   name: string;
@@ -15,6 +17,7 @@ export interface ProjectInterface {
 export interface ProjectProps {
   title?: string;
   id?: string;
+  handleProjectTasksFetch?: (id: string) => void;
 }
 export const Project = (props: ProjectProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -24,7 +27,7 @@ export const Project = (props: ProjectProps) => {
         <ProjectItemInnerWrapper>
           <Text
             onClick={() => {
-              Router.push(`${Routes.Dashboard}/${props.id}`);
+              props.handleProjectTasksFetch(props.id);
             }}
             text={props.title}
             style={projectTextStyle}
@@ -56,6 +59,10 @@ export interface ProjectListProps {
 }
 
 export const ProjectList = (props: ProjectListProps) => {
+  const { fetchProjectTasks } = useProjectTasksApiActions();
+  const handleProjectTasksFetch = (id) => {
+    fetchProjectTasks(id);
+  }
   return (
     <>
       <ul>
@@ -64,6 +71,7 @@ export const ProjectList = (props: ProjectListProps) => {
             key={uniqid(`${project.title} - `)}
             title={project.title}
             id={project._id}
+            handleProjectTasksFetch={handleProjectTasksFetch}
           />
         ))}
       </ul>

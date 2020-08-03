@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
@@ -46,13 +45,10 @@ const initalTasksState = [
 
 export const Dashboard = () => {
   const { project, fetchUserProjects } = useProjectsApiActions();
-  const { task, fetchProjectTasks } = useProjectTasksApiActions();
+  const { task } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
   const [selectedProject, setSelectedProject] = useState(initialProjectState)
   const [tasks, setTasks] = useState([]);
-  const {
-    query: { id }
-  } = useRouter();
 
   useEffect(() => {
     fetchUserProjects();
@@ -62,15 +58,11 @@ export const Dashboard = () => {
   }, [JSON.stringify(project.projects)]);
 
   useEffect(() => {
-    if (id) {
-      fetchProjectTasks(id);
-      const selectedProject = projects.find((project) => project._id === id);
-      setSelectedProject(selectedProject);
-      if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
-        setTasks(task.tasks);
-      }
+    if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
+      setTasks(task.tasks);
+      setSelectedProject(task.tasks[0].project);
     }
-  }, [id, JSON.stringify(task.tasks)]);
+  }, [JSON.stringify(task.tasks)]);
 
   useEffect(() => {
     client.onopen = () => {
@@ -130,10 +122,10 @@ export interface DashboardContentContainerProps {
 export const DashboardContentContainer = (
   props: DashboardContentContainerProps
 ) => (
-  <>
-    <div>{props.children}</div>
-    <style jsx>
-      {`
+    <>
+      <div>{props.children}</div>
+      <style jsx>
+        {`
          {
           top: 0;
           width: 100%;
@@ -144,6 +136,6 @@ export const DashboardContentContainer = (
           height: 100%;
         }
       `}
-    </style>
-  </>
-);
+      </style>
+    </>
+  );
