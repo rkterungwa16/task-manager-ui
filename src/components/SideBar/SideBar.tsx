@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { SideBarHeader } from "./SideBarHeader";
 import { SideBarProjectLists } from "./SideBarProjectLists";
+import { CircleSpinner } from "../SharedComponents"
 import { ProjectType } from "../../models";
 
 export interface SideBarProps {
   projects?: ProjectType[];
+  isRequestingProjects?: boolean;
 }
 export const SideBar = (props: SideBarProps) => {
   const [projectListIsOpen, setProjectListOpen] = useState(true);
@@ -17,15 +19,44 @@ export const SideBar = (props: SideBarProps) => {
             openProjectList={projectListIsOpen}
             onClick={() => setProjectListOpen(!projectListIsOpen)}
           />
-          <SideBarProjectLists
-            projects={props.projects}
-            openProjectList={projectListIsOpen}
-          />
+          {
+            props.isRequestingProjects ?
+            <Wrapper>
+              <CircleSpinner height={20} />
+            </Wrapper> :
+              <SideBarProjectLists
+                projects={props.projects}
+                openProjectList={projectListIsOpen}
+              />
+          }
         </SidebarContentWrapper>
       </SidebarContainer>
     </>
   );
 };
+
+interface WrapperProps {
+  children?: React.ReactNode;
+}
+
+const Wrapper = (props: WrapperProps) => (
+  <div>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            display: flex;
+            width: 100%;
+            height: 200px;
+            justify-content: center;
+            align-items: center;
+          }
+        `
+      }
+    </style>
+  </div>
+)
 
 export interface SidebarContainerProps {
   children?: React.ReactNode;

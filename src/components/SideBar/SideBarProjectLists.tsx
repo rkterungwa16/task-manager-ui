@@ -16,6 +16,8 @@ export const SideBarProjectLists = (props: SideBarProjectListsProps) => (
         {
           width: 100%;
           margin-left: 10px;
+          display: flex;
+          justify-content: center;
         }
       `}
     </style>
