@@ -44,7 +44,9 @@ export const addProject = (project: ProjectType) => async (dispatch: any) => {
   }
 };
 
-export const fetchUserProject = (projectId: string) => async (dispatch: any) => {
+export const fetchUserProject = (projectId: string) => async (
+  dispatch: any
+) => {
   dispatch(requestAction(ProjectActions.FETCH_USER_PROJECT));
   try {
     const url = `${apiEndPoints.projects}/${projectId}`;

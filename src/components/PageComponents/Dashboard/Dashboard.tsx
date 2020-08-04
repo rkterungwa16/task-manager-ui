@@ -25,7 +25,7 @@ const initialProjectState = {
   collaborators: [],
   createdAt: "",
   updatedAt: ""
-}
+};
 
 const initialProjectsState = [initialProjectState];
 
@@ -62,8 +62,10 @@ export const Dashboard = () => {
   }, [JSON.stringify(project.projects)]);
 
   useEffect(() => {
-    if (project.actions.fetchUserProjects.isRequesting !== isRequestingProjects) {
-      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting)
+    if (
+      project.actions.fetchUserProjects.isRequesting !== isRequestingProjects
+    ) {
+      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting);
     }
   }, [project.actions.fetchUserProjects.isRequesting]);
 
@@ -71,7 +73,7 @@ export const Dashboard = () => {
     if (JSON.stringify(project.project) !== JSON.stringify(currentProject)) {
       setCurrentProject(project.project);
     }
-  }, [JSON.stringify(project.project)])
+  }, [JSON.stringify(project.project)]);
 
   /**
    * Set tasks and corresponding project
@@ -103,10 +105,7 @@ export const Dashboard = () => {
             projects={projects}
             isRequestingProjects={isRequestingProjects}
           />
-          <MainView
-            tasks={tasks}
-            project={currentProject}
-          />
+          <MainView tasks={tasks} project={currentProject} />
         </DashboardContentContainer>
       </ModalProvider>
       <style jsx global>{`
@@ -140,10 +139,10 @@ export interface DashboardContentContainerProps {
 export const DashboardContentContainer = (
   props: DashboardContentContainerProps
 ) => (
-    <>
-      <div>{props.children}</div>
-      <style jsx>
-        {`
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
          {
           top: 0;
           width: 100%;
@@ -154,6 +153,6 @@ export const DashboardContentContainer = (
           height: 100%;
         }
       `}
-      </style>
-    </>
-  );
+    </style>
+  </>
+);

@@ -11,10 +11,7 @@ import { Button } from "../SharedComponents";
 import { Modal } from "../Modal";
 import { FormInput, CircleSpinner } from "../SharedComponents";
 import { useProjectsApiActions } from "../../hooks";
-import {
-  buttonStyle,
-  formInputStyle
-} from "./style";
+import { buttonStyle, formInputStyle } from "./style";
 
 export interface SideBarHeaderProps {
   onClick?: (event: React.MouseEvent<any, MouseEvent>) => void;
@@ -30,7 +27,7 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
       addProject: { isRequesting, error }
     }
   } = project;
-  useEffect(() => { }, [JSON.stringify(project.projects)]);
+  useEffect(() => {}, [JSON.stringify(project.projects)]);
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const target = event.currentTarget;
@@ -50,24 +47,22 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
       <header>
         <LinkWrapper>
           <TodayIcon fontSize="20px" />
-          <LinkText>
-            Today
-          </LinkText>
+          <LinkText>Today</LinkText>
         </LinkWrapper>
         <LinkWrapper>
           <OverduceIcon fontSize="20px" />
-          <LinkText>
-            Overdue
-          </LinkText>
+          <LinkText>Overdue</LinkText>
         </LinkWrapper>
         <LinkWrapper>
           <ProjectsIcon fontSize="20px" />
-          <LinkText>
-            Projects
-          </LinkText>
+          <LinkText>Projects</LinkText>
           <IconWrapper>
-            {props.openProjectList && <ArrowDown onClick={props.onClick} fontSize="20px" />}
-            {!props.openProjectList && <ArrowForward onClick={props.onClick} fontSize="20px" />}
+            {props.openProjectList && (
+              <ArrowDown onClick={props.onClick} fontSize="20px" />
+            )}
+            {!props.openProjectList && (
+              <ArrowForward onClick={props.onClick} fontSize="20px" />
+            )}
             <Add fontSize="30px" onClick={() => setModalOpen(true)} />
           </IconWrapper>
         </LinkWrapper>
@@ -179,20 +174,18 @@ export const LinkWrapper = (props: LinkWrapperProps) => {
     <div>
       {props.children}
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             display: flex;
             align-items: center;
             padding-top: 5px;
             padding-bottom: 5px;
           }
-          `
-        }
+        `}
       </style>
     </div>
   );
-}
+};
 
 export interface LinkTextProps {
   children?: React.ReactNode;
@@ -202,16 +195,14 @@ export const LinkText = (props: LinkTextProps) => (
   <span>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            margin-left: 10px;
-          }
-        `
-      }
+      {`
+         {
+          margin-left: 10px;
+        }
+      `}
     </style>
   </span>
-)
+);
 
 export interface IconWrapperProps {
   children?: React.ReactNode;
@@ -221,16 +212,14 @@ export const IconWrapper = (props: IconWrapperProps) => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            width: 100%;
-          }
-        `
-      }
+      {`
+         {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          width: 100%;
+        }
+      `}
     </style>
   </div>
-)
+);

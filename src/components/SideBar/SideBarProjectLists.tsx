@@ -11,21 +11,20 @@ export interface SideBarProjectListsProps {
 export const SideBarProjectLists = (props: SideBarProjectListsProps) => (
   <>
     <div>
-      {
-        !props.projects ?
+      {!props.projects ? (
         <Wrapper>
           <Text
             text="No Projects Yet. Go on! Create One!"
             style={emptyProjectTextStyle}
           />
         </Wrapper>
-        :
+      ) : (
         props.openProjectList && <ProjectList projects={props.projects} />
-      }
+      )}
     </div>
     <style jsx>
       {`
-        {
+         {
           width: 100%;
           margin-left: 10px;
           display: flex;
@@ -44,17 +43,15 @@ const Wrapper = (props: WrapperProps) => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            display: flex;
-            width: 100%;
-            height: 200px;
-            justify-content: center;
-            align-items: center;
-          }
-        `
-      }
+      {`
+         {
+          display: flex;
+          width: 100%;
+          height: 200px;
+          justify-content: center;
+          align-items: center;
+        }
+      `}
     </style>
   </div>
-)
+);

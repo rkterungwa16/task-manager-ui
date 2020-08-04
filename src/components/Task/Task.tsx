@@ -41,14 +41,8 @@ export const Task = (props: TaskProps) => {
           </CheckboxWrapper>
           <Text text={props.content} style={taskTextStyle} />
           <TaskItemIconWrapper>
-            <EditIcon
-              fontSize="22px"
-              color="#8d8d8d"
-            />
-            <CalendarIcon
-              fontSize="25px"
-              color="#8d8d8d"
-            />
+            <EditIcon fontSize="22px" color="#8d8d8d" />
+            <CalendarIcon fontSize="25px" color="#8d8d8d" />
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
         {dropdownIsOpen && <Dropdown />}
@@ -125,11 +119,11 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-        {
-           display: flex;
-           width: 70px;
-           align-items: center;
-           justify-content: space-evenly;
+         {
+          display: flex;
+          width: 70px;
+          align-items: center;
+          justify-content: space-evenly;
         }
       `}
     </style>

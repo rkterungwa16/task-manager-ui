@@ -13,20 +13,18 @@ export const MainView = (props: MainViewProps) => {
   return (
     <>
       <div>
-        <TasksHeader>
-          {props.project ? props.project.title : null}
-        </TasksHeader>
-        {
-          !props.tasks.length || (props.tasks.length === 1 && !props.tasks[0].content) ?
-            <Wrapper>
-              <Text
-                text="No tasks yet. Go on! Create one!"
-                style={emptyProjectTextStyle}
-              />
-            </Wrapper>
-            :
-            <TaskList tasks={props.tasks} />
-        }
+        <TasksHeader>{props.project ? props.project.title : null}</TasksHeader>
+        {!props.tasks.length ||
+        (props.tasks.length === 1 && !props.tasks[0].content) ? (
+          <Wrapper>
+            <Text
+              text="No tasks yet. Go on! Create one!"
+              style={emptyProjectTextStyle}
+            />
+          </Wrapper>
+        ) : (
+          <TaskList tasks={props.tasks} />
+        )}
       </div>
       <style jsx>
         {`
@@ -55,9 +53,8 @@ export const TasksHeader = (props: TasksHeaderProps) => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-        {
+      {`
+         {
           width: 100%;
           display: flex;
           justify-content: center;
@@ -66,8 +63,7 @@ export const TasksHeader = (props: TasksHeaderProps) => (
           font-weight: bold;
           color: #8d8d8d;
         }
-        `
-      }
+      `}
     </style>
   </div>
 );
@@ -80,17 +76,15 @@ const Wrapper = (props: WrapperProps) => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            display: flex;
-            width: 100%;
-            height: 200px;
-            justify-content: center;
-            align-items: center;
-          }
-        `
-      }
+      {`
+         {
+          display: flex;
+          width: 100%;
+          height: 200px;
+          justify-content: center;
+          align-items: center;
+        }
+      `}
     </style>
   </div>
-)
+);

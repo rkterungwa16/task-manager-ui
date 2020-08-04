@@ -5,10 +5,7 @@ import uniqid from "uniqid";
 import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
-import {
-  useProjectTasksApiActions,
-  useProjectsApiActions
-} from "../../hooks";
+import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 
 export interface ProjectInterface {
   name: string;
@@ -44,7 +41,7 @@ export const Project = (props: ProjectProps) => {
       </li>
       <style jsx>
         {`
-          {
+           {
             width: 95%;
             padding: 5px;
           }
@@ -61,10 +58,10 @@ export interface ProjectListProps {
 export const ProjectList = (props: ProjectListProps) => {
   const { fetchProjectTasks } = useProjectTasksApiActions();
   const { fetchUserProject } = useProjectsApiActions();
-  const handleProjectTasksFetch = (id) => {
+  const handleProjectTasksFetch = id => {
     fetchProjectTasks(id);
     fetchUserProject(id);
-  }
+  };
   return (
     <>
       <ul>
@@ -79,7 +76,7 @@ export const ProjectList = (props: ProjectListProps) => {
       </ul>
       <style jsx>
         {`
-          {
+           {
             animation: fadeIn 300ms ease-in;
             list-style: none;
             padding: 0;
@@ -141,7 +138,7 @@ export const ProjectItemIconWrapper = (props: ProjectItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-        {
+         {
         }
       `}
     </style>
