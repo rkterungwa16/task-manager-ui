@@ -43,3 +43,24 @@ export const addProject = (project: ProjectType) => async (dispatch: any) => {
     );
   }
 };
+
+export const fetchUserProject = (projectId: string) => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.FETCH_USER_PROJECT));
+  try {
+    const url = `${apiEndPoints.projects}/${projectId}`;
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+    dispatch(
+      withDataAction(ProjectActions.FETCH_USER_PROJECT_SUCCESS, response.data)
+    );
+  } catch (e) {
+    dispatch(
+      withErrorAction(
+        ProjectActions.FETCH_USER_PROJECT_FAILURE,
+        e.response.data.message
+      )
+    );
+  }
+};

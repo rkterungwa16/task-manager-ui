@@ -47,8 +47,8 @@ export const Dashboard = () => {
   const { project, fetchUserProjects } = useProjectsApiActions();
   const { task } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
+  const [currentProject, setCurrentProject] = useState(initialProjectState);
   const [isRequestingProjects, setIsRequestingProjects] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(initialProjectState)
   const [tasks, setTasks] = useState([]);
 
   /**
@@ -67,13 +67,18 @@ export const Dashboard = () => {
     }
   }, [project.actions.fetchUserProjects.isRequesting]);
 
+  useEffect(() => {
+    if (JSON.stringify(project.project) !== JSON.stringify(currentProject)) {
+      setCurrentProject(project.project);
+    }
+  }, [JSON.stringify(project.project)])
+
   /**
    * Set tasks and corresponding project
    */
   useEffect(() => {
     if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
       setTasks(task.tasks);
-      setSelectedProject(task.tasks[0].project);
     }
   }, [JSON.stringify(task.tasks)]);
 
@@ -100,7 +105,7 @@ export const Dashboard = () => {
           />
           <MainView
             tasks={tasks}
-            project={selectedProject}
+            project={currentProject}
           />
         </DashboardContentContainer>
       </ModalProvider>

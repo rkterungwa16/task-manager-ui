@@ -85,6 +85,45 @@ export function projectsReducer(
           }
         }
       };
+    case ProjectActions.FETCH_USER_PROJECT:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          fetchUserProject: {
+            ...state.actions.fetchUserProject,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_USER_PROJECT_SUCCESS:
+      const { data: userProject } = action;
+      return {
+        ...state,
+        project: userProject.data.project,
+        actions: {
+          ...state.actions,
+          fetchUserProject: {
+            ...state.actions.fetchUserProject,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_USER_PROJECT_FAILURE:
+      const { error: fetchUserProjectError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          fetchUserProject: {
+            isRequesting: false,
+            error: fetchUserProjectError
+          }
+        }
+      };
     default:
       return state;
   }

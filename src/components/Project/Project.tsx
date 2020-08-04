@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Router from "next/router";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
@@ -7,7 +6,8 @@ import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
 import {
-  useProjectTasksApiActions
+  useProjectTasksApiActions,
+  useProjectsApiActions
 } from "../../hooks";
 
 export interface ProjectInterface {
@@ -60,8 +60,10 @@ export interface ProjectListProps {
 
 export const ProjectList = (props: ProjectListProps) => {
   const { fetchProjectTasks } = useProjectTasksApiActions();
+  const { fetchUserProject } = useProjectsApiActions();
   const handleProjectTasksFetch = (id) => {
     fetchProjectTasks(id);
+    fetchUserProject(id);
   }
   return (
     <>

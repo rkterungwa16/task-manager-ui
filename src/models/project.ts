@@ -16,9 +16,11 @@ export interface ProjectType {
 
 export interface ProjectState {
   projects: ProjectType[];
+  project: ProjectType;
   actions: {
     addProject: ActionStatus;
     fetchUserProjects: ActionStatus;
+    fetchUserProject: ActionStatus;
   };
 }
 
@@ -38,12 +40,29 @@ export const defaultProjectsState: ProjectState = {
       updatedAt: ""
     }
   ],
+  project: {
+    title: "",
+    description: "",
+    color: "",
+    owner: "",
+    tasks: [],
+    isFavourite: false,
+    isArchived: false,
+    isDeleted: false,
+    collaborators: [],
+    createdAt: "",
+    updatedAt: ""
+  },
   actions: {
     addProject: {
       isRequesting: false,
       error: ""
     },
     fetchUserProjects: {
+      isRequesting: false,
+      error: ""
+    },
+    fetchUserProject: {
       isRequesting: false,
       error: ""
     }

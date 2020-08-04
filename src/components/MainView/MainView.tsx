@@ -31,12 +31,15 @@ export const MainView = (props: MainViewProps) => {
       <style jsx>
         {`
            {
-            width: 60%;
+            width: 50%;
             height: 100vh;
             position: relative;
             padding: 50px 100px 0px 100px;
             border-left: 1px solid #ededed;
             background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
         `}
       </style>
@@ -55,7 +58,7 @@ export const TasksHeader = (props: TasksHeaderProps) => (
       {
         `
         {
-          width: 70%;
+          width: 100%;
           display: flex;
           justify-content: center;
           padding-top: 15px;
