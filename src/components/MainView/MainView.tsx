@@ -1,5 +1,7 @@
 import { TaskList } from "../Task";
+import { Text } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
+import { emptyProjectTextStyle } from "./style";
 
 export interface MainViewProps {
   children?: React.ReactNode;
@@ -8,15 +10,23 @@ export interface MainViewProps {
 }
 
 export const MainView = (props: MainViewProps) => {
-  console.log('props value ->>', props);
   return (
     <>
       <div>
         <TasksHeader>
           {props.project ? props.project.title : null}
         </TasksHeader>
-        <TaskList tasks={props.tasks} />
-        {props.children}
+        {
+          !props.tasks.length || (props.tasks.length === 1 && !props.tasks[0].content) ?
+            <Wrapper>
+              <Text
+                text="No tasks yet. Go on! Create one!"
+                style={emptyProjectTextStyle}
+              />
+            </Wrapper>
+            :
+            <TaskList tasks={props.tasks} />
+        }
       </div>
       <style jsx>
         {`
@@ -53,6 +63,29 @@ export const TasksHeader = (props: TasksHeaderProps) => (
           font-weight: bold;
           color: #8d8d8d;
         }
+        `
+      }
+    </style>
+  </div>
+);
+
+interface WrapperProps {
+  children?: React.ReactNode;
+}
+
+const Wrapper = (props: WrapperProps) => (
+  <div>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            display: flex;
+            width: 100%;
+            height: 200px;
+            justify-content: center;
+            align-items: center;
+          }
         `
       }
     </style>
