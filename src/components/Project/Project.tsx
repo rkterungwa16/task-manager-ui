@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Router from "next/router";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
@@ -6,7 +7,7 @@ import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
 import {
-  useProjectTasksApiActions,
+  useProjectTasksApiActions
 } from "../../hooks";
 
 export interface ProjectInterface {
@@ -77,24 +78,21 @@ export const ProjectList = (props: ProjectListProps) => {
       <style jsx>
         {`
           {
-            animation: slideIn 0.5s forwards;
-            position: absolute;
-            left: -600px;
+            animation: fadeIn 300ms ease-in;
             list-style: none;
             padding: 0;
-            width: 85%;
+            width: 100%;
             margin: 2px 0;
             transition: all 0.5s;
             height: 100%;
           }
-          @keyframes slideIn {
-            100% { left: 50px; }
-          }
-          :active {
-            animation: slideOut 0.5s backwards;
-          }
-          :focus {
-            height: 100%;
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
           }
         `}
       </style>
@@ -141,7 +139,7 @@ export const ProjectItemIconWrapper = (props: ProjectItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-         {
+        {
         }
       `}
     </style>

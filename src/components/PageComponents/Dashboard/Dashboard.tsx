@@ -58,9 +58,14 @@ export const Dashboard = () => {
     fetchUserProjects();
     if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
       setProjects(project.projects);
-      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting)
     }
   }, [JSON.stringify(project.projects)]);
+
+  useEffect(() => {
+    if (project.actions.fetchUserProjects.isRequesting !== isRequestingProjects) {
+      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting)
+    }
+  }, [project.actions.fetchUserProjects.isRequesting]);
 
   /**
    * Set tasks and corresponding project
@@ -80,7 +85,6 @@ export const Dashboard = () => {
       console.log(message);
     };
   });
-
   return (
     <div>
       <ModalProvider>

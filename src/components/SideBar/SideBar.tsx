@@ -10,7 +10,6 @@ export interface SideBarProps {
 }
 export const SideBar = (props: SideBarProps) => {
   const [projectListIsOpen, setProjectListOpen] = useState(true);
-
   return (
     <>
       <SidebarContainer>
