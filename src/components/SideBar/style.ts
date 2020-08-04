@@ -35,3 +35,9 @@ export const formInputStyle = {
   letterSpacing: "1.5px",
   boxShadow: "0 1px 2px rgba(0,0,0,0.15)"
 };
+
+export const emptyProjectTextStyle = {
+  fontSize: "16px",
+  color: "#8d8d8d",
+  wordBreak: "break-all"
+};
