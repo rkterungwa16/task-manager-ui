@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Router from "next/router";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
@@ -44,7 +43,7 @@ export const Project = (props: ProjectProps) => {
       </li>
       <style jsx>
         {`
-           {
+          {
             width: 95%;
             padding: 5px;
           }
@@ -77,13 +76,22 @@ export const ProjectList = (props: ProjectListProps) => {
       </ul>
       <style jsx>
         {`
-           {
+          {
+            animation: slideIn 0.5s forwards;
+            position: absolute;
+            left: -600px;
             list-style: none;
             padding: 0;
-            width: 100%;
+            width: 85%;
             margin: 2px 0;
             transition: all 0.5s;
             height: 100%;
+          }
+          @keyframes slideIn {
+            100% { left: 50px; }
+          }
+          :active {
+            animation: slideOut 0.5s backwards;
           }
           :focus {
             height: 100%;
