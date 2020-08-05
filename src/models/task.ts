@@ -20,6 +20,8 @@ export interface TaskType {
 
 export interface TaskState {
   tasks: TaskType[];
+  task: TaskType;
+  code: number;
   actions: {
     fetchProjectTasks: ActionStatus;
   };
@@ -28,6 +30,7 @@ export interface TaskState {
 export const defaultTasksState: TaskState = {
   tasks: [
     {
+      _id: "",
       content: "",
       priority: null,
       userId: "",
@@ -38,6 +41,18 @@ export const defaultTasksState: TaskState = {
       updatedAt: ""
     }
   ],
+  task: {
+    _id: "",
+    content: "",
+    priority: null,
+    userId: "",
+    project: "",
+    label: [],
+    dueDate: "",
+    createdAt: "",
+    updatedAt: ""
+  },
+  code: 0,
   actions: {
     fetchProjectTasks: {
       isRequesting: false,

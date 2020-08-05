@@ -4,6 +4,7 @@ export interface UserType {
   name?: string;
   email?: string;
   token?: string;
+  code?: number;
 }
 
 export interface UserRegistrationDetails {
@@ -23,6 +24,7 @@ export const defaultUsersState: UserState = {
   email: "",
   name: "",
   token: "",
+  code: 0,
   actions: {
     createUser: {
       isRequesting: false,

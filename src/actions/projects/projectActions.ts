@@ -16,10 +16,13 @@ export const fetchUserProjects = () => async (dispatch: any) => {
       withDataAction(ProjectActions.FETCH_USER_PROJECTS_SUCCESS, response.data)
     );
   } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
     dispatch(
       withErrorAction(
         ProjectActions.FETCH_USER_PROJECTS_FAILURE,
-        e.response.data.message
+        e.response.data
       )
     );
   }
@@ -35,10 +38,13 @@ export const addProject = (project: ProjectType) => async (dispatch: any) => {
     });
     dispatch(withDataAction(ProjectActions.ADD_PROJECT_SUCCESS, response.data));
   } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
     dispatch(
       withErrorAction(
         ProjectActions.ADD_PROJECT_FAILURE,
-        e.response.data.message
+        e.response.data
       )
     );
   }
@@ -58,10 +64,13 @@ export const fetchUserProject = (projectId: string) => async (
       withDataAction(ProjectActions.FETCH_USER_PROJECT_SUCCESS, response.data)
     );
   } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
     dispatch(
       withErrorAction(
         ProjectActions.FETCH_USER_PROJECT_FAILURE,
-        e.response.data.message
+        e.response.data
       )
     );
   }

@@ -1,6 +1,8 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import Router from "next/router";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { Routes } from "../../../routes/client";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import TopNav from "../../../components/TopNav";
@@ -50,6 +52,12 @@ export const Dashboard = () => {
   const [currentProject, setCurrentProject] = useState(initialProjectState);
   const [isRequestingProjects, setIsRequestingProjects] = useState(false);
   const [tasks, setTasks] = useState([]);
+
+  // useEffect(() => {
+  //   if (project.code >= 400 && project.code < 600) {
+  //     Router.push(Routes.Login);
+  //   }
+  // }, [project.code])
 
   /**
    * Set projects

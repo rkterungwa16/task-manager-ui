@@ -17,6 +17,7 @@ export interface ProjectType {
 export interface ProjectState {
   projects: ProjectType[];
   project: ProjectType;
+  code: number;
   actions: {
     addProject: ActionStatus;
     fetchUserProjects: ActionStatus;
@@ -53,6 +54,7 @@ export const defaultProjectsState: ProjectState = {
     createdAt: "",
     updatedAt: ""
   },
+  code: 0,
   actions: {
     addProject: {
       isRequesting: false,
