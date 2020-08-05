@@ -42,10 +42,7 @@ export const addProject = (project: ProjectType) => async (dispatch: any) => {
       window.localStorage.clear();
     }
     dispatch(
-      withErrorAction(
-        ProjectActions.ADD_PROJECT_FAILURE,
-        e.response.data
-      )
+      withErrorAction(ProjectActions.ADD_PROJECT_FAILURE, e.response.data)
     );
   }
 };

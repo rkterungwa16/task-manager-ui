@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import Router from "next/router";
+
+import { Routes } from "../../routes/client";
 import { TaskList } from "../Task";
 import { Text } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
@@ -10,10 +14,27 @@ export interface MainViewProps {
 }
 
 export const MainView = (props: MainViewProps) => {
+  const [pathname, setPathname] = useState("");
+
+  useEffect(() => {
+    if (Router.pathname !== pathname) {
+      setPathname(Router.pathname);
+    }
+  }, [pathname]);
+  const alternativeTitles = {
+    [Routes.Today]: "Today",
+    [Routes.Overdue]: "Overdue"
+  };
   return (
     <>
       <div>
-        <TasksHeader>{props.project ? props.project.title : null}</TasksHeader>
+        <TasksHeader>
+          {alternativeTitles[pathname]
+            ? alternativeTitles[pathname]
+            : props.project
+            ? props.project.title
+            : null}
+        </TasksHeader>
         {!props.tasks.length ||
         (props.tasks.length === 1 && !props.tasks[0].content) ? (
           <Wrapper>
@@ -80,7 +101,7 @@ const Wrapper = (props: WrapperProps) => (
          {
           display: flex;
           width: 100%;
-          height: 200px;
+          height: 90px;
           justify-content: center;
           align-items: center;
         }

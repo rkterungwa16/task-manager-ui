@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 
 import Add from "react-ionicons/lib/IosAdd";
 import ArrowDown from "react-ionicons/lib/IosArrowDown";
@@ -7,6 +8,7 @@ import TodayIcon from "react-ionicons/lib/IosAlarmOutline";
 import OverduceIcon from "react-ionicons/lib/IosCalendarOutline";
 import ProjectsIcon from "react-ionicons/lib/IosList";
 
+import { Routes } from "../../routes/client";
 import { Button } from "../SharedComponents";
 import { Modal } from "../Modal";
 import { FormInput, CircleSpinner } from "../SharedComponents";
@@ -47,11 +49,19 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
       <header>
         <LinkWrapper>
           <TodayIcon fontSize="20px" />
-          <LinkText>Today</LinkText>
+          <Link href={Routes.Today}>
+            <a>
+              <LinkText>Today</LinkText>
+            </a>
+          </Link>
         </LinkWrapper>
         <LinkWrapper>
           <OverduceIcon fontSize="20px" />
-          <LinkText>Overdue</LinkText>
+          <Link href={Routes.Overdue}>
+            <a>
+              <LinkText>Overdue</LinkText>
+            </a>
+          </Link>
         </LinkWrapper>
         <LinkWrapper>
           <ProjectsIcon fontSize="20px" />
@@ -91,6 +101,10 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
           justify-content: space-between;
           cursor: pointer;
           width: 100%;
+        }
+        a {
+          text-decoration: none;
+          color: #8d8d8d;
         }
       `}</style>
     </>

@@ -34,7 +34,10 @@ export function projectsReducer(
       };
 
     case ProjectActions.FETCH_USER_PROJECTS_FAILURE:
-      const { error: fetchUserProjectsError } = action as WithError<{ message: string; code: number }>;
+      const { error: fetchUserProjectsError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
       return {
         ...state,
         code: fetchUserProjectsError.code,
@@ -75,7 +78,10 @@ export function projectsReducer(
       };
 
     case ProjectActions.ADD_PROJECT_FAILURE:
-      const { error: addProjectError } = action as WithError<{message: string; code: number}>;
+      const { error: addProjectError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
       return {
         ...state,
         code: addProjectError.code,
@@ -115,7 +121,10 @@ export function projectsReducer(
       };
 
     case ProjectActions.FETCH_USER_PROJECT_FAILURE:
-      const { error: fetchUserProjectError } = action as WithError<{message: string; code: number}>;
+      const { error: fetchUserProjectError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
       return {
         ...state,
         code: fetchUserProjectError.code,

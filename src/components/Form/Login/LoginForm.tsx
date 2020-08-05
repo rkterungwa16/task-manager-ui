@@ -41,7 +41,7 @@ export const LoginForm = () => {
   useEffect(() => {
     if (user.token.length) {
       window.localStorage.setItem("currentUser", user.token);
-      Router.push(Routes.Dashboard);
+      Router.push(Routes.Overdue);
     }
   }, [user.token]);
 

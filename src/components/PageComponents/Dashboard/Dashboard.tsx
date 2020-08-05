@@ -47,8 +47,9 @@ const initalTasksState = [
 
 export const Dashboard = () => {
   const { project, fetchUserProjects } = useProjectsApiActions();
-  const { task } = useProjectTasksApiActions();
+  const { task, fetchTodaysTasks } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
+  const [pathname, setPathname] = useState("");
   const [currentProject, setCurrentProject] = useState(initialProjectState);
   const [isRequestingProjects, setIsRequestingProjects] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -64,6 +65,9 @@ export const Dashboard = () => {
    */
   useEffect(() => {
     fetchUserProjects();
+    if (Router.pathname !== pathname) {
+      setPathname(Router.pathname);
+    }
     if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
       setProjects(project.projects);
     }
@@ -87,10 +91,13 @@ export const Dashboard = () => {
    * Set tasks and corresponding project
    */
   useEffect(() => {
+    if (Router.pathname !== pathname && Router.pathname === Routes.Today) {
+      fetchTodaysTasks();
+    }
     if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
       setTasks(task.tasks);
     }
-  }, [JSON.stringify(task.tasks)]);
+  }, [JSON.stringify(task.tasks), pathname]);
 
   useEffect(() => {
     client.onopen = () => {
