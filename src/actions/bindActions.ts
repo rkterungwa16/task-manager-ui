@@ -2,7 +2,10 @@ export interface INameToValueMap {
   [key: string]: any;
 }
 
-export function bindActions(actions: any, dispatch: any) {
+export function bindActions(
+  actions: any,
+  dispatch: any
+): INameToValueMap | any {
   function bindAction(action: any, dispatcher: any) {
     return function() {
       return dispatcher(action.apply(null, arguments));

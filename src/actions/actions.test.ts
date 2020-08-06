@@ -1,6 +1,6 @@
 import { requestAction, withDataAction, withErrorAction } from "./actions";
 
-describe.only("Actions", () => {
+describe("Actions", () => {
   it("should return the correct action type", () => {
     expect(requestAction("CREATE_USER")).toEqual({ type: "CREATE_USER" });
   });
