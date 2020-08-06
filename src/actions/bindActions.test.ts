@@ -1,6 +1,6 @@
 import { bindActions } from "./bindActions";
 
-describe.only("Bind Actions", () => {
+describe("Bind Actions", () => {
   it("should call a dispatcher for a single action", () => {
     const createUser = jest.fn();
     const dispatch = jest.fn(x => {
