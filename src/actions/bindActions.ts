@@ -27,12 +27,4 @@ export function bindActions(actions: any, dispatch: any) {
     }
   });
   return boundActions;
-  // for (const key of Object.keys(actions)) {
-  //   const action: any = actions[key];
-  //   console.log("key --->>>>", key);
-  //   if (typeof action === "function") {
-  //     boundActions[key] = bindAction(action, dispatch);
-  //   }
-  //   return boundActions;
-  // }
 }
