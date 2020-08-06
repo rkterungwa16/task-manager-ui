@@ -9,7 +9,7 @@ export const createUser = (user: UserRegistrationDetails) => async (
 ) => {
   dispatch(requestAction(UserActions.CREATE_USER));
   try {
-    const url = apiEndPoints.register; // ApiEndpoints.register;
+    const url = apiEndPoints.register;
     const response = await axios.post(url, user);
     dispatch(withDataAction(UserActions.CREATE_USER_SUCCESS, response.data));
   } catch (e) {
@@ -24,7 +24,7 @@ export const authenticateUser = (user: UserRegistrationDetails) => async (
 ) => {
   dispatch(requestAction(UserActions.AUTHENTICATE_USER));
   try {
-    const url = apiEndPoints.login; // ApiEndpoints.register;
+    const url = apiEndPoints.login;
     const response = await axios.post(url, user);
     dispatch(
       withDataAction(UserActions.AUTHENTICATE_USER_SUCCESS, response.data)
