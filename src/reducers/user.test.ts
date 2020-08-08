@@ -1,8 +1,8 @@
 import { usersReducer } from "./user";
-import { AnyAction, UserActions, WithData, WithError } from "../actions";
-import { defaultUsersState, UserState } from "../models";
+import { UserActions } from "../actions";
+import { defaultUsersState } from "../models";
 
-describe.only("User Reducer", () => {
+describe("User Reducer", () => {
   it("should return default state for undefined action", () => {
     expect(usersReducer(defaultUsersState, {
       type: undefined
@@ -97,7 +97,7 @@ describe.only("User Reducer", () => {
   it("should return authenticated user details", () => {
     const mockUser = {
       data: {
-      token: "fxddt45"
+        token: "fxddt45"
       }
     }
 
