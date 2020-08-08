@@ -75,4 +75,69 @@ describe.only("User Reducer", () => {
       })
     ).toEqual(mockUserState);
   });
+
+  it("should return isRequest true for request to authenticate user", () => {
+    const mockUserState = {
+      ...defaultUsersState,
+      actions: {
+        ...defaultUsersState.actions,
+        authenticateUser: {
+          ...defaultUsersState.actions.authenticateUser,
+          isRequesting: true
+        }
+      }
+    };
+
+    expect(
+      usersReducer(defaultUsersState, {
+        type: UserActions.AUTHENTICATE_USER
+      })
+    ).toEqual(mockUserState);
+  })
+  it("should return authenticated user details", () => {
+    const mockUser = {
+      data: {
+      token: "fxddt45"
+      }
+    }
+
+    const mockUserState = {
+      ...defaultUsersState,
+      token: mockUser.data.token,
+      actions: {
+        ...defaultUsersState.actions,
+        authenticateUser: {
+          ...defaultUsersState.actions.authenticateUser,
+          isRequesting: false
+        }
+      }
+    };
+
+    expect(
+      usersReducer(defaultUsersState, {
+        type: UserActions.AUTHENTICATE_USER_SUCCESS,
+        data: mockUser
+      })
+    ).toEqual(mockUserState);
+  })
+
+  it("should return error for unsuccessful user authentication", () => {
+    const mockUserState = {
+      ...defaultUsersState,
+      actions: {
+        ...defaultUsersState.actions,
+        authenticateUser: {
+          error: "error",
+          isRequesting: false
+        }
+      }
+    };
+
+    expect(
+      usersReducer(defaultUsersState, {
+        type: UserActions.AUTHENTICATE_USER_FAILURE,
+        error: "error"
+      })
+    ).toEqual(mockUserState);
+  });
 })
