@@ -4,9 +4,11 @@ import { defaultUsersState } from "../models";
 
 describe("User Reducer", () => {
   it("should return default state for undefined action", () => {
-    expect(usersReducer(defaultUsersState, {
-      type: undefined
-    })).toEqual(defaultUsersState)
+    expect(
+      usersReducer(defaultUsersState, {
+        type: undefined
+      })
+    ).toEqual(defaultUsersState);
   });
 
   it("should return isRequest true for request to create user", () => {
@@ -26,13 +28,13 @@ describe("User Reducer", () => {
         type: UserActions.CREATE_USER
       })
     ).toEqual(mockUserState);
-  })
+  });
   it("should return created user", () => {
     const mockUser = {
       _id: "12345",
       email: "tk@tk.com",
       token: "fxddt45"
-    }
+    };
 
     const mockUserState = {
       ...defaultUsersState,
@@ -54,7 +56,7 @@ describe("User Reducer", () => {
         data: mockUser
       })
     ).toEqual(mockUserState);
-  })
+  });
 
   it("should return error for unsuccessful user creation", () => {
     const mockUserState = {
@@ -93,13 +95,13 @@ describe("User Reducer", () => {
         type: UserActions.AUTHENTICATE_USER
       })
     ).toEqual(mockUserState);
-  })
+  });
   it("should return authenticated user details", () => {
     const mockUser = {
       data: {
         token: "fxddt45"
       }
-    }
+    };
 
     const mockUserState = {
       ...defaultUsersState,
@@ -119,7 +121,7 @@ describe("User Reducer", () => {
         data: mockUser
       })
     ).toEqual(mockUserState);
-  })
+  });
 
   it("should return error for unsuccessful user authentication", () => {
     const mockUserState = {
@@ -140,4 +142,4 @@ describe("User Reducer", () => {
       })
     ).toEqual(mockUserState);
   });
-})
+});

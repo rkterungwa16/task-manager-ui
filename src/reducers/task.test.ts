@@ -4,9 +4,11 @@ import { defaultTasksState } from "../models";
 
 describe.only("Task Reducer", () => {
   it("should return default state for undefined action", () => {
-    expect(tasksReducer(defaultTasksState, {
-      type: undefined
-    })).toEqual(defaultTasksState)
+    expect(
+      tasksReducer(defaultTasksState, {
+        type: undefined
+      })
+    ).toEqual(defaultTasksState);
   });
 
   it("should make return true for requests to fetch project tasks", () => {
@@ -142,4 +144,4 @@ describe.only("Task Reducer", () => {
       })
     ).toEqual(mockTaskState);
   });
-})
+});
