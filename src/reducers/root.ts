@@ -34,19 +34,3 @@ export const rootReducer = (state: StoreState, action: AnyAction) => {
   logger(action, state, currentState);
   return currentState;
 };
-
-// export default function mainReducer(state: IState, action: object) {
-// 	// Receiving previous state here
-// 	const { items, login } = state;
-
-// 	// Receiving current state here
-// 	const currentState = {
-// 		items: itemsReducer.reducer(items, action),
-// 		login: loginReducer.reducer(login, action)
-// 	};
-
-// 	// Middlewares
-// 	logger(action, state, currentState);
-
-// 	return currentState;
-// }
