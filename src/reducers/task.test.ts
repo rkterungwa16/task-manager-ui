@@ -49,7 +49,8 @@ describe.only("Task Reducer", () => {
         data: {
           data: {
             tasks: defaultTasksState.tasks
-          }
+          },
+          code: 0
         }
       })
     ).toEqual(mockTaskState);
@@ -114,7 +115,8 @@ describe.only("Task Reducer", () => {
         data: {
           data: {
             tasks: defaultTasksState.tasks
-          }
+          },
+          code: 0
         }
       })
     ).toEqual(mockTaskState);

@@ -23,6 +23,7 @@ export function projectsReducer(
       return {
         ...state,
         projects: userProjects.data.projects,
+        code: userProjects.code,
         actions: {
           ...state.actions,
           fetchUserProjects: {
@@ -67,6 +68,7 @@ export function projectsReducer(
       return {
         ...state,
         projects: [...state.projects, addedProject.data.project],
+        code: addedProject.code,
         actions: {
           ...state.actions,
           addProject: {
@@ -110,6 +112,7 @@ export function projectsReducer(
       return {
         ...state,
         project: userProject.data.project,
+        code: userProject.code,
         actions: {
           ...state.actions,
           fetchUserProject: {

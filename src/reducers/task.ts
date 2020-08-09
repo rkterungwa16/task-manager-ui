@@ -23,6 +23,7 @@ export function tasksReducer(
       return {
         ...state,
         tasks: projectTasks.data.tasks,
+        code: projectTasks.code,
         actions: {
           ...state.actions,
           fetchProjectTasks: {
@@ -63,6 +64,7 @@ export function tasksReducer(
       return {
         ...state,
         tasks: todaysTasks.data.tasks,
+        code: todaysTasks.code,
         actions: {
           ...state.actions,
           fetchTodaysTasks: {
