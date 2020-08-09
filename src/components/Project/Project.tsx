@@ -2,10 +2,11 @@ import { useState } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
-import { Dropdown, Text } from "../SharedComponents";
-import { projectTextStyle } from "./style";
+import { Dropdown, Text, FormInput } from "../SharedComponents";
+import { projectTextStyle, projectModalFormInputStyle } from "./style";
 import { ProjectType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
+import { ProjectModal } from "./ProjectModal";
 
 export interface ProjectInterface {
   name: string;
@@ -17,6 +18,12 @@ export interface ProjectProps {
   handleProjectTasksFetch?: (id: string) => void;
 }
 export const Project = (props: ProjectProps) => {
+  const defaultDropdownModalStates = {
+    editProject: false,
+    deleteProject: false,
+    archiveProject: false
+  };
+  const [isModalOpen, setIsModalOpen] = useState(defaultDropdownModalStates);
   const [dropdownIsOpen, openDropdown] = useState(false);
   return (
     <>
@@ -37,8 +44,37 @@ export const Project = (props: ProjectProps) => {
             />
           </ProjectItemIconWrapper>
         </ProjectItemInnerWrapper>
-        {dropdownIsOpen && <Dropdown />}
+        {dropdownIsOpen && (
+          <Dropdown
+            handleEditProjectModalOpen={() => {
+              openDropdown(false);
+              setIsModalOpen(prevState => {
+                return {
+                  ...prevState,
+                  editProject: true
+                };
+              });
+            }}
+          />
+        )}
       </li>
+      {isModalOpen.editProject ? (
+        <ProjectModal
+          headerText="Edit project"
+          onClick={() =>
+            setIsModalOpen({
+              ...defaultDropdownModalStates,
+              editProject: false
+            })
+          }
+        >
+          <FormInput
+            type="password"
+            style={projectModalFormInputStyle}
+            name="confirmPassword"
+          />
+        </ProjectModal>
+      ) : null}
       <style jsx>
         {`
            {

@@ -8,8 +8,7 @@ export function ModalProvider({ children }) {
   const [context, setContext] = useState();
   useEffect(() => {
     setContext(modalRef.current);
-  }, []);
-
+  }, [modalRef.current]);
   return (
     <ModalContainer>
       <Context.Provider value={context}>{children}</Context.Provider>
@@ -20,7 +19,6 @@ export function ModalProvider({ children }) {
 
 export function Modal({ onClose, children, ...props }) {
   const modalNode = useContext(Context);
-
   return modalNode
     ? ReactDOM.createPortal(
         <ModalOverlay>
@@ -51,30 +49,32 @@ export interface ModalOverlayProps {
   children?: React.ReactNode;
 }
 
-export const ModalOverlay = (props: ModalOverlayProps) => (
-  <div>
-    {props.children}
-    <style jsx>
-      {`
-         {
-          animation: fadeIn 200ms ease-out;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.3);
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
+export const ModalOverlay = (props: ModalOverlayProps) => {
+  return (
+    <div className="modal-task-manager">
+      {props.children}
+      <style jsx>
+        {`
+           {
+            animation: fadeIn 200ms ease-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
           }
-        }
-      `}
-    </style>
-  </div>
-);
+
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
+    </div>
+  );
+};
 
 export interface ModalDialogProps {
   children?: React.ReactNode;
@@ -94,8 +94,8 @@ export const ModalDialog = (props: ModalDialogProps) => (
         border-radius: 4px;
         background: white;
         position: absolute;
-        left: 56%;
-        top: 30%;
+        left: 50%;
+        top: 40%;
         transform: translate(-50%, -50%);
         z-index: 1;
         align-items: center !important;
