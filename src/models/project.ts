@@ -14,7 +14,7 @@ export interface ProjectType {
   updatedAt?: string;
 }
 
-export interface ProjectColors {
+export interface ProjectColorsType {
   code: string;
   name: string;
 }
@@ -22,7 +22,7 @@ export interface ProjectColors {
 export interface ProjectState {
   projects: ProjectType[];
   project: ProjectType;
-  colors: ProjectColors[];
+  colors: ProjectColorsType[];
   code: number;
   actions: {
     addProject: ActionStatus;

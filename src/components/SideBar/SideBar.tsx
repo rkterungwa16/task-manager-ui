@@ -2,9 +2,10 @@ import { useState } from "react";
 import { SideBarHeader } from "./SideBarHeader";
 import { SideBarProjectLists } from "./SideBarProjectLists";
 import { CircleSpinner } from "../SharedComponents";
-import { ProjectType } from "../../models";
+import { ProjectType, ProjectColorsType } from "../../models";
 
 export interface SideBarProps {
+  colors?: ProjectColorsType[];
   projects?: ProjectType[];
   isRequestingProjects?: boolean;
 }

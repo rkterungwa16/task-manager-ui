@@ -29,6 +29,11 @@ const initialProjectState = {
   updatedAt: ""
 };
 
+const initialColorsState = [{
+  code: "",
+  name: ""
+}]
+
 const initialProjectsState = [initialProjectState];
 
 const initalTasksState = [
@@ -51,6 +56,7 @@ export const Dashboard = () => {
   const [projects, setProjects] = useState(initialProjectsState);
   const [pathname, setPathname] = useState("");
   const [currentProject, setCurrentProject] = useState(initialProjectState);
+  const [colors, setColors] = useState(initialColorsState);
   const [isRequestingProjects, setIsRequestingProjects] = useState(false);
   const [tasks, setTasks] = useState([]);
 
@@ -88,6 +94,12 @@ export const Dashboard = () => {
     }
   }, [JSON.stringify(project.project)]);
 
+  useEffect(() => {
+    if (JSON.stringify(project.colors) !== JSON.stringify(colors)) {
+      setColors(project.colors);
+    }
+  }, [JSON.stringify(project.colors)]);
+
   /**
    * Set tasks and corresponding project
    */
@@ -118,6 +130,7 @@ export const Dashboard = () => {
         <TopNav />
         <DashboardContentContainer>
           <SideBar
+            colors={colors}
             projects={projects}
             isRequestingProjects={isRequestingProjects}
           />

@@ -2,11 +2,12 @@ import { useState } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
-import { Dropdown, Text, FormInput } from "../SharedComponents";
-import { projectTextStyle, projectModalFormInputStyle } from "./style";
+import { Dropdown, Text } from "../SharedComponents";
+import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
+import { title } from "process";
 
 export interface ProjectInterface {
   name: string;
@@ -15,6 +16,8 @@ export interface ProjectInterface {
 export interface ProjectProps {
   title?: string;
   id?: string;
+  color?: string;
+  isFavourite?: boolean;
   handleProjectTasksFetch?: (id: string) => void;
 }
 export const Project = (props: ProjectProps) => {
@@ -34,7 +37,7 @@ export const Project = (props: ProjectProps) => {
               props.handleProjectTasksFetch(props.id);
             }}
             text={props.title}
-            style={projectTextStyle}
+            style={{...projectTextStyle, borderLeft: `5px solid ${props.color}`}}
           />
           <ProjectItemIconWrapper>
             <MoreIcon
@@ -61,31 +64,34 @@ export const Project = (props: ProjectProps) => {
       {isModalOpen.editProject ? (
         <ProjectModal
           headerText="Edit project"
-          onClick={() =>
+          project={{
+            title: props.title,
+            color: props.color,
+            isFavourite: props.isFavourite
+          }}
+          handleCancel={() =>
             setIsModalOpen({
               ...defaultDropdownModalStates,
               editProject: false
             })
           }
-        >
-          <FormInput
-            type="password"
-            style={projectModalFormInputStyle}
-            name="confirmPassword"
-          />
-        </ProjectModal>
+        />
       ) : null}
       <style jsx>
         {`
-           {
+          {
             width: 95%;
-            padding: 5px;
           }
         `}
       </style>
     </>
   );
 };
+
+Project.defaultProps = {
+  color: "#8d8d8d",
+  isFavourite: false
+}
 
 export interface ProjectListProps {
   projects: ProjectType[];
@@ -106,6 +112,7 @@ export const ProjectList = (props: ProjectListProps) => {
             key={uniqid(`${project.title} - `)}
             title={project.title}
             id={project._id}
+            color={project.color}
             handleProjectTasksFetch={handleProjectTasksFetch}
           />
         ))}
@@ -151,7 +158,6 @@ export const ProjectItemInnerWrapper = (
           height: 30px;
           padding: 5px 5px 5px 0;
           border-radius: 4px;
-          background-color: #fff;
           width: 100%;
           display: flex;
           justify-content: space-between;
