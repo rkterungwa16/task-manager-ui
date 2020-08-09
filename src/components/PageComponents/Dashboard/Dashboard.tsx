@@ -46,7 +46,7 @@ const initalTasksState = [
 ];
 
 export const Dashboard = () => {
-  const { project, fetchUserProjects } = useProjectsApiActions();
+  const { project, fetchUserProjects, fetchProjectColors } = useProjectsApiActions();
   const { task, fetchTodaysTasks } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
   const [pathname, setPathname] = useState("");
@@ -65,6 +65,7 @@ export const Dashboard = () => {
    */
   useEffect(() => {
     fetchUserProjects();
+    fetchProjectColors();
     if (Router.pathname !== pathname) {
       setPathname(Router.pathname);
     }

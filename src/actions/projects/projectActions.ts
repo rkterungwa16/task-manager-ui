@@ -72,3 +72,27 @@ export const fetchUserProject = (projectId: string) => async (
     );
   }
 };
+
+export const fetchProjectColors = () => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.FETCH_PROJECT_COLORS));
+  try {
+    const url = apiEndPoints.colors;
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+    dispatch(
+      withDataAction(ProjectActions.FETCH_PROJECT_COLORS_SUCCESS, response.data)
+    );
+  } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
+    dispatch(
+      withErrorAction(
+        ProjectActions.FETCH_PROJECT_COLORS_FAILURE,
+        e.response.data
+      )
+    );
+  }
+};

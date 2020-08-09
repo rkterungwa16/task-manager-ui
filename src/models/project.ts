@@ -14,14 +14,21 @@ export interface ProjectType {
   updatedAt?: string;
 }
 
+export interface ProjectColors {
+  code: string;
+  name: string;
+}
+
 export interface ProjectState {
   projects: ProjectType[];
   project: ProjectType;
+  colors: ProjectColors[];
   code: number;
   actions: {
     addProject: ActionStatus;
     fetchUserProjects: ActionStatus;
     fetchUserProject: ActionStatus;
+    fetchProjectColors: ActionStatus;
   };
 }
 
@@ -54,6 +61,12 @@ export const defaultProjectsState: ProjectState = {
     createdAt: "",
     updatedAt: ""
   },
+  colors: [
+    {
+      name: "",
+      code: ""
+    }
+  ],
   code: 0,
   actions: {
     addProject: {
@@ -65,6 +78,10 @@ export const defaultProjectsState: ProjectState = {
       error: ""
     },
     fetchUserProject: {
+      isRequesting: false,
+      error: ""
+    },
+    fetchProjectColors: {
       isRequesting: false,
       error: ""
     }

@@ -12,7 +12,7 @@ describe.only("Project Reducer", () => {
   });
 
   it("should make return true for requests to fetch user's projects", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       actions: {
         ...defaultProjectsState.actions,
@@ -27,11 +27,11 @@ describe.only("Project Reducer", () => {
       projectsReducer(defaultProjectsState, {
         type: ProjectActions.FETCH_USER_PROJECTS
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should return fetched user's projects", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       projects: defaultProjectsState.projects,
       actions: {
@@ -53,11 +53,11 @@ describe.only("Project Reducer", () => {
           code: 0
         }
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should return error for unsuccessful fetch of user's projects", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       code: 400,
       actions: {
@@ -78,11 +78,11 @@ describe.only("Project Reducer", () => {
           message: "error"
         }
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should make return true for requests to fetch a project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       actions: {
         ...defaultProjectsState.actions,
@@ -97,11 +97,11 @@ describe.only("Project Reducer", () => {
       projectsReducer(defaultProjectsState, {
         type: ProjectActions.FETCH_USER_PROJECT
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should return fetched user project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       project: defaultProjectsState.project,
       actions: {
@@ -123,11 +123,11 @@ describe.only("Project Reducer", () => {
           code: 0
         }
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should return error for unsuccessful fetch user project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       code: 400,
       actions: {
@@ -148,11 +148,11 @@ describe.only("Project Reducer", () => {
           message: "error"
         }
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should make return true for requests to add a project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       actions: {
         ...defaultProjectsState.actions,
@@ -167,11 +167,11 @@ describe.only("Project Reducer", () => {
       projectsReducer(defaultProjectsState, {
         type: ProjectActions.ADD_PROJECT
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
   });
 
   it("should return dded project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       project: defaultProjectsState.project,
       actions: {
@@ -197,7 +197,7 @@ describe.only("Project Reducer", () => {
   });
 
   it("should return error for unsuccessful addition of project", () => {
-    const mockTaskState = {
+    const mockProjectState = {
       ...defaultProjectsState,
       code: 400,
       actions: {
@@ -218,6 +218,77 @@ describe.only("Project Reducer", () => {
           message: "error"
         }
       })
-    ).toEqual(mockTaskState);
+    ).toEqual(mockProjectState);
+  });
+
+  it("should make return true for requests to fetch project colors", () => {
+    const mockProjectState = {
+      ...defaultProjectsState,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchProjectColors: {
+          ...defaultProjectsState.actions.fetchProjectColors,
+          isRequesting: true
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_PROJECT_COLORS
+      })
+    ).toEqual(mockProjectState);
+  });
+
+  it("should return fetched project colors", () => {
+    const mockProjectState = {
+      ...defaultProjectsState,
+      colors: defaultProjectsState.colors,
+      code: 200,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchProjectColors: {
+          ...defaultProjectsState.actions.fetchProjectColors,
+          isRequesting: false
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_PROJECT_COLORS_SUCCESS,
+        data: {
+          data: {
+            colors: defaultProjectsState.colors
+          },
+          code: 200
+        }
+      })
+    ).toEqual(mockProjectState);
+  });
+
+  it("should return error for unsuccessful fetch of project colors", () => {
+    const mockProjectState = {
+      ...defaultProjectsState,
+      code: 400,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchProjectColors: {
+          ...defaultProjectsState.actions.fetchProjectColors,
+          isRequesting: false,
+          error: "error"
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_PROJECT_COLORS_FAILURE,
+        error: {
+          code: 400,
+          message: "error"
+        }
+      })
+    ).toEqual(mockProjectState);
   });
 });

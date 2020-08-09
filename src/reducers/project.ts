@@ -139,6 +139,51 @@ export function projectsReducer(
           }
         }
       };
+
+    case ProjectActions.FETCH_PROJECT_COLORS:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          fetchProjectColors: {
+            ...state.actions.fetchProjectColors,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_PROJECT_COLORS_SUCCESS:
+      const { data: projectColors } = action;
+      return {
+        ...state,
+        colors: projectColors.data.colors,
+        code: projectColors.code,
+        actions: {
+          ...state.actions,
+          fetchProjectColors: {
+            ...state.actions.fetchProjectColors,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_PROJECT_COLORS_FAILURE:
+      const { error: fetchProjectColorsError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
+      return {
+        ...state,
+        code: fetchProjectColorsError.code,
+        actions: {
+          ...state.actions,
+          fetchProjectColors: {
+            isRequesting: false,
+            error: fetchProjectColorsError.message
+          }
+        }
+      };
     default:
       return state;
   }
