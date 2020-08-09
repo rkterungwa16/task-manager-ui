@@ -7,7 +7,6 @@ import { projectTextStyle } from "./style";
 import { ProjectType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
-import { title } from "process";
 
 export interface ProjectInterface {
   name: string;
@@ -49,6 +48,9 @@ export const Project = (props: ProjectProps) => {
         </ProjectItemInnerWrapper>
         {dropdownIsOpen && (
           <Dropdown
+            closeDropdown={() => {
+              openDropdown(false);
+            }}
             handleEditProjectModalOpen={() => {
               openDropdown(false);
               setIsModalOpen(prevState => {

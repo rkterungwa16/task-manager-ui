@@ -1,15 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef, forwardRef } from "react";
 import ArchiveIcon from "react-ionicons/lib/IosArchiveOutline";
 import EditIcon from "react-ionicons/lib/IosCreateOutline";
 import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
 
-import { Modal } from "../../Modal";
-import { Button } from "../Button";
-import { FormInput } from "../FormInput";
 import { Separator } from "../Separator";
 import { Text } from "../Text";
 import { DropdownItem } from "./DropdownItem";
-import { buttonStyle, dropdownFormInputStyle } from "./style";
+import { useClickOutside } from "../../../hooks";
 
 const dropdownItemTextStyle = {
   fontSize: "16px",
@@ -29,12 +26,15 @@ export interface DefaultDropdownModalStateInterface {
 
 export interface DropdownProps {
   handleEditProjectModalOpen?: () => void;
+  closeDropdown?: () => void;
 }
 
 export const Dropdown = (props: DropdownProps) => {
+  const dropdownRef = useRef(null);
+  useClickOutside(dropdownRef, props.closeDropdown);
   return (
     <>
-      <div>
+      <div ref={dropdownRef}>
         <DropdownItem onClick={props.handleEditProjectModalOpen}>
           <EditIcon />
           <Text text="Edit Project" style={dropdownItemTextStyle} />
