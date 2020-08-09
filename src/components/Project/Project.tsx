@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
 import uniqid from "uniqid";
 
 import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
-import { ProjectType } from "../../models";
+import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
 
@@ -16,6 +16,7 @@ export interface ProjectProps {
   title?: string;
   id?: string;
   color?: string;
+  colors?: ProjectColorsType[];
   isFavourite?: boolean;
   handleProjectTasksFetch?: (id: string) => void;
 }
@@ -69,8 +70,9 @@ export const Project = (props: ProjectProps) => {
           project={{
             title: props.title,
             color: props.color,
-            isFavourite: props.isFavourite
+            isFavourite: props.isFavourite,
           }}
+          colors={props.colors}
           handleCancel={() =>
             setIsModalOpen({
               ...defaultDropdownModalStates,
@@ -99,9 +101,22 @@ export interface ProjectListProps {
   projects: ProjectType[];
 }
 
+const initialColorsState = [{
+  code: "",
+  name: ""
+}]
+
 export const ProjectList = (props: ProjectListProps) => {
   const { fetchProjectTasks } = useProjectTasksApiActions();
-  const { fetchUserProject } = useProjectsApiActions();
+  const { project, fetchUserProject } = useProjectsApiActions();
+
+  const [colors, setColors] = useState(initialColorsState);
+
+  useEffect(() => {
+    if (JSON.stringify(project.colors) !== JSON.stringify(colors)) {
+      setColors(project.colors);
+    }
+  }, [JSON.stringify(project.colors)]);
   const handleProjectTasksFetch = id => {
     fetchProjectTasks(id);
     fetchUserProject(id);
@@ -115,6 +130,7 @@ export const ProjectList = (props: ProjectListProps) => {
             title={project.title}
             id={project._id}
             color={project.color}
+            colors={colors}
             handleProjectTasksFetch={handleProjectTasksFetch}
           />
         ))}

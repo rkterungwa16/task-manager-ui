@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Modal } from "../Modal";
 import { Button, FormInput } from "../SharedComponents";
 import { buttonStyle, projectModalFormInputStyle } from "./style";
+import { ProjectColorsType } from "../../models";
 
 export interface ModalHeaderProps {
   children?: React.ReactNode;
@@ -56,6 +57,7 @@ export interface ProjectModalProps {
     color?: string;
     isFavourite?: boolean;
   };
+  colors?: ProjectColorsType[];
   handleCancel?: () => void;
 }
 
@@ -67,6 +69,7 @@ export const initialProjectState = {
 
 export const ProjectModal = (props: ProjectModalProps) => {
   const [project, setProject] = useState(initialProjectState);
+  const [colorPaletteIsVisible, showColorPalette] = useState(false);
 
   useEffect(() => {
     if (JSON.stringify(project) !== JSON.stringify(props.project)) {
@@ -75,7 +78,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
         ...props.project
       }))
     }
-  }, [JSON.stringify(props.project)])
+  }, [JSON.stringify(props.project)]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): any => {
@@ -103,6 +106,26 @@ export const ProjectModal = (props: ProjectModalProps) => {
           style={projectModalFormInputStyle}
           name="title"
         />
+        <Row>
+          <Color
+            handleClick={() => {
+              showColorPalette(!colorPaletteIsVisible);
+            }}
+            color={project.color}
+          />
+          {
+            colorPaletteIsVisible &&
+            <ColorPalette
+              colors={props.colors}
+              handleClick={(color) => {
+                setProject(prevState => ({
+                  ...prevState,
+                  color
+                }))
+              }}
+            />
+          }
+        </Row>
         {props.children}
         <Row>
           <Button text="add" style={buttonStyle} />
@@ -112,3 +135,71 @@ export const ProjectModal = (props: ProjectModalProps) => {
     </>
   );
 };
+export interface ColorProps {
+  color?: string;
+  handleClick?: () => void;
+}
+
+export const Color = (props: ColorProps) => {
+  return (
+    <>
+      <span onClick= {props.handleClick} />
+      <style jsx>
+        {
+          `
+          {
+            background: ${props.color};
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            position: relative;
+            float: left;
+            border-radius: 4px;
+            margin: 2px;
+          }
+          `
+        }
+      </style>
+    </>
+  )
+}
+
+export interface ColorPaletteProps {
+  colors?: ProjectColorsType[];
+  handleClick?: (color: string) => void;
+}
+
+export const ColorPalette = (props: ColorPaletteProps) => {
+  const colors = props.colors.map((color) => {
+    return (
+      <Color
+        key={color.name}
+        color={color.code}
+        handleClick={() => {
+          props.handleClick(color.code);
+        }}
+      />
+    )
+  })
+  return (
+    <div>
+      {colors}
+      <style jsx>
+        {
+          `
+          {
+            width: 120px;
+            background: rgb(255, 255, 255);
+            border: 0px solid rgba(0, 0, 0, 0.25);
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+            border-radius: 4px;
+            top: 165px;
+            position: absolute;
+            padding: 5px;
+          }
+          `
+        }
+      </style>
+    </div>
+  )
+}
