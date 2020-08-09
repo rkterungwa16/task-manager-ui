@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { Modal } from "../Modal";
 import { Button, FormInput } from "../SharedComponents";
 import { buttonStyle, projectModalFormInputStyle } from "./style";
@@ -56,7 +56,7 @@ export interface ProjectModalProps {
     color?: string;
     isFavourite?: boolean;
   };
-  handleCancel?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  handleCancel?: () => void;
 }
 
 export const initialProjectState = {
