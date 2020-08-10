@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Modal } from "../Modal";
-import { Button, FormInput } from "../SharedComponents";
+import { Button, FormInput, Labels } from "../SharedComponents";
 import { buttonStyle, projectModalFormInputStyle } from "./style";
 import { ProjectColorsType } from "../../models";
 
@@ -40,9 +40,47 @@ export const Row = (props: RowProps) => (
          {
           display: flex;
           align-self: center;
-          width: 80%;
-          justify-content: space-between;
+          width: 90%;
+          justify-content: flex-end;
           padding: 15px;
+        }
+      `}
+    </style>
+  </>
+);
+
+export interface ColorPaletteRowProps {
+  children?: React.ReactNode;
+}
+export const ColorPaletteRow = (props: ColorPaletteRowProps) => (
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
+         {
+          display: flex;
+          align-self: center;
+          width: 90%;
+          padding: 5px;
+        }
+      `}
+    </style>
+  </>
+);
+
+export interface ColProps {
+  children?: React.ReactNode;
+}
+export const Col = (props: ColProps) => (
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
+         {
+          display: flex;
+          align-self: center;
+          width: 80%;
+          flex-direction: column;
         }
       `}
     </style>
@@ -93,7 +131,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
         }));
       }
     }
-  ,[JSON.stringify(project)]);
+    , [JSON.stringify(project)]);
 
   return (
     <>
@@ -106,30 +144,31 @@ export const ProjectModal = (props: ProjectModalProps) => {
           style={projectModalFormInputStyle}
           name="title"
         />
-        <Row>
-          <Color
+        <ColorPaletteRow>
+          <Labels text="Select project color" />
+        </ColorPaletteRow>
+        <ColorPaletteRow>
+          <ColorPalette
+            colors={props.colors}
+            color={project.color}
+            handleClick={(color) => {
+              setProject(prevState => ({
+                ...prevState,
+                color
+              }))
+            }}
+          />
+          <CurrentColor
             handleClick={() => {
               showColorPalette(!colorPaletteIsVisible);
             }}
             color={project.color}
           />
-          {
-            colorPaletteIsVisible &&
-            <ColorPalette
-              colors={props.colors}
-              handleClick={(color) => {
-                setProject(prevState => ({
-                  ...prevState,
-                  color
-                }))
-              }}
-            />
-          }
-        </Row>
+        </ColorPaletteRow>
         {props.children}
         <Row>
-          <Button text="add" style={buttonStyle} />
-          <Button text="cancel" style={buttonStyle} onClick={props.handleCancel} />
+          <Button text="cancel" style={{...buttonStyle, marginRight: "3px"}} onClick={props.handleCancel} />
+          <Button text="save" style={{...buttonStyle, marginLeft: "3px"}}/>
         </Row>
       </Modal>
     </>
@@ -143,7 +182,7 @@ export interface ColorProps {
 export const Color = (props: ColorProps) => {
   return (
     <>
-      <span onClick= {props.handleClick} />
+      <span onClick={props.handleClick} />
       <style jsx>
         {
           `
@@ -164,8 +203,39 @@ export const Color = (props: ColorProps) => {
   )
 }
 
+export interface CurrentColorProps {
+  color?: string;
+  handleClick?: () => void;
+}
+
+export const CurrentColor = (props: CurrentColorProps) => {
+  return (
+    <>
+      <span onClick={props.handleClick} />
+      <style jsx>
+        {
+          `
+          {
+            background: ${props.color};
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            position: relative;
+            float: left;
+            border-radius: 4px;
+            height: 60px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+          }
+          `
+        }
+      </style>
+    </>
+  )
+}
+
 export interface ColorPaletteProps {
   colors?: ProjectColorsType[];
+  color?: string;
   handleClick?: (color: string) => void;
 }
 
@@ -188,14 +258,17 @@ export const ColorPalette = (props: ColorPaletteProps) => {
         {
           `
           {
-            width: 120px;
+            width: 198px;
             background: rgb(255, 255, 255);
             border: 0px solid rgba(0, 0, 0, 0.25);
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
             border-radius: 4px;
-            top: 165px;
-            position: absolute;
-            padding: 5px;
+            padding: 2px;
+            margin-right: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
           }
           `
         }

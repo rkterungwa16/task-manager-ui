@@ -13,17 +13,17 @@ export const buttonStyle = {
   display: "flex",
   alignSelf: "center",
   justifyContent: "center",
-  borderRadius: "8px",
+  borderRadius: "4px",
   border: "none",
-  height: "35px",
-  fontSize: "14px",
+  height: "30px",
+  fontSize: "10px",
   lineHeight: "normal",
   textAlign: "center",
   letterSpacing: "2px",
   alignItems: "center",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
-  width: "70px",
+  width: "60px",
   cursor: "pointer"
 };
 
@@ -34,15 +34,12 @@ export const projectModalFormInputStyle = {
   marginTop: "20px",
   marginBottom: "20px",
   backgroundColor: "#FFFFFF",
-  borderRadius: "8px",
+  borderRadius: "4px",
   border: "1px solid rgba(0,0,0,0.15)",
-  width: "80%",
+  width: "90%",
   height: "30px",
   textIndent: "25px",
-  fontSize: "14px",
   lineHeight: "normal",
   color: "#767676",
-  fontWeight: "600",
-  letterSpacing: "1.5px",
-  boxShadow: "0 1px 2px rgba(0,0,0,0.15)"
+  letterSpacing: "1.5px"
 };
