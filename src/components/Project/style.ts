@@ -43,3 +43,18 @@ export const projectModalFormInputStyle = {
   color: "#767676",
   letterSpacing: "1.5px"
 };
+
+export const buttonRowStyle = {
+  display: "flex",
+  alignSelf: "center",
+  width: "90%",
+  justifyContent: "flex-end",
+  padding: "15px"
+}
+
+export const colorPaletteRowStyle = {
+  display: "flex",
+  alignSelf: "center",
+  width: "90%",
+  padding: "5px"
+}
