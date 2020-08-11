@@ -1,18 +1,29 @@
+export const flexRowCenter = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+// Break styles into Components. Example Project Modal, Color, Project
+// Determine shared styles between these components (Project shared styles)
+// Break each component into sub components. Example Project component (button, Row etc).
+// Determine global style for each Component example: color, font, border radius, width etc.
+
 export const projectTextStyle = {
-  fontSize: "16px",
+  fontSize: "14px",
   color: "#8d8d8d",
   wordBreak: "break-all",
   paddingLeft: "5px",
   display: "flex",
   alignItems: "center",
-  height: "100%",
   width: "80%"
 };
 
 export const buttonStyle = {
   display: "flex",
-  alignSelf: "center",
   justifyContent: "center",
+  alignItems: "center",
+  alignSelf: "center",
   borderRadius: "4px",
   border: "none",
   height: "30px",
@@ -20,7 +31,6 @@ export const buttonStyle = {
   lineHeight: "normal",
   textAlign: "center",
   letterSpacing: "2px",
-  alignItems: "center",
   backgroundColor: "#c23d38",
   color: "#FFFFFF",
   width: "60px",

@@ -128,7 +128,7 @@ export const ModalHeader = (props: ModalHeaderProps) => (
           height: 50px;
           background-color: #ededed;
           color: #767676;
-          font-size: 20px;
+          font-size: 13px;
           width: 100%;
         }
       `}

@@ -140,6 +140,7 @@ export const Dashboard = () => {
       <style jsx global>{`
         body {
           font-family: "Source Sans Pro", sans-serif;
+          font-size: 14px;
           margin: 0;
           height: 100%;
           width: 100%;

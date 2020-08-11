@@ -50,7 +50,7 @@ export const MainView = (props: MainViewProps) => {
       <style jsx>
         {`
            {
-            width: 50%;
+            width: 100%;
             height: 100vh;
             position: relative;
             padding: 50px 100px 0px 100px;
