@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Button,
@@ -36,15 +37,38 @@ export const RegisterForm = () => {
     confirmPassword: ""
   };
 
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const { user, createUser } = useUserApiActions();
   const { handleChange, formValues, errors } = useFormValidation(
     defaultRegistrationState,
     stateValidatorSchema
   );
 
+  useEffect(() => {
+    const hasEmptyFormInput = Object.keys(formValues).some((value) => {
+      if (!formValues[value]) return true;
+      return false;
+    });
+
+    const hasErrors = Object.keys(errors).some((error) => {
+      if (errors[error]) return true;
+      return false;
+    });
+
+    if (hasErrors || hasEmptyFormInput) {
+      setButtonDisabled(true);
+    }
+
+    if (!hasErrors && !hasEmptyFormInput) {
+      setButtonDisabled(false);
+    }
+  }, [JSON.stringify(errors), JSON.stringify(formValues)])
+
   const handleSubmit = () => {
     createUser(formValues);
   };
+
   return (
     <>
       <FormImageWrapper>
@@ -101,7 +125,12 @@ export const RegisterForm = () => {
               placeholder="Confirm Password"
             />
 
-            <Button text="" style={buttonStyle} onClick={handleSubmit}>
+            <Button
+              text=""
+              style={buttonStyle}
+              onClick={handleSubmit}
+              disabled={buttonDisabled}
+            >
               {user.actions.createUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (

@@ -15,11 +15,7 @@ export const loginStateValidatorSchema = {
   password: {
     isEmpty: {
       func: value => Boolean(value.length),
-      error: "Must not be empty"
-    },
-    isValidPassword: {
-      func: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/.test(value),
-      error: "Invalid password format: must be greater than 5"
+      error: "Password must not be empty"
     }
   }
 };
@@ -28,7 +24,7 @@ export const registrationStateValidatorSchema = {
   name: {
     isEmpty: {
       func: value => Boolean(value.length),
-      error: "Must not be empty"
+      error: "Name must not be empty"
     },
     isString: {
       func: value => /^[a-zA-Z]+$/.test(value),
@@ -38,7 +34,7 @@ export const registrationStateValidatorSchema = {
   email: {
     isEmpty: {
       func: value => Boolean(value.length),
-      error: "Must not be empty"
+      error: "Email must not be empty"
     },
     isEmail: {
       func: value =>
@@ -51,22 +47,22 @@ export const registrationStateValidatorSchema = {
   password: {
     isEmpty: {
       func: value => Boolean(value.length),
-      error: "Must not be empty"
+      error: "Password must not be empty"
     },
     isValidPassword: {
       func: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/.test(value),
-      error: "Invalid password format: must be greater than 5"
+      error: "Invalid password: must be greater than 5, and have numbers, upper and lower case letter and characters"
     }
   },
   confirmPassword: {
     isEmpty: {
       func: value => Boolean(value.length),
-      error: "Must not be empty"
+      error: "Confirm password must not be empty"
     },
     isEqual: {
       func: (password: string, confirmPassword: string) =>
         password === confirmPassword,
-      error: "Password not the same"
+      error: "Password not equal"
     }
   }
 };

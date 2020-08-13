@@ -32,6 +32,7 @@ export const LoginForm = () => {
 
   const [error, setError] = useState("");
   const [toastIsOpen, setToastOpen] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { user, authenticateUser } = useUserApiActions();
   const { handleChange, formValues, errors } = useFormValidation(
@@ -47,6 +48,26 @@ export const LoginForm = () => {
   }, [user.token]);
 
   useEffect(() => {
+    const hasEmptyFormInput = Object.keys(formValues).some((value) => {
+      if (!formValues[value]) return true;
+      return false;
+    });
+
+    const hasErrors = Object.keys(errors).some((error) => {
+      if (errors[error]) return true;
+      return false;
+    });
+
+    if (hasErrors || hasEmptyFormInput) {
+      setButtonDisabled(true);
+    }
+
+    if (!hasErrors && !hasEmptyFormInput) {
+      setButtonDisabled(false);
+    }
+  }, [JSON.stringify(errors), JSON.stringify(formValues)])
+
+  useEffect(() => {
     const error = user.actions.authenticateUser.error;
     if (error) {
       setError(error);
@@ -57,6 +78,7 @@ export const LoginForm = () => {
   const handleSubmit = () => {
     authenticateUser(formValues);
   };
+
   return (
     <ToastProvider>
       <FormImageWrapper>
@@ -90,7 +112,12 @@ export const LoginForm = () => {
               placeholder="Password"
             />
 
-            <Button text="" style={buttonStyle} onClick={handleSubmit}>
+            <Button
+              text=""
+              style={buttonStyle}
+              onClick={handleSubmit}
+              disabled={buttonDisabled}
+            >
               {user.actions.authenticateUser.isRequesting ? (
                 <CircleSpinner height={20} />
               ) : (
