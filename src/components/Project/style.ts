@@ -9,6 +9,11 @@ export const flexRowCenter = {
 // Break each component into sub components. Example Project component (button, Row etc).
 // Determine global style for each Component example: color, font, border radius, width etc.
 
+// Create a heirachy of shared properties. Top most shared by all etc.
+// Group components according e.g color palette, favourites, task content input button.
+// Determine properties shared across all components (top most level)
+// Determine properties shared by elements within each component
+
 export const projectTextStyle = {
   fontSize: "14px",
   color: "#8d8d8d",
@@ -65,6 +70,12 @@ export const buttonRowStyle = {
 export const colorPaletteRowStyle = {
   display: "flex",
   alignSelf: "center",
+  width: "90%",
+  padding: "5px"
+}
+
+export const addFavouriteRowStyle = {
+  display: "flex",
   width: "90%",
   padding: "5px"
 }

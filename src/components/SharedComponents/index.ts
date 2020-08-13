@@ -7,3 +7,4 @@ export * from "./LinkButton";
 export * from "./Spinner";
 export * from "./Labels";
 export * from "./Row";
+export * from "./Switch";

@@ -4,13 +4,15 @@ import {
   Button,
   FormInput,
   Labels,
-  Row
+  Row,
+  Switch
 } from "../SharedComponents";
 import {
   buttonStyle,
   projectModalFormInputStyle,
   buttonRowStyle,
-  colorPaletteRowStyle
+  colorPaletteRowStyle,
+  addFavouriteRowStyle
 } from "./style";
 import { ProjectColorsType } from "../../models";
 import { ColorPalette, CurrentColor } from "./Color";
@@ -61,6 +63,7 @@ export const initialProjectState = {
 export const ProjectModal = (props: ProjectModalProps) => {
   const [project, setProject] = useState(initialProjectState);
   const [colorPaletteIsVisible, showColorPalette] = useState(false);
+  const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
     if (JSON.stringify(project) !== JSON.stringify(props.project)) {
@@ -83,8 +86,11 @@ export const ProjectModal = (props: ProjectModalProps) => {
           [name]: value
         }));
       }
+      if (name === 'addFavourite') {
+        setChecked(!isChecked)
+      }
     }
-    , [JSON.stringify(project)]);
+    , [JSON.stringify(project), isChecked]);
 
   return (
     <>
@@ -116,6 +122,16 @@ export const ProjectModal = (props: ProjectModalProps) => {
               showColorPalette(!colorPaletteIsVisible);
             }}
             color={project.color}
+          />
+        </Row>
+        <Row style={colorPaletteRowStyle}>
+          <Labels text="Add as Favourite" />
+        </Row>
+        <Row style={addFavouriteRowStyle}>
+          <Switch
+            name="addFavourite"
+            handleChange={handleChange}
+            checked={isChecked}
           />
         </Row>
         {props.children}
