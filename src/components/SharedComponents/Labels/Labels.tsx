@@ -1,4 +1,3 @@
-
 export interface LabelsProps {
   text?: string;
 }
@@ -7,14 +6,12 @@ export const Labels = (props: LabelsProps) => {
     <label>
       {props.text}
       <style jsx>
-        {
-          `
-          {
-            color: #8d8d8d
+        {`
+           {
+            color: #8d8d8d;
           }
-        `
-        }
+        `}
       </style>
     </label>
-  )
-}
+  );
+};

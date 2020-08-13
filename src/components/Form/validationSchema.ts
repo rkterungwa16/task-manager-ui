@@ -51,7 +51,8 @@ export const registrationStateValidatorSchema = {
     },
     isValidPassword: {
       func: value => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d\W\-_]{5,}$/.test(value),
-      error: "Invalid password: must be greater than 5, and have numbers, upper and lower case letter and characters"
+      error:
+        "Invalid password: must be greater than 5, and have numbers, upper and lower case letter and characters"
     }
   },
   confirmPassword: {

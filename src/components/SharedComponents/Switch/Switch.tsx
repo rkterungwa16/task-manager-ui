@@ -11,18 +11,17 @@ export const Switch = (props: SwitchProps) => {
   return (
     <>
       <SwitchLabel>
-
         <SwitchSlider checked={props.checked}>
-        <SwitchInput
-          checked={props.checked}
-          handleChange={props.handleChange}
-          name={props.name}
-        />
-          </SwitchSlider>
+          <SwitchInput
+            checked={props.checked}
+            handleChange={props.handleChange}
+            name={props.name}
+          />
+        </SwitchSlider>
       </SwitchLabel>
     </>
-  )
-}
+  );
+};
 
 export interface SwitchLabelProps {
   children?: React.ReactNode;
@@ -32,19 +31,17 @@ export const SwitchLabel = (props: SwitchLabelProps) => {
     <label>
       {props.children}
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             display: inline-block;
             width: 40px;
             height: 26px;
           }
-          `
-        }
+        `}
       </style>
     </label>
-  )
-}
+  );
+};
 
 export interface SwitchInputProps {
   children?: React.ReactNode;
@@ -65,18 +62,16 @@ export const SwitchInput = (props: SwitchInputProps) => {
         name={props.name}
       />
       <style jsx>
-        {
-          `
-          {
-            ${props.checked ? 'border-color: #2819ae;' : ''}
+        {`
+           {
+            ${props.checked ? "border-color: #2819ae;" : ""}
             display: none;
           }
-          `
-        }
+        `}
       </style>
     </>
-  )
-}
+  );
+};
 
 export interface SwitchSliderProps {
   children?: React.ReactNode;
@@ -87,8 +82,7 @@ export const SwitchSlider = (props: SwitchSliderProps) => {
     <span>
       {props.children}
       <style jsx>
-        {
-          `
+        {`
           {
             position: relative;
             display: block;
@@ -97,7 +91,11 @@ export const SwitchSlider = (props: SwitchSliderProps) => {
             border: 1px solid #d8dbe0;
             border-radius: .25rem;
             transition: .15s ease-out;
-            ${props.checked ? 'background-color: #c23d38;' : 'background-color: #fff;'}
+            ${
+              props.checked
+                ? "background-color: #c23d38;"
+                : "background-color: #fff;"
+            }
           }
           ::before {
             position: absolute;
@@ -109,14 +107,17 @@ export const SwitchSlider = (props: SwitchSliderProps) => {
             content: "";
             border: 1px solid #d8dbe0;
             border-radius: .125rem;
-            ${!props.checked ? 'background-color: #c23d38;' : 'background-color: #fff;'}
-            ${props.checked ? '-webkit-transform: translateX(14px);' : ''}
-            ${props.checked ? 'transform: translateX(14px);' : ''}
+            ${
+              !props.checked
+                ? "background-color: #c23d38;"
+                : "background-color: #fff;"
+            }
+            ${props.checked ? "-webkit-transform: translateX(14px);" : ""}
+            ${props.checked ? "transform: translateX(14px);" : ""}
             transition: .15s ease-out;
           }
-          `
-        }
+          `}
       </style>
     </span>
-  )
-}
+  );
+};

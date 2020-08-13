@@ -37,7 +37,10 @@ export const Project = (props: ProjectProps) => {
               props.handleProjectTasksFetch(props.id);
             }}
             text={props.title}
-            style={{...projectTextStyle, borderLeft: `5px solid ${props.color}`}}
+            style={{
+              ...projectTextStyle,
+              borderLeft: `5px solid ${props.color}`
+            }}
           />
           <ProjectItemIconWrapper>
             <MoreIcon
@@ -70,7 +73,7 @@ export const Project = (props: ProjectProps) => {
           project={{
             title: props.title,
             color: props.color,
-            isFavourite: props.isFavourite,
+            isFavourite: props.isFavourite
           }}
           colors={props.colors}
           handleCancel={() =>
@@ -83,7 +86,7 @@ export const Project = (props: ProjectProps) => {
       ) : null}
       <style jsx>
         {`
-          {
+           {
             width: 95%;
           }
         `}
@@ -95,16 +98,18 @@ export const Project = (props: ProjectProps) => {
 Project.defaultProps = {
   color: "#8d8d8d",
   isFavourite: false
-}
+};
 
 export interface ProjectListProps {
   projects: ProjectType[];
 }
 
-const initialColorsState = [{
-  code: "",
-  name: ""
-}]
+const initialColorsState = [
+  {
+    code: "",
+    name: ""
+  }
+];
 
 export const ProjectList = (props: ProjectListProps) => {
   const { fetchProjectTasks } = useProjectTasksApiActions();

@@ -68,15 +68,15 @@ export const Toast = (props: ToastContainerProps) => {
     <>
       {toastNode
         ? createPortal(
-          <ToastContainerWrapper>
-            {toastIsOpen && (
-              <ToastContainer remove={() => remove()}>
-                {props.message}
-              </ToastContainer>
-            )}
-          </ToastContainerWrapper>,
-          toastNode
-        )
+            <ToastContainerWrapper>
+              {toastIsOpen && (
+                <ToastContainer remove={() => remove()}>
+                  {props.message}
+                </ToastContainer>
+              )}
+            </ToastContainerWrapper>,
+            toastNode
+          )
         : null}
     </>
   );

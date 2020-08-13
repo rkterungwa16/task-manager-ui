@@ -29,10 +29,12 @@ const initialProjectState = {
   updatedAt: ""
 };
 
-const initialColorsState = [{
-  code: "",
-  name: ""
-}]
+const initialColorsState = [
+  {
+    code: "",
+    name: ""
+  }
+];
 
 const initialProjectsState = [initialProjectState];
 
@@ -51,7 +53,11 @@ const initalTasksState = [
 ];
 
 export const Dashboard = () => {
-  const { project, fetchUserProjects, fetchProjectColors } = useProjectsApiActions();
+  const {
+    project,
+    fetchUserProjects,
+    fetchProjectColors
+  } = useProjectsApiActions();
   const { task, fetchTodaysTasks } = useProjectTasksApiActions();
   const [projects, setProjects] = useState(initialProjectsState);
   const [pathname, setPathname] = useState("");

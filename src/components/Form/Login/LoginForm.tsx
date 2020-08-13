@@ -48,12 +48,12 @@ export const LoginForm = () => {
   }, [user.token]);
 
   useEffect(() => {
-    const hasEmptyFormInput = Object.keys(formValues).some((value) => {
+    const hasEmptyFormInput = Object.keys(formValues).some(value => {
       if (!formValues[value]) return true;
       return false;
     });
 
-    const hasErrors = Object.keys(errors).some((error) => {
+    const hasErrors = Object.keys(errors).some(error => {
       if (errors[error]) return true;
       return false;
     });
@@ -65,7 +65,7 @@ export const LoginForm = () => {
     if (!hasErrors && !hasEmptyFormInput) {
       setButtonDisabled(false);
     }
-  }, [JSON.stringify(errors), JSON.stringify(formValues)])
+  }, [JSON.stringify(errors), JSON.stringify(formValues)]);
 
   useEffect(() => {
     const error = user.actions.authenticateUser.error;
@@ -135,7 +135,13 @@ export const LoginForm = () => {
           </FormWrapper>
         </Wrapper>
       </FormContainer>
-      <Toast isOpen={toastIsOpen} message={error} handleRemove={() => { setToastOpen(false) }} />
+      <Toast
+        isOpen={toastIsOpen}
+        message={error}
+        handleRemove={() => {
+          setToastOpen(false);
+        }}
+      />
       <style jsx>{`
         .form-img {
           height: 50px;

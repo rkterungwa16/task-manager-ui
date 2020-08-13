@@ -1,12 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { Modal } from "../Modal";
-import {
-  Button,
-  FormInput,
-  Labels,
-  Row,
-  Switch
-} from "../SharedComponents";
+import { Button, FormInput, Labels, Row, Switch } from "../SharedComponents";
 import {
   buttonStyle,
   projectModalFormInputStyle,
@@ -58,7 +52,7 @@ export const initialProjectState = {
   title: "",
   isFavourite: false,
   color: ""
-}
+};
 
 export const ProjectModal = (props: ProjectModalProps) => {
   const [project, setProject] = useState(initialProjectState);
@@ -70,27 +64,29 @@ export const ProjectModal = (props: ProjectModalProps) => {
       setProject(prevState => ({
         ...prevState,
         ...props.project
-      }))
+      }));
     }
   }, [JSON.stringify(props.project)]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): any => {
       const target = event.currentTarget;
-      const value = target.type === 'checkbox' ? target.checked : target.value as any;
+      const value =
+        target.type === "checkbox" ? target.checked : (target.value as any);
       const name = target.name;
 
-      if (name === 'title') {
+      if (name === "title") {
         setProject(prevState => ({
           ...prevState,
           [name]: value
         }));
       }
-      if (name === 'addFavourite') {
-        setChecked(!isChecked)
+      if (name === "addFavourite") {
+        setChecked(!isChecked);
       }
-    }
-    , [JSON.stringify(project), isChecked]);
+    },
+    [JSON.stringify(project), isChecked]
+  );
 
   return (
     <>
@@ -106,15 +102,17 @@ export const ProjectModal = (props: ProjectModalProps) => {
         <Row style={colorPaletteRowStyle}>
           <Labels text="Select project color" />
         </Row>
-        <Row style={{...colorPaletteRowStyle, justifyContent: "space-around"}}>
+        <Row
+          style={{ ...colorPaletteRowStyle, justifyContent: "space-around" }}
+        >
           <ColorPalette
             colors={props.colors}
             color={project.color}
-            handleClick={(color) => {
+            handleClick={color => {
               setProject(prevState => ({
                 ...prevState,
                 color
-              }))
+              }));
             }}
           />
           <CurrentColor
@@ -136,11 +134,14 @@ export const ProjectModal = (props: ProjectModalProps) => {
         </Row>
         {props.children}
         <Row style={buttonRowStyle}>
-          <Button text="cancel" style={{...buttonStyle, marginRight: "3px"}} onClick={props.handleCancel} />
-          <Button text="save" style={{...buttonStyle, marginLeft: "3px"}}/>
+          <Button
+            text="cancel"
+            style={{ ...buttonStyle, marginRight: "3px" }}
+            onClick={props.handleCancel}
+          />
+          <Button text="save" style={{ ...buttonStyle, marginLeft: "3px" }} />
         </Row>
       </Modal>
     </>
   );
 };
-

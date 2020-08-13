@@ -46,12 +46,12 @@ export const RegisterForm = () => {
   );
 
   useEffect(() => {
-    const hasEmptyFormInput = Object.keys(formValues).some((value) => {
+    const hasEmptyFormInput = Object.keys(formValues).some(value => {
       if (!formValues[value]) return true;
       return false;
     });
 
-    const hasErrors = Object.keys(errors).some((error) => {
+    const hasErrors = Object.keys(errors).some(error => {
       if (errors[error]) return true;
       return false;
     });
@@ -63,7 +63,7 @@ export const RegisterForm = () => {
     if (!hasErrors && !hasEmptyFormInput) {
       setButtonDisabled(false);
     }
-  }, [JSON.stringify(errors), JSON.stringify(formValues)])
+  }, [JSON.stringify(errors), JSON.stringify(formValues)]);
 
   const handleSubmit = () => {
     createUser(formValues);

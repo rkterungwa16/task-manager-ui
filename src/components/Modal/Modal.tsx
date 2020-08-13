@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useState, forwardRef } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  forwardRef
+} from "react";
 import ReactDOM from "react-dom";
 
 import { useClickOutside } from "../../hooks";
@@ -26,7 +32,9 @@ export function Modal({ onClose, children, ...props }) {
   return modalNode
     ? ReactDOM.createPortal(
         <ModalOverlay>
-          <ModalDialog {...props} onClose={onClose}>{children}</ModalDialog>
+          <ModalDialog {...props} onClose={onClose}>
+            {children}
+          </ModalDialog>
         </ModalOverlay>,
         modalNode
       )
@@ -110,5 +118,5 @@ export const ModalDialog = (props: ModalDialogProps) => {
         `}
       </style>
     </div>
-  )
+  );
 };

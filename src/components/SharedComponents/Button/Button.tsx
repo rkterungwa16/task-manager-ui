@@ -18,10 +18,7 @@ export interface ButtonStyleProps {
 
 export const Button = (props: ButtonProps) => (
   <>
-    <button
-      disabled={props.disabled}
-      onClick={props.onClick}
-    >
+    <button disabled={props.disabled} onClick={props.onClick}>
       {props.children}
       {props.text}
     </button>

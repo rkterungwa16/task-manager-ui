@@ -10,9 +10,8 @@ export const Color = (props: ColorProps) => {
     <>
       <span onClick={props.handleClick} />
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             background: ${props.color};
             height: 20px;
             width: 20px;
@@ -22,12 +21,11 @@ export const Color = (props: ColorProps) => {
             border-radius: 4px;
             margin: 2px;
           }
-          `
-        }
+        `}
       </style>
     </>
-  )
-}
+  );
+};
 
 export interface CurrentColorProps {
   color?: string;
@@ -39,9 +37,8 @@ export const CurrentColor = (props: CurrentColorProps) => {
     <>
       <span onClick={props.handleClick} />
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             background: ${props.color};
             height: 20px;
             width: 20px;
@@ -52,12 +49,11 @@ export const CurrentColor = (props: CurrentColorProps) => {
             height: 60px;
             box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
           }
-          `
-        }
+        `}
       </style>
     </>
-  )
-}
+  );
+};
 
 export interface ColorPaletteProps {
   colors?: ProjectColorsType[];
@@ -66,7 +62,7 @@ export interface ColorPaletteProps {
 }
 
 export const ColorPalette = (props: ColorPaletteProps) => {
-  const colors = props.colors.map((color) => {
+  const colors = props.colors.map(color => {
     return (
       <Color
         key={color.name}
@@ -75,15 +71,14 @@ export const ColorPalette = (props: ColorPaletteProps) => {
           props.handleClick(color.code);
         }}
       />
-    )
-  })
+    );
+  });
   return (
     <div>
       {colors}
       <style jsx>
-        {
-          `
-          {
+        {`
+           {
             width: 198px;
             background: rgb(255, 255, 255);
             border: 0px solid rgba(0, 0, 0, 0.25);
@@ -96,9 +91,8 @@ export const ColorPalette = (props: ColorPaletteProps) => {
             justify-content: center;
             align-items: center;
           }
-          `
-        }
+        `}
       </style>
     </div>
-  )
-}
+  );
+};

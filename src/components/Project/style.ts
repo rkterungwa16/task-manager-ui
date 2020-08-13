@@ -1,8 +1,8 @@
 export const flexRowCenter = {
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
-}
+  alignItems: "center"
+};
 
 // Break styles into Components. Example Project Modal, Color, Project
 // Determine shared styles between these components (Project shared styles)
@@ -65,17 +65,17 @@ export const buttonRowStyle = {
   width: "90%",
   justifyContent: "flex-end",
   padding: "15px"
-}
+};
 
 export const colorPaletteRowStyle = {
   display: "flex",
   alignSelf: "center",
   width: "90%",
   padding: "5px"
-}
+};
 
 export const addFavouriteRowStyle = {
   display: "flex",
   width: "90%",
   padding: "5px"
-}
+};
