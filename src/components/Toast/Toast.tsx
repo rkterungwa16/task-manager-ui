@@ -47,32 +47,36 @@ export const ToastContainer = ({ children, remove }) => {
 export interface ToastContainerProps {
   isOpen: boolean;
   message: string;
+  handleRemove?: () => void;
 }
 
 export const Toast = (props: ToastContainerProps) => {
   const toastNode = useContext(ToastContext);
   const [toastIsOpen, setToastOpen] = useState(false);
   useEffect(() => {
-    setToastOpen(props.isOpen);
+    if (toastIsOpen !== props.isOpen) {
+      setToastOpen(props.isOpen);
+    }
   }, [props.isOpen]);
 
   const remove = () => {
     setToastOpen(false);
+    props.handleRemove();
   };
 
   return (
     <>
       {toastNode
         ? createPortal(
-            <ToastContainerWrapper>
-              {toastIsOpen && (
-                <ToastContainer remove={() => remove()}>
-                  {props.message}
-                </ToastContainer>
-              )}
-            </ToastContainerWrapper>,
-            toastNode
-          )
+          <ToastContainerWrapper>
+            {toastIsOpen && (
+              <ToastContainer remove={() => remove()}>
+                {props.message}
+              </ToastContainer>
+            )}
+          </ToastContainerWrapper>,
+          toastNode
+        )
         : null}
     </>
   );

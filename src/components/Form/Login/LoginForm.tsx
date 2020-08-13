@@ -38,6 +38,7 @@ export const LoginForm = () => {
     defaultLoginState,
     stateValidatorSchema
   );
+
   useEffect(() => {
     if (user.token.length) {
       window.localStorage.setItem("currentUser", user.token);
@@ -51,7 +52,8 @@ export const LoginForm = () => {
       setError(error);
       setToastOpen(true);
     }
-  }, [user.actions.authenticateUser.error]);
+  }, [JSON.stringify(user.actions.authenticateUser)]);
+
   const handleSubmit = () => {
     authenticateUser(formValues);
   };
@@ -106,7 +108,7 @@ export const LoginForm = () => {
           </FormWrapper>
         </Wrapper>
       </FormContainer>
-      <Toast isOpen={toastIsOpen} message={error} />
+      <Toast isOpen={toastIsOpen} message={error} handleRemove={() => { setToastOpen(false) }} />
       <style jsx>{`
         .form-img {
           height: 50px;
