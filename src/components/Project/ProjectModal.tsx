@@ -1,6 +1,13 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Modal } from "../Modal";
-import { Button, FormInput, Labels, Row, Switch } from "../SharedComponents";
+import {
+  Button,
+  FormInput,
+  Labels,
+  Row,
+  Switch,
+  CircleSpinner
+} from "../SharedComponents";
 import {
   buttonStyle,
   projectModalFormInputStyle,
@@ -10,6 +17,7 @@ import {
 } from "./style";
 import { ProjectColorsType } from "../../models";
 import { ColorPalette, CurrentColor } from "./Color";
+import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 
 export interface ModalHeaderProps {
   children?: React.ReactNode;
@@ -46,6 +54,10 @@ export interface ProjectModalProps {
   };
   colors?: ProjectColorsType[];
   handleCancel?: () => void;
+  editProject?: (projectId: string, project: any) => void;
+  error?: string;
+  isRequesting?: boolean;
+  projectId?: string;
 }
 
 export const initialProjectState = {
@@ -55,12 +67,22 @@ export const initialProjectState = {
 };
 
 export const ProjectModal = (props: ProjectModalProps) => {
-  const [project, setProject] = useState(initialProjectState);
+  const [currentProject, setProject] = useState(initialProjectState);
   const [colorPaletteIsVisible, showColorPalette] = useState(false);
-  const [isChecked, setChecked] = useState(false);
+
+  const { project,  editProject } = useProjectsApiActions();
+
+  const {
+    actions: {
+      editProject: {
+        isRequesting,
+        error
+      }
+    }
+  } = project;
 
   useEffect(() => {
-    if (JSON.stringify(project) !== JSON.stringify(props.project)) {
+    if (JSON.stringify(currentProject) !== JSON.stringify(props.project)) {
       setProject(prevState => ({
         ...prevState,
         ...props.project
@@ -75,17 +97,12 @@ export const ProjectModal = (props: ProjectModalProps) => {
         target.type === "checkbox" ? target.checked : (target.value as any);
       const name = target.name;
 
-      if (name === "title") {
-        setProject(prevState => ({
-          ...prevState,
-          [name]: value
-        }));
-      }
-      if (name === "addFavourite") {
-        setChecked(!isChecked);
-      }
+      setProject(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
     },
-    [JSON.stringify(project), isChecked]
+    [JSON.stringify(currentProject)]
   );
 
   return (
@@ -94,7 +111,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
         <ModalHeader>{props.headerText}</ModalHeader>
         <FormInput
           onChange={handleChange}
-          value={props.project.title}
+          value={currentProject.title}
           type="text"
           style={projectModalFormInputStyle}
           name="title"
@@ -107,7 +124,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
         >
           <ColorPalette
             colors={props.colors}
-            color={project.color}
+            color={currentProject.color}
             handleClick={color => {
               setProject(prevState => ({
                 ...prevState,
@@ -119,7 +136,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
             handleClick={() => {
               showColorPalette(!colorPaletteIsVisible);
             }}
-            color={project.color}
+            color={currentProject.color}
           />
         </Row>
         <Row style={colorPaletteRowStyle}>
@@ -127,9 +144,9 @@ export const ProjectModal = (props: ProjectModalProps) => {
         </Row>
         <Row style={addFavouriteRowStyle}>
           <Switch
-            name="addFavourite"
+            name="isFavourite"
             handleChange={handleChange}
-            checked={isChecked}
+            checked={currentProject.isFavourite}
           />
         </Row>
         {props.children}
@@ -139,7 +156,12 @@ export const ProjectModal = (props: ProjectModalProps) => {
             style={{ ...buttonStyle, marginRight: "3px" }}
             onClick={props.handleCancel}
           />
-          <Button text="save" style={{ ...buttonStyle, marginLeft: "3px" }} />
+          <Button
+            style={{ ...buttonStyle, marginLeft: "3px" }}
+            onClick={() => { editProject(props.projectId, currentProject) }}
+          >
+            {isRequesting ? <CircleSpinner height={10} /> : "Save"}
+          </Button>
         </Row>
       </Modal>
     </>

@@ -29,6 +29,7 @@ export interface ProjectState {
     fetchUserProjects: ActionStatus;
     fetchUserProject: ActionStatus;
     fetchProjectColors: ActionStatus;
+    editProject: ActionStatus;
   };
 }
 
@@ -82,6 +83,10 @@ export const defaultProjectsState: ProjectState = {
       error: ""
     },
     fetchProjectColors: {
+      isRequesting: false,
+      error: ""
+    },
+    editProject: {
       isRequesting: false,
       error: ""
     }

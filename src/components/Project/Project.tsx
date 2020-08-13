@@ -82,6 +82,7 @@ export const Project = (props: ProjectProps) => {
               editProject: false
             })
           }
+          projectId={props.id}
         />
       ) : null}
       <style jsx>
@@ -96,7 +97,7 @@ export const Project = (props: ProjectProps) => {
 };
 
 Project.defaultProps = {
-  color: "#8d8d8d",
+  color: "#8D8D8D",
   isFavourite: false
 };
 
@@ -126,6 +127,7 @@ export const ProjectList = (props: ProjectListProps) => {
     fetchProjectTasks(id);
     fetchUserProject(id);
   };
+
   return (
     <>
       <ul>
@@ -135,6 +137,7 @@ export const ProjectList = (props: ProjectListProps) => {
             title={project.title}
             id={project._id}
             color={project.color}
+            isFavourite={project.isFavourite}
             colors={colors}
             handleProjectTasksFetch={handleProjectTasksFetch}
           />

@@ -96,3 +96,30 @@ export const fetchProjectColors = () => async (dispatch: any) => {
     );
   }
 };
+
+export const editProject = (
+  projectId: string,
+  project: any
+) => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.EDIT_PROJECT));
+  try {
+    const url = `${apiEndPoints.projects}/${projectId}`;
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.put(url, project, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+    dispatch(
+      withDataAction(ProjectActions.EDIT_PROJECT_SUCCESS, response.data)
+    );
+  } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
+    dispatch(
+      withErrorAction(
+        ProjectActions.EDIT_PROJECT_FAILURE,
+        e.response.data
+      )
+    );
+  }
+};

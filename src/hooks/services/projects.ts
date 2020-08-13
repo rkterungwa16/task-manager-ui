@@ -5,7 +5,8 @@ import {
   fetchUserProjects,
   addProject,
   fetchUserProject,
-  fetchProjectColors
+  fetchProjectColors,
+  editProject
 } from "../../actions";
 
 export const useProjectsApiActions: any = () => {
@@ -16,7 +17,8 @@ export const useProjectsApiActions: any = () => {
       fetchUserProjects,
       fetchUserProject,
       addProject,
-      fetchProjectColors
+      fetchProjectColors,
+      editProject
     },
     dispatch
   );

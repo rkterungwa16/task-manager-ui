@@ -184,6 +184,57 @@ export function projectsReducer(
           }
         }
       };
+    case ProjectActions.EDIT_PROJECT:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          editProject: {
+            ...state.actions.addProject,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.EDIT_PROJECT_SUCCESS:
+      const { data: editedProject } = action;
+      const modifiedProject = state.projects.map(project => {
+        if (project._id === editedProject.data.project._id) {
+          return editedProject.data.project;
+        }
+        return project;
+      });
+
+      return {
+        ...state,
+        projects: modifiedProject,
+        code: editedProject.code,
+        actions: {
+          ...state.actions,
+          editProject: {
+            ...state.actions.editProject,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.ADD_PROJECT_FAILURE:
+      const { error: editProjectError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
+      return {
+        ...state,
+        code: editProjectError.code,
+        actions: {
+          ...state.actions,
+          editProject: {
+            isRequesting: false,
+            error: editProjectError.message
+          }
+        }
+      };
     default:
       return state;
   }
