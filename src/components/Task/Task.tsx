@@ -102,9 +102,6 @@ export const TaskItemInnerWrapper = (props: TaskItemInnerWrapperProps) => (
           border-top-left-radius: 20px;
           border-bottom-left-radius: 20px;
         }
-        :hover {
-          background-color: #fff;
-        }
       `}
     </style>
   </>
@@ -145,8 +142,8 @@ export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
             border: 3px solid #767676;
             color: transparent;
             transition: 0.2s;
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             background-color: #eee;
             display: flex;
