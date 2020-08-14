@@ -1,19 +1,55 @@
 import axios from "axios";
 
-import { createUser, authenticateUser } from "./userActions";
+import { fetchProjectTasks, fetchTodaysTasks } from "./taskActions";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe("User Actions", () => {
-  it("should successfully create a user", async () => {
+describe.only("Task Actions", () => {
+  it("should successfully project tasks", async () => {
     const dispatch = jest.fn(x => {
       return true;
     });
 
-    const user = { name: "Terungwa" };
+    const tasks = [{ content: "physics" }];
     const resp = {
-      data: user,
+      data: tasks,
+      status: 200,
+      statusText: "",
+      config: {},
+      request: {
+        url: ""
+      }
+    };
+    mockedAxios.get.mockResolvedValue(resp);
+    await fetchProjectTasks("12345")(dispatch);
+    expect(dispatch.mock.calls.length).toBe(2);
+  });
+
+  it("should throw an error for unsuccessful fetch of project tasks", async () => {
+    const dispatch = jest.fn(x => {
+      return true;
+    });
+
+    mockedAxios.get.mockRejectedValue({
+      response: {
+        data: {
+          message: "error"
+        }
+      }
+    });
+    await fetchProjectTasks("12345")(dispatch);
+    expect(dispatch.mock.calls.length).toBe(2);
+  });
+
+  it("should successfully return tasks for today", async () => {
+    const dispatch = jest.fn(x => {
+      return true;
+    });
+
+    const tasks = [{ content: "Terungwa" }];
+    const resp = {
+      data: tasks,
       status: 200,
       statusText: "",
       config: {},
@@ -22,7 +58,7 @@ describe("User Actions", () => {
       }
     };
     mockedAxios.post.mockResolvedValue(resp);
-    await createUser(user)(dispatch);
+    await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
   });
 
@@ -31,8 +67,6 @@ describe("User Actions", () => {
       return true;
     });
 
-    const user = { name: "Terungwa" };
-
     mockedAxios.post.mockRejectedValue({
       response: {
         data: {
@@ -40,45 +74,7 @@ describe("User Actions", () => {
         }
       }
     });
-    await createUser(user)(dispatch);
-    expect(dispatch.mock.calls.length).toBe(2);
-  });
-
-  it("should successfully authenticate user", async () => {
-    const dispatch = jest.fn(x => {
-      return true;
-    });
-
-    const user = { name: "Terungwa" };
-    const resp = {
-      data: user,
-      status: 200,
-      statusText: "",
-      config: {},
-      request: {
-        url: ""
-      }
-    };
-    mockedAxios.post.mockResolvedValue(resp);
-    await authenticateUser(user)(dispatch);
-    expect(dispatch.mock.calls.length).toBe(2);
-  });
-
-  it("should throw an error", async () => {
-    const dispatch = jest.fn(x => {
-      return true;
-    });
-
-    const user = { name: "Terungwa" };
-
-    mockedAxios.post.mockRejectedValue({
-      response: {
-        data: {
-          message: "error"
-        }
-      }
-    });
-    await authenticateUser(user)(dispatch);
+    await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
   });
 });
