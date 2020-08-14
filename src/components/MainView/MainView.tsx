@@ -76,11 +76,12 @@ export const TasksHeader = (props: TasksHeaderProps) => (
     <style jsx>
       {`
          {
-          width: 100%;
+          width: 60%;
+          justify-content: flex-start;
+          margin-left: 15px;
           display: flex;
-          justify-content: center;
           padding-top: 15px;
-          font-size: 25px;
+          font-size: 22px;
           font-weight: bold;
           color: #8d8d8d;
         }
@@ -100,9 +101,10 @@ const Wrapper = (props: WrapperProps) => (
       {`
          {
           display: flex;
-          width: 100%;
+          width: 60%;
+          justify-content: flex-start;
+          margin-left: 15px;
           height: 90px;
-          justify-content: center;
           align-items: center;
         }
       `}
