@@ -11,9 +11,10 @@ import ProjectsIcon from "react-ionicons/lib/IosList";
 import { Routes } from "../../routes/client";
 import { Button } from "../SharedComponents";
 import { Modal } from "../Modal";
-import { FormInput, CircleSpinner } from "../SharedComponents";
+import { ProjectModal } from "../Project";
+import { CircleSpinner } from "../SharedComponents";
 import { useProjectsApiActions } from "../../hooks";
-import { buttonStyle, formInputStyle } from "./style";
+import { buttonStyle } from "./style";
 
 export interface SideBarHeaderProps {
   onClick?: (event: React.MouseEvent<any, MouseEvent>) => void;
@@ -21,29 +22,14 @@ export interface SideBarHeaderProps {
 }
 export const SideBarHeader = (props: SideBarHeaderProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const { project, addProject } = useProjectsApiActions();
+  const { project } = useProjectsApiActions();
 
   const {
     actions: {
       addProject: { isRequesting, error }
     }
   } = project;
-  useEffect(() => {}, [JSON.stringify(project.projects)]);
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const target = event.currentTarget;
-      const value = target.value;
-      setTitle(value);
-    },
-    [title]
-  );
 
-  const handleSubmit = useCallback(() => {
-    addProject({
-      title
-    });
-  }, [title]);
   return (
     <>
       <header>
@@ -77,21 +63,13 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
           </IconWrapper>
         </LinkWrapper>
         {isModalOpen && (
-          <AddProjectModal
+          <ProjectModal
             headerText="Add project"
-            onClick={() => setModalOpen(false)}
-            handleSubmit={handleSubmit}
+            handleCancel={() => setModalOpen(false)}
             isRequesting={isRequesting}
-          >
-            <FormInput
-              type="text"
-              style={formInputStyle}
-              name="title"
-              error={error}
-              onChange={handleChange}
-              placeholder="Project Title"
-            />
-          </AddProjectModal>
+            action="add"
+            colors={project.colors}
+          />
         )}
       </header>
       <style jsx>{`

@@ -39,25 +39,23 @@ export interface ProjectModalProps {
 export const initialProjectState = {
   title: "",
   isFavourite: false,
-  color: ""
+  color: "#8D8D8D"
 };
 
 export const ProjectModal = (props: ProjectModalProps) => {
   const [currentProject, setProject] = useState(initialProjectState);
   const [colorPaletteIsVisible, showColorPalette] = useState(false);
 
-  const {
-    project,
-    editProject,
-    addProject
-  } = useProjectsApiActions();
+  const { project, editProject, addProject } = useProjectsApiActions();
 
   const projectActions = {
     edit: useCallback(() => {
-      editProject(props.projectId, currentProject)
+      editProject(props.projectId, currentProject);
     }, [props.projectId, JSON.stringify(currentProject)]),
-    add: addProject
-  }
+    add: useCallback(() => {
+      addProject(currentProject);
+    }, [JSON.stringify(currentProject)])
+  };
 
   const {
     actions: {
