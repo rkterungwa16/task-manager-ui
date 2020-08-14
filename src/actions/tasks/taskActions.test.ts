@@ -57,7 +57,7 @@ describe.only("Task Actions", () => {
         url: ""
       }
     };
-    mockedAxios.post.mockResolvedValue(resp);
+    mockedAxios.get.mockResolvedValue(resp);
     await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
   });
@@ -67,7 +67,7 @@ describe.only("Task Actions", () => {
       return true;
     });
 
-    mockedAxios.post.mockRejectedValue({
+    mockedAxios.get.mockRejectedValue({
       response: {
         data: {
           message: "error"
