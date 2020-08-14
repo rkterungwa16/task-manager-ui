@@ -18,31 +18,7 @@ import {
 import { ProjectColorsType } from "../../models";
 import { ColorPalette, CurrentColor } from "./Color";
 import { useProjectsApiActions } from "../../hooks";
-
-export interface ModalHeaderProps {
-  children?: React.ReactNode;
-}
-
-export const ModalHeader = (props: ModalHeaderProps) => (
-  <>
-    <div>{props.children}</div>
-    <style jsx>
-      {`
-         {
-          border-radius: 4px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 50px;
-          width: 100%;
-          background-color: #ededed;
-          color: #767676;
-          font-size: 20px;
-        }
-      `}
-    </style>
-  </>
-);
+import { ModalHeader } from "./ModalUtils";
 
 export interface ProjectModalProps {
   children?: React.ReactNode;
@@ -54,7 +30,7 @@ export interface ProjectModalProps {
   };
   colors?: ProjectColorsType[];
   handleCancel?: () => void;
-  editProject?: (projectId: string, project: any) => void;
+  action?: string;
   error?: string;
   isRequesting?: boolean;
   projectId?: string;
@@ -70,7 +46,18 @@ export const ProjectModal = (props: ProjectModalProps) => {
   const [currentProject, setProject] = useState(initialProjectState);
   const [colorPaletteIsVisible, showColorPalette] = useState(false);
 
-  const { project, editProject } = useProjectsApiActions();
+  const {
+    project,
+    editProject,
+    addProject
+  } = useProjectsApiActions();
+
+  const projectActions = {
+    edit: useCallback(() => {
+      editProject(props.projectId, currentProject)
+    }, [props.projectId, JSON.stringify(currentProject)]),
+    add: addProject
+  }
 
   const {
     actions: {
@@ -156,7 +143,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
           <Button
             style={{ ...buttonStyle, marginLeft: "3px" }}
             onClick={() => {
-              editProject(props.projectId, currentProject);
+              projectActions[props.action]();
             }}
           >
             {isRequesting ? <CircleSpinner height={10} /> : "Save"}

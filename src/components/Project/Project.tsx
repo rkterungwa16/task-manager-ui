@@ -6,7 +6,7 @@ import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
-import { ProjectModal } from "./EditProjectModal";
+import { ProjectModal } from "./ProjectModal";
 
 export interface ProjectInterface {
   name: string;
@@ -82,6 +82,7 @@ export const Project = (props: ProjectProps) => {
               editProject: false
             })
           }
+          action="edit"
           projectId={props.id}
         />
       ) : null}
