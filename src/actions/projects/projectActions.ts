@@ -97,10 +97,9 @@ export const fetchProjectColors = () => async (dispatch: any) => {
   }
 };
 
-export const editProject = (
-  projectId: string,
-  project: any
-) => async (dispatch: any) => {
+export const editProject = (projectId: string, project: any) => async (
+  dispatch: any
+) => {
   dispatch(requestAction(ProjectActions.EDIT_PROJECT));
   try {
     const url = `${apiEndPoints.projects}/${projectId}`;
@@ -116,10 +115,7 @@ export const editProject = (
       window.localStorage.clear();
     }
     dispatch(
-      withErrorAction(
-        ProjectActions.EDIT_PROJECT_FAILURE,
-        e.response.data
-      )
+      withErrorAction(ProjectActions.EDIT_PROJECT_FAILURE, e.response.data)
     );
   }
 };

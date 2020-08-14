@@ -6,7 +6,7 @@ import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
-import { ProjectModal } from "./ProjectModal";
+import { ProjectModal } from "./EditProjectModal";
 
 export interface ProjectInterface {
   name: string;

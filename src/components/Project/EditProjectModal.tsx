@@ -17,7 +17,7 @@ import {
 } from "./style";
 import { ProjectColorsType } from "../../models";
 import { ColorPalette, CurrentColor } from "./Color";
-import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
+import { useProjectsApiActions } from "../../hooks";
 
 export interface ModalHeaderProps {
   children?: React.ReactNode;
@@ -70,14 +70,11 @@ export const ProjectModal = (props: ProjectModalProps) => {
   const [currentProject, setProject] = useState(initialProjectState);
   const [colorPaletteIsVisible, showColorPalette] = useState(false);
 
-  const { project,  editProject } = useProjectsApiActions();
+  const { project, editProject } = useProjectsApiActions();
 
   const {
     actions: {
-      editProject: {
-        isRequesting,
-        error
-      }
+      editProject: { isRequesting, error }
     }
   } = project;
 
@@ -158,7 +155,9 @@ export const ProjectModal = (props: ProjectModalProps) => {
           />
           <Button
             style={{ ...buttonStyle, marginLeft: "3px" }}
-            onClick={() => { editProject(props.projectId, currentProject) }}
+            onClick={() => {
+              editProject(props.projectId, currentProject);
+            }}
           >
             {isRequesting ? <CircleSpinner height={10} /> : "Save"}
           </Button>
