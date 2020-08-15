@@ -45,13 +45,17 @@ export const Task = (props: TaskProps) => {
             <CalendarIcon fontSize="25px" color="#8d8d8d" />
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
-        {dropdownIsOpen && <Dropdown />}
+        <ReminderWrapper>
+          <Text text="Aug 7" />
+        </ReminderWrapper>
       </li>
       <style jsx>
         {`
            {
             width: 100%;
             padding: 5px;
+            display: flex;
+            flex-direction: column;
           }
         `}
       </style>
@@ -159,3 +163,25 @@ export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
     </div>
   </>
 );
+
+export interface ReminderWrapperProps {
+  children?: React.ReactNode;
+}
+
+export const ReminderWrapper = (props: ReminderWrapperProps) => {
+  return (
+    <div>
+      {props.children}
+      <style jsx>
+        {`
+           {
+            width: 84%;
+            display: flex;
+            justify-content: flex-end;
+            color: #c23d38;
+          }
+        `}
+      </style>
+    </div>
+  );
+};
