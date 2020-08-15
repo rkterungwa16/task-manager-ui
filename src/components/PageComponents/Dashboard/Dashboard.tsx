@@ -5,7 +5,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { Routes } from "../../../routes/client";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
-import TopNav from "../../../components/TopNav";
+import { TopNav } from "../../../components/TopNav";
 import { SideBar } from "../../SideBar/SideBar";
 import {
   useProjectsApiActions,
@@ -65,6 +65,7 @@ export const Dashboard = () => {
   const [colors, setColors] = useState(initialColorsState);
   const [isRequestingProjects, setIsRequestingProjects] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [sidebarIsOpen, setSidebarOpen] = useState(false);
 
   // useEffect(() => {
   //   if (project.code >= 400 && project.code < 600) {
@@ -126,6 +127,7 @@ export const Dashboard = () => {
       console.log(message);
     };
   });
+
   return (
     <div>
       <ModalProvider>
@@ -133,9 +135,14 @@ export const Dashboard = () => {
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <TopNav />
+        <TopNav
+          openSidBar={() => {
+            setSidebarOpen(!sidebarIsOpen);
+          }}
+        />
         <DashboardContentContainer>
           <SideBar
+            isOpen={sidebarIsOpen}
             colors={colors}
             projects={projects}
             isRequestingProjects={isRequestingProjects}

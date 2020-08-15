@@ -8,13 +8,14 @@ export interface SideBarProps {
   colors?: ProjectColorsType[];
   projects?: ProjectType[];
   isRequestingProjects?: boolean;
+  isOpen?: boolean;
 }
 export const SideBar = (props: SideBarProps) => {
   const [projectListIsOpen, setProjectListOpen] = useState(true);
   return (
     <>
-      <SidebarContainer>
-        <SidebarContentWrapper>
+      <SidebarContainer isOpen={props.isOpen}>
+        <SidebarContentWrapper isOpen={props.isOpen}>
           <SideBarHeader
             openProjectList={projectListIsOpen}
             onClick={() => setProjectListOpen(!projectListIsOpen)}
@@ -58,6 +59,7 @@ const Wrapper = (props: WrapperProps) => (
 
 export interface SidebarContainerProps {
   children?: React.ReactNode;
+  isOpen?: boolean;
 }
 
 export const SidebarContainer = (props: SidebarContainerProps) => (
@@ -79,13 +81,31 @@ export const SidebarContainer = (props: SidebarContainerProps) => (
           background-color: #ededed;
           margin-left: 0;
         }
+
+        @media screen and (max-width: 600px) {
+           {
+            z-index: 99;
+            position: absolute;
+            top: 0px;
+            width: ${props.isOpen ? "305px" : 0};
+            padding-left: ${props.isOpen ? "25px" : 0};
+            padding-right: ${props.isOpen ? "25px" : 0};
+            padding-top: ${props.isOpen ? "74px" : 0};
+            transition: 0.15s ease-out;
+          }
+        }
       `}
     </style>
   </>
 );
 
+SidebarContainer.defaultProps = {
+  isOpen: false
+};
+
 export interface SidebarContentWrapperProps {
   children?: React.ReactNode;
+  isOpen?: boolean;
 }
 
 export const SidebarContentWrapper = (props: SidebarContentWrapperProps) => (
@@ -97,6 +117,12 @@ export const SidebarContentWrapper = (props: SidebarContentWrapperProps) => (
           width: 100%;
           padding-bottom: 30px;
           height: 100%;
+        }
+        @media screen and (max-width: 600px) {
+           {
+            display: ${props.isOpen ? "block" : "none"};
+            transition: 0.15s ease-out;
+          }
         }
       `}
     </style>

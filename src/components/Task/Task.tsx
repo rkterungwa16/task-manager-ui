@@ -77,6 +77,11 @@ export const TaskList = (props: TaskListProps) => (
           list-style: none;
           padding: 0;
         }
+        @media screen and (max-width: 600px) {
+           {
+            width: 90%;
+          }
+        }
       `}
     </style>
   </>

@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  forwardRef
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 
 import { useClickOutside } from "../../hooks";
@@ -63,7 +57,7 @@ export interface ModalOverlayProps {
 
 export const ModalOverlay = (props: ModalOverlayProps) => {
   return (
-    <div className="modal-task-manager">
+    <div>
       {props.children}
       <style jsx>
         {`
@@ -72,6 +66,7 @@ export const ModalOverlay = (props: ModalOverlayProps) => {
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 1000;
             width: 100vw;
             height: 100vh;
             background: rgba(0, 0, 0, 0.3);
@@ -115,6 +110,12 @@ export const ModalDialog = (props: ModalDialogProps) => {
           transform: translate(-50%, -50%);
           z-index: 1;
           align-items: center !important;
+
+          @media screen and (max-width: 600px) {
+             {
+              top: 50%;
+            }
+          }
         `}
       </style>
     </div>

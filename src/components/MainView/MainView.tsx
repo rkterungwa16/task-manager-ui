@@ -60,6 +60,11 @@ export const MainView = (props: MainViewProps) => {
             flex-direction: column;
             align-items: center;
           }
+          @media screen and (max-width: 600px) {
+             {
+              padding: 50px 0 0 0;
+            }
+          }
         `}
       </style>
     </>
@@ -84,6 +89,12 @@ export const TasksHeader = (props: TasksHeaderProps) => (
           font-size: 22px;
           font-weight: bold;
           color: #8d8d8d;
+        }
+
+        @media screen and (max-width: 600px) {
+           {
+            width: 90%;
+          }
         }
       `}
     </style>
