@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Home = () => {
   return (
@@ -11,9 +12,14 @@ const Home = () => {
             alt="Task Manager"
           />
           <div className="home_btn-container">
-            <button className="home-btn">Get Started</button>
+            <Link href="/register">
+              <a className="home-btn">Get Started</a>
+            </Link>
+
             <span className="already_member-text">already a member?</span>
-            <button className="home-btn">Login</button>
+            <Link href="/login">
+              <a className="home-btn">Login</a>
+            </Link>
           </div>
         </div>
       </div>
@@ -61,6 +67,7 @@ const Home = () => {
           background: none;
           border: none;
           cursor: pointer;
+          text-decoration: none;
         }
 
         .home-btn:hover {
