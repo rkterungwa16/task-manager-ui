@@ -15,7 +15,7 @@ export const LinkButton = React.forwardRef(
       <style jsx>
         {`
            {
-            ${mapToCssProperties(props.style)}
+            ${mapToCssProperties(props.style? {textDecoration: "none", ...props.style} : {textDecoration: "none"})}
           }
         `}
       </style>

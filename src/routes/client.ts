@@ -3,6 +3,6 @@ export enum Routes {
   Registration = "/registration",
   Login = "/login",
   Dashboard = "/dashboard",
-  Today = "/dashboard/today",
-  Overdue = "/dashboard/overdue"
+  Today = "/today",
+  Overdue = "/overdue"
 }

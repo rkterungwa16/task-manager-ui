@@ -21,7 +21,7 @@ export const projectTextStyle = {
   paddingLeft: "5px",
   display: "flex",
   alignItems: "center",
-  width: "80%"
+  width: "100%"
 };
 
 export const buttonStyle = {
@@ -79,3 +79,7 @@ export const addFavouriteRowStyle = {
   width: "90%",
   padding: "5px"
 };
+
+export const projectTextLinkStyle = {
+  width: "100%;"
+}
