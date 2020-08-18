@@ -2,7 +2,7 @@ import { useState } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
 
 import { Dropdown, Text } from "../SharedComponents";
-import { projectTextStyle } from "./style";
+import { projectTextStyle, textBadgeStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
@@ -18,6 +18,7 @@ export interface ProjectProps {
   color?: string;
   colors?: ProjectColorsType[];
   isFavourite?: boolean;
+  numberOfTasks?: number;
   handleProjectTasksFetch?: (id: string) => void;
 }
 export const Project = (props: ProjectProps) => {
@@ -44,10 +45,13 @@ export const Project = (props: ProjectProps) => {
                 fontWeight: "bold"
               })
             }}
-          />
+          ></Text>
+          <Text style={textBadgeStyle}>
+            {props.numberOfTasks ? props.numberOfTasks : null}
+          </Text>
           <ProjectItemIconWrapper>
             <MoreIcon
-              fontSize="35px"
+              fontSize="25px"
               color="#8d8d8d"
               onClick={() => openDropdown(!dropdownIsOpen)}
             />
@@ -139,6 +143,7 @@ export const ProjectList = (props: ProjectListProps) => {
             colors={colors}
             currentProjectTitle={currentProject.title}
             handleProjectTasksFetch={handleProjectTasksFetch}
+            numberOfTasks={project.tasks.length}
           />
         ))}
       </ul>

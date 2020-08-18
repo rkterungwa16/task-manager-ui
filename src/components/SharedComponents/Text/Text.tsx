@@ -10,13 +10,15 @@ export const Text = (props: TextProps) => {
   return (
     <>
       <span onClick={props.onClick}>
-        {props.text}
+        {props.text ? props.text : null}
         {props.children}
       </span>
       <style jsx>
         {`
            {
-            ${props.style ? mapToCssProperties(props.style) : null}
+            ${props.style
+              ? mapToCssProperties({ display: "flex", ...props.style })
+              : null}
           }
         `}
       </style>

@@ -41,7 +41,7 @@ export const Dashboard = () => {
     if (!project.project.title) {
       fetchTodaysTasks();
     }
-  }, [JSON.stringify(project.project)])
+  }, [JSON.stringify(project.project)]);
 
   useEffect(() => {
     client.onopen = () => {
@@ -65,9 +65,7 @@ export const Dashboard = () => {
           }}
         />
         <DashboardContentContainer>
-          <SideBar
-            isOpen={sidebarIsOpen}
-          />
+          <SideBar isOpen={sidebarIsOpen} />
           <MainView />
         </DashboardContentContainer>
       </ModalProvider>

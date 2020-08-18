@@ -83,3 +83,13 @@ export const addFavouriteRowStyle = {
 export const projectTextLinkStyle = {
   width: "100%;"
 };
+
+export const textBadgeStyle = {
+  width: "15px;",
+  textAlign: "center;",
+  borderRadius: "4px;",
+  backgroundColor: "white;",
+  display: "inline-block;",
+  position: "absolute;",
+  right: "10px;"
+};
