@@ -41,3 +41,7 @@ export const emptyProjectTextStyle = {
   color: "#8d8d8d",
   wordBreak: "break-all"
 };
+
+export const textStyle = {
+  marginLeft: "10px"
+};

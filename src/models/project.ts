@@ -30,12 +30,14 @@ export interface ProjectState {
     fetchUserProject: ActionStatus;
     fetchProjectColors: ActionStatus;
     editProject: ActionStatus;
+    fetchTodaysTasks: ActionStatus;
   };
 }
 
 export const defaultProjectsState: ProjectState = {
   projects: [
     {
+      _id: "1",
       title: "",
       description: "",
       color: "",
@@ -50,6 +52,7 @@ export const defaultProjectsState: ProjectState = {
     }
   ],
   project: {
+    _id: "1",
     title: "",
     description: "",
     color: "",
@@ -87,6 +90,10 @@ export const defaultProjectsState: ProjectState = {
       error: ""
     },
     editProject: {
+      isRequesting: false,
+      error: ""
+    },
+    fetchTodaysTasks: {
       isRequesting: false,
       error: ""
     }

@@ -235,6 +235,50 @@ export function projectsReducer(
           }
         }
       };
+    case ProjectActions.FETCH_TODAYS_TASKS:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          fetchTodaysTasks: {
+            ...state.actions.fetchTodaysTasks,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_TODAYS_TASKS_SUCCESS:
+      const { data: todaysTasks } = action;
+      return {
+        ...state,
+        project: todaysTasks.data.project,
+        code: todaysTasks.code,
+        actions: {
+          ...state.actions,
+          fetchTodaysTasks: {
+            ...state.actions.fetchTodaysTasks,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.FETCH_TODAYS_TASKS_FAILURE:
+      const { error: fetchTodaysTasksError } = action as WithError<{
+        message: string;
+        code: number;
+      }>;
+      return {
+        ...state,
+        code: fetchTodaysTasksError.code,
+        actions: {
+          ...state.actions,
+          fetchTodaysTasks: {
+            isRequesting: false,
+            error: fetchTodaysTasksError.message
+          }
+        }
+      };
     default:
       return state;
   }

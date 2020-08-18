@@ -119,3 +119,27 @@ export const editProject = (projectId: string, project: any) => async (
     );
   }
 };
+
+export const fetchTodaysTasks = () => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.FETCH_TODAYS_TASKS));
+  try {
+    const url = `${apiEndPoints.tasks}/today`;
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.get(url, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+    dispatch(
+      withDataAction(ProjectActions.FETCH_TODAYS_TASKS_SUCCESS, response.data)
+    );
+  } catch (e) {
+    if (e.response.data.code >= 400 && e.response.data.code < 600) {
+      window.localStorage.clear();
+    }
+    dispatch(
+      withErrorAction(
+        ProjectActions.FETCH_TODAYS_TASKS_FAILURE,
+        e.response.data
+      )
+    );
+  }
+};

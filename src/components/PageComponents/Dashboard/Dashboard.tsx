@@ -5,6 +5,10 @@ import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import { TopNav } from "../../../components/TopNav";
 import { SideBar } from "../../SideBar/SideBar";
+import {
+  useProjectTasksApiActions,
+  useProjectsApiActions
+} from "../../../hooks";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
 
@@ -24,12 +28,20 @@ const initalTasksState = [
 
 export const Dashboard = () => {
   const [sidebarIsOpen, setSidebarOpen] = useState(false);
+  const { fetchTodaysTasks } = useProjectTasksApiActions();
+  const { project } = useProjectsApiActions();
 
   // useEffect(() => {
   //   if (project.code >= 400 && project.code < 600) {
   //     Router.push(Routes.Login);
   //   }
   // }, [project.code])
+
+  useEffect(() => {
+    if (!project.project.title) {
+      fetchTodaysTasks();
+    }
+  }, [JSON.stringify(project.project)])
 
   useEffect(() => {
     client.onopen = () => {

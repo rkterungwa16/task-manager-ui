@@ -8,23 +8,24 @@ import TodayIcon from "react-ionicons/lib/IosAlarmOutline";
 import OverduceIcon from "react-ionicons/lib/IosCalendarOutline";
 import ProjectsIcon from "react-ionicons/lib/IosList";
 
-import { Routes } from "../../routes/client";
-import { Button } from "../SharedComponents";
 import { Modal } from "../Modal";
 import { ProjectModal } from "../Project";
-import { CircleSpinner } from "../SharedComponents";
-import { useProjectsApiActions } from "../../hooks";
-import { buttonStyle } from "./style";
+import { CircleSpinner, Text, Button } from "../SharedComponents";
+import { useProjectsApiActions, useProjectTasksApiActions } from "../../hooks";
+import { buttonStyle, textStyle } from "./style";
 
 export interface SideBarHeaderProps {
   onClick?: (event: React.MouseEvent<any, MouseEvent>) => void;
   openProjectList?: boolean;
 }
+
 export const SideBarHeader = (props: SideBarHeaderProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const { project } = useProjectsApiActions();
+  const { fetchTodaysTasks } = useProjectTasksApiActions();
 
   const {
+    project: currentProject,
     actions: {
       addProject: { isRequesting, error }
     }
@@ -33,25 +34,28 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
   return (
     <>
       <header>
-        <LinkWrapper>
+        <TextWrapper>
           <TodayIcon fontSize="20px" />
-          <Link href={Routes.Today}>
-            <a>
-              <LinkText>Today</LinkText>
-            </a>
-          </Link>
-        </LinkWrapper>
-        <LinkWrapper>
+          <Text
+            style={
+              currentProject.title === "today"
+                ? { fontWeight: "bold", ...textStyle }
+                : textStyle
+            }
+            onClick={() => {
+              fetchTodaysTasks();
+            }}
+          >
+            Today
+          </Text>
+        </TextWrapper>
+        <TextWrapper>
           <OverduceIcon fontSize="20px" />
-          <Link href={Routes.Overdue}>
-            <a>
-              <LinkText>Overdue</LinkText>
-            </a>
-          </Link>
-        </LinkWrapper>
-        <LinkWrapper>
+          <Text style={textStyle}>Overdue</Text>
+        </TextWrapper>
+        <TextWrapper>
           <ProjectsIcon fontSize="20px" />
-          <LinkText>Projects</LinkText>
+          <Text style={textStyle}>Projects</Text>
           <IconWrapper>
             {props.openProjectList && (
               <ArrowDown onClick={props.onClick} fontSize="20px" />
@@ -61,7 +65,7 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
             )}
             <Add fontSize="30px" onClick={() => setModalOpen(true)} />
           </IconWrapper>
-        </LinkWrapper>
+        </TextWrapper>
         {isModalOpen && (
           <ProjectModal
             headerText="Add project"
@@ -157,11 +161,11 @@ export const AddProjectModal = (props: AddProjectModalProps) => (
   </>
 );
 
-export interface LinkWrapperProps {
+export interface TextWrapperProps {
   children?: React.ReactNode;
 }
 
-export const LinkWrapper = (props: LinkWrapperProps) => {
+export const TextWrapper = (props: TextWrapperProps) => {
   return (
     <div>
       {props.children}
@@ -178,23 +182,6 @@ export const LinkWrapper = (props: LinkWrapperProps) => {
     </div>
   );
 };
-
-export interface LinkTextProps {
-  children?: React.ReactNode;
-}
-
-export const LinkText = (props: LinkTextProps) => (
-  <span>
-    {props.children}
-    <style jsx>
-      {`
-         {
-          margin-left: 10px;
-        }
-      `}
-    </style>
-  </span>
-);
 
 export interface IconWrapperProps {
   children?: React.ReactNode;

@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
-import uniqid from "uniqid";
 
-import { Dropdown, Text, LinkButton } from "../SharedComponents";
+import { Dropdown, Text } from "../SharedComponents";
 import { projectTextStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
-import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
+import { useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
 
 export interface ProjectInterface {
@@ -15,6 +13,7 @@ export interface ProjectInterface {
 
 export interface ProjectProps {
   title?: string;
+  currentProjectTitle?: string;
   id?: string;
   color?: string;
   colors?: ProjectColorsType[];
@@ -40,7 +39,10 @@ export const Project = (props: ProjectProps) => {
             text={props.title}
             style={{
               ...projectTextStyle,
-              borderLeft: `5px solid ${props.color}`
+              borderLeft: `5px solid ${props.color}`,
+              ...(props.title === props.currentProjectTitle && {
+                fontWeight: "bold"
+              })
             }}
           />
           <ProjectItemIconWrapper>
@@ -116,32 +118,26 @@ const initialColorsState = [
 ];
 
 export const ProjectList = (props: ProjectListProps) => {
-  const { fetchProjectTasks } = useProjectTasksApiActions();
   const { project, fetchUserProject } = useProjectsApiActions();
 
-  const [colors, setColors] = useState(initialColorsState);
-
-  useEffect(() => {
-    if (JSON.stringify(project.colors) !== JSON.stringify(colors)) {
-      setColors(project.colors);
-    }
-  }, [JSON.stringify(project.colors)]);
   const handleProjectTasksFetch = id => {
-    fetchProjectTasks(id);
     fetchUserProject(id);
   };
+
+  const { project: currentProject, projects, colors } = project;
 
   return (
     <>
       <ul>
-        {props.projects.map(project => (
+        {projects.map(project => (
           <Project
-            key={uniqid(`${project.title} - `)}
+            key={project._id}
             title={project.title}
             id={project._id}
             color={project.color}
             isFavourite={project.isFavourite}
             colors={colors}
+            currentProjectTitle={currentProject.title}
             handleProjectTasksFetch={handleProjectTasksFetch}
           />
         ))}
@@ -178,10 +174,10 @@ export interface ProjectItemInnerWrapperProps {
 export const ProjectItemInnerWrapper = (
   props: ProjectItemInnerWrapperProps
 ) => (
-    <>
-      <div>{props.children}</div>
-      <style jsx>
-        {`
+  <>
+    <div>{props.children}</div>
+    <style jsx>
+      {`
          {
           cursor: pointer;
           height: 30px;
@@ -193,9 +189,9 @@ export const ProjectItemInnerWrapper = (
           align-items: center;
         }
       `}
-      </style>
-    </>
-  );
+    </style>
+  </>
+);
 
 export interface ProjectItemIconWrapperProps {
   children?: React.ReactNode;

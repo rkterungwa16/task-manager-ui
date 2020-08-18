@@ -6,9 +6,7 @@ import { SideBarProjectLists } from "./SideBarProjectLists";
 import { CircleSpinner } from "../SharedComponents";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { Routes } from "../../routes/client";
-import {
-  useProjectsApiActions
-} from "../../hooks";
+import { useProjectsApiActions } from "../../hooks";
 
 const initialProjectState = {
   _id: "",

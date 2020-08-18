@@ -82,4 +82,4 @@ export const addFavouriteRowStyle = {
 
 export const projectTextLinkStyle = {
   width: "100%;"
-}
+};

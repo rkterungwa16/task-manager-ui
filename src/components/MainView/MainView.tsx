@@ -6,10 +6,7 @@ import { TaskList } from "../Task";
 import { Text } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
 import { emptyProjectTextStyle } from "./style";
-import {
-  useProjectTasksApiActions,
-  useProjectsApiActions
-} from "../../hooks";
+import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 
 const initialProjectState = {
   _id: "",
@@ -33,9 +30,7 @@ export interface MainViewProps {
 }
 
 export const MainView = () => {
-  const {
-    project,
-  } = useProjectsApiActions();
+  const { project } = useProjectsApiActions();
   const { fetchTodaysTasks } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
   const [currentProject, setCurrentProject] = useState(initialProjectState);
@@ -69,14 +64,11 @@ export const MainView = () => {
     <>
       <div>
         <TasksHeader>
-          {alternativeTitles[pathname]
-            ? alternativeTitles[pathname]
-            : currentProject
-            ? currentProject.title
-            : null}
+          {currentProject.title ? currentProject.title : null}
         </TasksHeader>
         {!currentProject.tasks.length ||
-        (currentProject.tasks.length === 1 && !currentProject.tasks[0].content) ? (
+        (currentProject.tasks.length === 1 &&
+          !currentProject.tasks[0].content) ? (
           <Wrapper>
             <Text
               text="No tasks yet. Go on! Create one!"
@@ -129,6 +121,7 @@ export const TasksHeader = (props: TasksHeaderProps) => (
           font-size: 22px;
           font-weight: bold;
           color: #8d8d8d;
+          text-transform: capitalize;
         }
 
         @media screen and (max-width: 600px) {

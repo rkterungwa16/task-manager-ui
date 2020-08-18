@@ -2,7 +2,6 @@ import { useState } from "react";
 import CheckMarkIcon from "react-ionicons/lib/IosCheckmark";
 import CalendarIcon from "react-ionicons/lib/IosCalendarOutline";
 import EditIcon from "react-ionicons/lib/MdCreate";
-import uniqid from "uniqid";
 
 import { Dropdown, FormInput, Text } from "../SharedComponents";
 import { TaskType } from "../../models";
@@ -71,7 +70,7 @@ export const TaskList = (props: TaskListProps) => (
   <>
     <ul>
       {props.tasks.map(task => (
-        <Task key={uniqid(`${task.content} - `)} content={task.content} />
+        <Task key={task._id} content={task.content} />
       ))}
     </ul>
     <style jsx>
