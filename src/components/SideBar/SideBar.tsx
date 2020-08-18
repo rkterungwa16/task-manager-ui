@@ -1,8 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Router from "next/router";
+
 import { SideBarHeader } from "./SideBarHeader";
 import { SideBarProjectLists } from "./SideBarProjectLists";
 import { CircleSpinner } from "../SharedComponents";
 import { ProjectType, ProjectColorsType } from "../../models";
+import { Routes } from "../../routes/client";
+import {
+  useProjectsApiActions
+} from "../../hooks";
+
+const initialProjectState = {
+  _id: "",
+  title: "",
+  description: "",
+  color: "",
+  owner: "",
+  tasks: [],
+  isFavourite: false,
+  isArchived: false,
+  isDeleted: false,
+  collaborators: [],
+  createdAt: "",
+  updatedAt: ""
+};
+
+const initialColorsState = [
+  {
+    code: "",
+    name: ""
+  }
+];
+
+const initialProjectsState = [initialProjectState];
 
 export interface SideBarProps {
   colors?: ProjectColorsType[];
@@ -11,7 +41,40 @@ export interface SideBarProps {
   isOpen?: boolean;
 }
 export const SideBar = (props: SideBarProps) => {
+  const {
+    project,
+    fetchUserProjects,
+    fetchProjectColors
+  } = useProjectsApiActions();
   const [projectListIsOpen, setProjectListOpen] = useState(true);
+  const [projects, setProjects] = useState(initialProjectsState);
+  const [colors, setColors] = useState(initialColorsState);
+  const [isRequestingProjects, setIsRequestingProjects] = useState(false);
+
+  useEffect(() => {
+    if (
+      project.actions.fetchUserProjects.isRequesting !== isRequestingProjects
+    ) {
+      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting);
+    }
+  }, [project.actions.fetchUserProjects.isRequesting]);
+
+  useEffect(() => {
+    if (JSON.stringify(project.colors) !== JSON.stringify(colors)) {
+      setColors(project.colors);
+    }
+  }, [JSON.stringify(project.colors)]);
+
+  /**
+   * Set projects
+   */
+  useEffect(() => {
+    fetchUserProjects();
+    fetchProjectColors();
+    if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
+      setProjects(project.projects);
+    }
+  }, [JSON.stringify(project.projects)]);
   return (
     <>
       <SidebarContainer isOpen={props.isOpen}>
@@ -20,13 +83,13 @@ export const SideBar = (props: SideBarProps) => {
             openProjectList={projectListIsOpen}
             onClick={() => setProjectListOpen(!projectListIsOpen)}
           />
-          {props.isRequestingProjects ? (
+          {isRequestingProjects ? (
             <Wrapper>
               <CircleSpinner height={20} />
             </Wrapper>
           ) : (
             <SideBarProjectLists
-              projects={props.projects}
+              projects={projects}
               openProjectList={projectListIsOpen}
             />
           )}

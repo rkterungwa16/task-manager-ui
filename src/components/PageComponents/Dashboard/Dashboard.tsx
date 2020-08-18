@@ -1,42 +1,12 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { Routes } from "../../../routes/client";
 import { MainView } from "../../../components/MainView";
 import { ModalProvider } from "../../../components/Modal";
 import { TopNav } from "../../../components/TopNav";
 import { SideBar } from "../../SideBar/SideBar";
-import {
-  useProjectsApiActions,
-  useProjectTasksApiActions
-} from "../../../hooks";
 
 const client = new W3CWebSocket("ws://127.0.0.1:8000");
-
-const initialProjectState = {
-  _id: "",
-  title: "",
-  description: "",
-  color: "",
-  owner: "",
-  tasks: [],
-  isFavourite: false,
-  isArchived: false,
-  isDeleted: false,
-  collaborators: [],
-  createdAt: "",
-  updatedAt: ""
-};
-
-const initialColorsState = [
-  {
-    code: "",
-    name: ""
-  }
-];
-
-const initialProjectsState = [initialProjectState];
 
 const initalTasksState = [
   {
@@ -53,18 +23,6 @@ const initalTasksState = [
 ];
 
 export const Dashboard = () => {
-  const {
-    project,
-    fetchUserProjects,
-    fetchProjectColors
-  } = useProjectsApiActions();
-  const { task, fetchTodaysTasks } = useProjectTasksApiActions();
-  const [projects, setProjects] = useState(initialProjectsState);
-  const [pathname, setPathname] = useState("");
-  const [currentProject, setCurrentProject] = useState(initialProjectState);
-  const [colors, setColors] = useState(initialColorsState);
-  const [isRequestingProjects, setIsRequestingProjects] = useState(false);
-  const [tasks, setTasks] = useState([]);
   const [sidebarIsOpen, setSidebarOpen] = useState(false);
 
   // useEffect(() => {
@@ -72,52 +30,6 @@ export const Dashboard = () => {
   //     Router.push(Routes.Login);
   //   }
   // }, [project.code])
-
-  /**
-   * Set projects
-   */
-  useEffect(() => {
-    fetchUserProjects();
-    fetchProjectColors();
-    if (Router.pathname !== pathname) {
-      setPathname(Router.pathname);
-    }
-    if (JSON.stringify(projects) !== JSON.stringify(project.projects)) {
-      setProjects(project.projects);
-    }
-  }, [JSON.stringify(project.projects)]);
-
-  useEffect(() => {
-    if (
-      project.actions.fetchUserProjects.isRequesting !== isRequestingProjects
-    ) {
-      setIsRequestingProjects(project.actions.fetchUserProjects.isRequesting);
-    }
-  }, [project.actions.fetchUserProjects.isRequesting]);
-
-  useEffect(() => {
-    if (JSON.stringify(project.project) !== JSON.stringify(currentProject)) {
-      setCurrentProject(project.project);
-    }
-  }, [JSON.stringify(project.project)]);
-
-  useEffect(() => {
-    if (JSON.stringify(project.colors) !== JSON.stringify(colors)) {
-      setColors(project.colors);
-    }
-  }, [JSON.stringify(project.colors)]);
-
-  /**
-   * Set tasks and corresponding project
-   */
-  useEffect(() => {
-    if (Router.pathname !== pathname && Router.pathname === Routes.Today) {
-      fetchTodaysTasks();
-    }
-    if (JSON.stringify(tasks) !== JSON.stringify(task.tasks)) {
-      setTasks(task.tasks);
-    }
-  }, [JSON.stringify(task.tasks), pathname]);
 
   useEffect(() => {
     client.onopen = () => {
@@ -143,11 +55,8 @@ export const Dashboard = () => {
         <DashboardContentContainer>
           <SideBar
             isOpen={sidebarIsOpen}
-            colors={colors}
-            projects={projects}
-            isRequestingProjects={isRequestingProjects}
           />
-          <MainView tasks={tasks} project={currentProject} />
+          <MainView />
         </DashboardContentContainer>
       </ModalProvider>
       <style jsx global>{`

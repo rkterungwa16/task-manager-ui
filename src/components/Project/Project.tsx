@@ -8,7 +8,6 @@ import { projectTextStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
-import { Routes } from "../../routes/client";
 
 export interface ProjectInterface {
   name: string;
@@ -34,20 +33,16 @@ export const Project = (props: ProjectProps) => {
     <>
       <li>
         <ProjectItemInnerWrapper>
-          <Link href={Routes.Dashboard}>
-            <LinkButton link={Routes.Dashboard}>
-              <Text
-                onClick={() => {
-                  props.handleProjectTasksFetch(props.id);
-                }}
-                text={props.title}
-                style={{
-                  ...projectTextStyle,
-                  borderLeft: `5px solid ${props.color}`
-                }}
-              />
-            </LinkButton>
-          </Link>
+          <Text
+            onClick={() => {
+              props.handleProjectTasksFetch(props.id);
+            }}
+            text={props.title}
+            style={{
+              ...projectTextStyle,
+              borderLeft: `5px solid ${props.color}`
+            }}
+          />
           <ProjectItemIconWrapper>
             <MoreIcon
               fontSize="35px"

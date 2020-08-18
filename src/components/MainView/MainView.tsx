@@ -6,6 +6,25 @@ import { TaskList } from "../Task";
 import { Text } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
 import { emptyProjectTextStyle } from "./style";
+import {
+  useProjectTasksApiActions,
+  useProjectsApiActions
+} from "../../hooks";
+
+const initialProjectState = {
+  _id: "",
+  title: "",
+  description: "",
+  color: "",
+  owner: "",
+  tasks: [],
+  isFavourite: false,
+  isArchived: false,
+  isDeleted: false,
+  collaborators: [],
+  createdAt: "",
+  updatedAt: ""
+};
 
 export interface MainViewProps {
   children?: React.ReactNode;
@@ -13,14 +32,35 @@ export interface MainViewProps {
   project?: ProjectType;
 }
 
-export const MainView = (props: MainViewProps) => {
+export const MainView = () => {
+  const {
+    project,
+  } = useProjectsApiActions();
+  const { fetchTodaysTasks } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
+  const [currentProject, setCurrentProject] = useState(initialProjectState);
 
   useEffect(() => {
     if (Router.pathname !== pathname) {
       setPathname(Router.pathname);
     }
   }, [pathname]);
+
+  useEffect(() => {
+    if (JSON.stringify(project.project) !== JSON.stringify(currentProject)) {
+      setCurrentProject(project.project);
+    }
+  }, [JSON.stringify(project.project)]);
+
+  /**
+   * Set tasks and corresponding project
+   */
+  useEffect(() => {
+    if (Router.pathname !== pathname && Router.pathname === Routes.Today) {
+      fetchTodaysTasks();
+    }
+  }, [pathname]);
+
   const alternativeTitles = {
     [Routes.Today]: "Today",
     [Routes.Overdue]: "Overdue"
@@ -31,12 +71,12 @@ export const MainView = (props: MainViewProps) => {
         <TasksHeader>
           {alternativeTitles[pathname]
             ? alternativeTitles[pathname]
-            : props.project
-            ? props.project.title
+            : currentProject
+            ? currentProject.title
             : null}
         </TasksHeader>
-        {!props.tasks.length ||
-        (props.tasks.length === 1 && !props.tasks[0].content) ? (
+        {!currentProject.tasks.length ||
+        (currentProject.tasks.length === 1 && !currentProject.tasks[0].content) ? (
           <Wrapper>
             <Text
               text="No tasks yet. Go on! Create one!"
@@ -44,7 +84,7 @@ export const MainView = (props: MainViewProps) => {
             />
           </Wrapper>
         ) : (
-          <TaskList tasks={props.tasks} />
+          <TaskList tasks={currentProject.tasks} />
         )}
       </div>
       <style jsx>
