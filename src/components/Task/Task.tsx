@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CheckMarkIcon from "react-ionicons/lib/IosCheckmark";
 import CalendarIcon from "react-ionicons/lib/IosCalendarOutline";
 import EditIcon from "react-ionicons/lib/MdCreate";
 
@@ -33,9 +32,7 @@ export const Task = (props: TaskProps) => {
       <li>
         <TaskItemInnerWrapper>
           <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
-            {taskIsComplete && (
-              <CheckMarkIcon fontSize="500px" color="#767676" />
-            )}
+            {taskIsComplete && <CheckBoxMark />}
             <FormInput type="checkbox" style={taskCheckboxStyle} />
           </CheckboxWrapper>
           <Text text={props.content} style={taskTextStyle} />
@@ -150,8 +147,8 @@ export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
             border: 3px solid #767676;
             color: transparent;
             transition: 0.2s;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background-color: #eee;
             display: flex;
@@ -184,3 +181,20 @@ export const ReminderWrapper = (props: ReminderWrapperProps) => {
     </div>
   );
 };
+
+export const CheckBoxMark = () => (
+  <span>
+    <style jsx>
+      {`
+          {
+            width: 14px;
+            height: 14px;
+            background-color: #767676;
+            border-radius: 50%;
+            position: absolute;
+            left: 325px;
+          }
+      `}
+    </style>
+  </span>
+);
