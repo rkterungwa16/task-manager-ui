@@ -2,10 +2,11 @@ import { useState } from "react";
 import CalendarIcon from "react-ionicons/lib/IosCalendarOutline";
 import EditIcon from "react-ionicons/lib/MdCreate";
 
-import { Dropdown, FormInput, Text } from "../SharedComponents";
+import { Dropdown, FormInput, Text, Button } from "../SharedComponents";
 import { TaskType } from "../../models";
-import { taskTextStyle } from "./style";
+import { taskTextStyle, taskIconHoverStyle, taskIconStyle } from "./style";
 
+// TODO: Checkbox mark position for all screen sizes
 export interface TaskInterface {
   name: string;
 }
@@ -37,8 +38,19 @@ export const Task = (props: TaskProps) => {
           </CheckboxWrapper>
           <Text text={props.content} style={taskTextStyle} />
           <TaskItemIconWrapper>
-            <EditIcon fontSize="22px" color="#8d8d8d" />
-            <CalendarIcon fontSize="25px" color="#8d8d8d" />
+            <Button
+              style={taskIconStyle}
+              hoverStyle={taskIconHoverStyle}
+            >
+              <EditIcon fontSize="22px" color="#8d8d8d" />
+            </Button>
+            <Button
+              style={taskIconStyle}
+              hoverStyle={taskIconHoverStyle}
+            >
+              <CalendarIcon fontSize="25px" color="#8d8d8d" />
+            </Button>
+
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
         <ReminderWrapper>
@@ -121,11 +133,19 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-         {
+        {
           display: flex;
           width: 70px;
           align-items: center;
           justify-content: space-evenly;
+          position: absolute;
+          margin-bottom: 5px;
+          right: 400px;
+        }
+        @media screen and (max-width: 600px) {
+          {
+            right: 50px;
+          }
         }
       `}
     </style>
@@ -144,7 +164,7 @@ export const CheckboxWrapper = (props: CheckboxWrapperProps) => (
       <style jsx>
         {`
            {
-            border: 3px solid #767676;
+            border: 1px solid #767676;
             color: transparent;
             transition: 0.2s;
             width: 20px;
@@ -192,7 +212,12 @@ export const CheckBoxMark = () => (
             background-color: #767676;
             border-radius: 50%;
             position: absolute;
-            left: 325px;
+            left: 323px;
+          }
+          @media screen and (max-width: 600px) {
+            {
+              left: 28px;
+            }
           }
       `}
     </style>
