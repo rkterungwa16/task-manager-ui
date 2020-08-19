@@ -18,6 +18,8 @@ export interface InputProps {
   type?: string;
   value?: string | number | string[];
   style?: StyleProps;
+  placeHolderStyle?: StyleProps;
+  focusStyle?: StyleProps;
 }
 
 export const FormInput = (props: InputProps) => {
@@ -36,7 +38,19 @@ export const FormInput = (props: InputProps) => {
       </InputWrapper>
       <style jsx>
         {`
-          ${props.style ? mapToCssProperties(props.style) : ""}
+           {
+            ${props.style ? mapToCssProperties(props.style) : ""}
+          }
+
+          ::placeholder {
+            ${props.placeHolderStyle
+              ? mapToCssProperties(props.placeHolderStyle)
+              : ""}
+          }
+
+          :focus {
+            ${props.focusStyle ? mapToCssProperties(props.focusStyle) : ""}
+          }
         `}
       </style>
     </>

@@ -5,6 +5,7 @@ export interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   style?: StyleProps;
   hoverStyle?: StyleProps;
+  focusStyle?: StyleProps;
   disabled?: boolean;
 }
 
@@ -28,6 +29,9 @@ export const Button = (props: ButtonProps) => (
       }
       :hover {
         ${props.hoverStyle ? mapToCssProperties(props.hoverStyle) : null}
+      }
+      :focus {
+        ${props.focusStyle ? mapToCssProperties(props.focusStyle) : ""}
       }
     `}</style>
   </>

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 
 import { Routes } from "../../routes/client";
-import { TaskList } from "../Task";
-import { Text } from "../SharedComponents";
+import { TaskList, AddTask } from "../Task";
+import { Text, FormInput, Button } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
 import { emptyProjectTextStyle } from "./style";
 import { useProjectTasksApiActions, useProjectsApiActions } from "../../hooks";
@@ -33,6 +33,7 @@ export const MainView = () => {
   const { project } = useProjectsApiActions();
   const { fetchTodaysTasks } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
+  const [addTaskIsOpen, setAddTaskOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState(initialProjectState);
 
   useEffect(() => {
@@ -78,6 +79,7 @@ export const MainView = () => {
         ) : (
           <TaskList tasks={currentProject.tasks} />
         )}
+        <AddTask />
       </div>
       <style jsx>
         {`

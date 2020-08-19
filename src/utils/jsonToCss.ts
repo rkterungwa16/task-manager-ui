@@ -41,6 +41,8 @@ export interface StyleProps {
   boxShadow?: string;
   cursor?: string;
   transition?: string;
+  opacity?: string;
+  outline?: string;
   [x: string]: any;
 }
 
@@ -83,7 +85,9 @@ export const cssProperties = {
   zIndex: "z-index",
   boxShadow: "box-shadow",
   cursor: "cursor",
-  transition: "transition"
+  transition: "transition",
+  opacity: "opacity",
+  outline: "outline"
 };
 
 export const mapToCssProperties = (props: StyleProps) => {
@@ -98,7 +102,10 @@ export const mapToCssProperties = (props: StyleProps) => {
     {}
   );
 
-  return `${JSON.stringify(cssStyle)}`
+  const style = `${JSON.stringify(cssStyle)}`
     .replace(/(\",\")/g, ";")
     .replace(/[\"{}]/g, "");
+
+  console.log("style information -->>", style);
+  return style;
 };

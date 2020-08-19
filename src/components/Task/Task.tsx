@@ -38,19 +38,12 @@ export const Task = (props: TaskProps) => {
           </CheckboxWrapper>
           <Text text={props.content} style={taskTextStyle} />
           <TaskItemIconWrapper>
-            <Button
-              style={taskIconStyle}
-              hoverStyle={taskIconHoverStyle}
-            >
+            <Button style={taskIconStyle} hoverStyle={taskIconHoverStyle}>
               <EditIcon fontSize="22px" color="#8d8d8d" />
             </Button>
-            <Button
-              style={taskIconStyle}
-              hoverStyle={taskIconHoverStyle}
-            >
+            <Button style={taskIconStyle} hoverStyle={taskIconHoverStyle}>
               <CalendarIcon fontSize="25px" color="#8d8d8d" />
             </Button>
-
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
         <ReminderWrapper>
@@ -133,7 +126,7 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
     <div>{props.children}</div>
     <style jsx>
       {`
-        {
+         {
           display: flex;
           width: 70px;
           align-items: center;
@@ -143,7 +136,7 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
           right: 400px;
         }
         @media screen and (max-width: 600px) {
-          {
+           {
             right: 50px;
           }
         }
@@ -206,19 +199,19 @@ export const CheckBoxMark = () => (
   <span>
     <style jsx>
       {`
-          {
-            width: 14px;
-            height: 14px;
-            background-color: #767676;
-            border-radius: 50%;
-            position: absolute;
-            left: 323px;
+         {
+          width: 14px;
+          height: 14px;
+          background-color: #767676;
+          border-radius: 50%;
+          position: absolute;
+          left: 323px;
+        }
+        @media screen and (max-width: 600px) {
+           {
+            left: 28px;
           }
-          @media screen and (max-width: 600px) {
-            {
-              left: 28px;
-            }
-          }
+        }
       `}
     </style>
   </span>
