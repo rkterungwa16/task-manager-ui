@@ -31,7 +31,7 @@ export const Button = (props: ButtonProps) => (
         ${props.hoverStyle ? mapToCssProperties(props.hoverStyle) : null}
       }
       :focus {
-        ${props.focusStyle ? mapToCssProperties(props.focusStyle) : ""}
+        ${props.focusStyle ? mapToCssProperties({outline: "none",...props.focusStyle}) : mapToCssProperties({outline: "none"})}
       }
     `}</style>
   </>

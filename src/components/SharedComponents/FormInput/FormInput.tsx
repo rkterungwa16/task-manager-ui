@@ -49,7 +49,7 @@ export const FormInput = (props: InputProps) => {
           }
 
           :focus {
-            ${props.focusStyle ? mapToCssProperties(props.focusStyle) : ""}
+            ${props.focusStyle ? mapToCssProperties({outline: "none",...props.focusStyle}) : mapToCssProperties({outline: "none"})}
           }
         `}
       </style>
