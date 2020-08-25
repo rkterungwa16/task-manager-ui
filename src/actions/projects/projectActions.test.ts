@@ -9,6 +9,10 @@ import {
   fetchTodaysTasks
 } from "./projectActions";
 
+import {
+  ProjectActions
+} from "./actionTypes";
+
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 // TODO: test that dispatch is called with the right action type;
@@ -31,6 +35,11 @@ describe("Project Actions", () => {
     mockedAxios.post.mockResolvedValue(resp);
     await addProject(project)(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.ADD_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.ADD_PROJECT_SUCCESS,
+      data: project
+    });
   });
 
   it("should throw an error for unsuccessful project creation", async () => {
@@ -49,6 +58,13 @@ describe("Project Actions", () => {
     });
     await addProject(project)(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.ADD_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.ADD_PROJECT_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 
   it("should successfully edit project", async () => {
@@ -69,6 +85,11 @@ describe("Project Actions", () => {
     mockedAxios.put.mockResolvedValue(resp);
     await editProject("12345", project)(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.EDIT_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.EDIT_PROJECT_SUCCESS,
+      data: project
+    });
   });
 
   it("should throw an error for unsuccessfull editing of a project", async () => {
@@ -87,6 +108,13 @@ describe("Project Actions", () => {
     });
     await editProject("12345", project)(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.EDIT_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.EDIT_PROJECT_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 
   it("should successfully return project colors", async () => {
@@ -107,6 +135,11 @@ describe("Project Actions", () => {
     mockedAxios.get.mockResolvedValue(resp);
     await fetchProjectColors()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_PROJECT_COLORS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_PROJECT_COLORS_SUCCESS,
+      data: colors
+    });
   });
 
   it("should throw an error for unsuccessful fetching of project colors", async () => {
@@ -123,6 +156,13 @@ describe("Project Actions", () => {
     });
     await fetchProjectColors()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_PROJECT_COLORS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_PROJECT_COLORS_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 
   it("should successfully return user project", async () => {
@@ -143,6 +183,11 @@ describe("Project Actions", () => {
     mockedAxios.get.mockResolvedValue(resp);
     await fetchUserProject("12345")(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_USER_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_USER_PROJECT_SUCCESS,
+      data: project
+    });
   });
 
   it("should throw an error for unsuccessful fetching user project", async () => {
@@ -159,6 +204,13 @@ describe("Project Actions", () => {
     });
     await fetchUserProject("12345")(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_USER_PROJECT });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_USER_PROJECT_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 
   it("should successfully return user projects", async () => {
@@ -179,6 +231,11 @@ describe("Project Actions", () => {
     mockedAxios.get.mockResolvedValue(resp);
     await fetchUserProjects()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_USER_PROJECTS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_USER_PROJECTS_SUCCESS,
+      data: projects
+    });
   });
 
   it("should throw an error for unsuccessful fetching of user projects", async () => {
@@ -195,6 +252,13 @@ describe("Project Actions", () => {
     });
     await fetchUserProjects()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_USER_PROJECTS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_USER_PROJECTS_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 
   it("should successfully return tasks for today", async () => {
@@ -202,9 +266,12 @@ describe("Project Actions", () => {
       return true;
     });
 
-    const tasks = [{ content: "Terungwa" }];
+    const project = {
+      title: "today",
+      tasks: [{ content: "Terungwa" }]
+    };
     const resp = {
-      data: tasks,
+      data: project,
       status: 200,
       statusText: "",
       config: {},
@@ -215,6 +282,11 @@ describe("Project Actions", () => {
     mockedAxios.get.mockResolvedValue(resp);
     await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_TODAYS_TASKS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_TODAYS_TASKS_SUCCESS,
+      data: project
+    });
   });
 
   it("should throw an error", async () => {
@@ -231,5 +303,12 @@ describe("Project Actions", () => {
     });
     await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
+    expect(dispatch.mock.calls[0][0]).toEqual({ type: ProjectActions.FETCH_TODAYS_TASKS });
+    expect(dispatch.mock.calls[1][0]).toEqual({
+      type: ProjectActions.FETCH_TODAYS_TASKS_FAILURE,
+      error: {
+        message: "error"
+      }
+    });
   });
 });
