@@ -5,7 +5,8 @@ import {
   editProject,
   fetchProjectColors,
   fetchUserProject,
-  fetchUserProjects
+  fetchUserProjects,
+  fetchTodaysTasks
 } from "./projectActions";
 
 jest.mock("axios");
@@ -193,6 +194,42 @@ describe("Project Actions", () => {
       }
     });
     await fetchUserProjects()(dispatch);
+    expect(dispatch.mock.calls.length).toBe(2);
+  });
+
+  it("should successfully return tasks for today", async () => {
+    const dispatch = jest.fn(x => {
+      return true;
+    });
+
+    const tasks = [{ content: "Terungwa" }];
+    const resp = {
+      data: tasks,
+      status: 200,
+      statusText: "",
+      config: {},
+      request: {
+        url: ""
+      }
+    };
+    mockedAxios.get.mockResolvedValue(resp);
+    await fetchTodaysTasks()(dispatch);
+    expect(dispatch.mock.calls.length).toBe(2);
+  });
+
+  it("should throw an error", async () => {
+    const dispatch = jest.fn(x => {
+      return true;
+    });
+
+    mockedAxios.get.mockRejectedValue({
+      response: {
+        data: {
+          message: "error"
+        }
+      }
+    });
+    await fetchTodaysTasks()(dispatch);
     expect(dispatch.mock.calls.length).toBe(2);
   });
 });

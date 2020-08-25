@@ -291,4 +291,74 @@ describe.only("Project Reducer", () => {
       })
     ).toEqual(mockProjectState);
   });
+
+  it("should make return true for requests to fetch todays tasks", () => {
+    const mockTaskState = {
+      ...defaultProjectsState,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchTodaysTasks: {
+          ...defaultProjectsState.actions.fetchTodaysTasks,
+          isRequesting: true
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_TODAYS_TASKS
+      })
+    ).toEqual(mockTaskState);
+  });
+
+  it("should return fetched tasks for today", () => {
+    const mockTaskState = {
+      ...defaultProjectsState,
+      project: defaultProjectsState.project,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchTodaysTasks: {
+          ...defaultProjectsState.actions.fetchTodaysTasks,
+          isRequesting: false
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_TODAYS_TASKS_SUCCESS,
+        data: {
+          data: {
+            project: defaultProjectsState.project
+          },
+          code: 0
+        }
+      })
+    ).toEqual(mockTaskState);
+  });
+
+  it("should return error for unsuccessful fetch of tasks", () => {
+    const mockTaskState = {
+      ...defaultProjectsState,
+      code: 400,
+      actions: {
+        ...defaultProjectsState.actions,
+        fetchTodaysTasks: {
+          ...defaultProjectsState.actions.fetchTodaysTasks,
+          isRequesting: false,
+          error: "error"
+        }
+      }
+    };
+
+    expect(
+      projectsReducer(defaultProjectsState, {
+        type: ProjectActions.FETCH_TODAYS_TASKS_FAILURE,
+        error: {
+          code: 400,
+          message: "error"
+        }
+      })
+    ).toEqual(mockTaskState);
+  });
 });
