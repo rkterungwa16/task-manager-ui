@@ -106,6 +106,5 @@ export const mapToCssProperties = (props: StyleProps) => {
     .replace(/(\",\")/g, ";")
     .replace(/[\"{}]/g, "");
 
-  console.log("style information -->>", style);
   return style;
 };
