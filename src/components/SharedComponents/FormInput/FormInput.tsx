@@ -1,3 +1,4 @@
+import * as React from "react";
 import { mapToCssProperties, StyleProps } from "../../../utils";
 // TODO: Make background color dynamic for theme creation
 export interface InputProps {
@@ -33,6 +34,7 @@ export const FormInput = (props: InputProps) => {
           name={props.name}
           value={props.value}
           placeholder={props.placeholder}
+          disabled={props.disabled}
         />
         <InputErrorText text={props.error} />
       </InputWrapper>
