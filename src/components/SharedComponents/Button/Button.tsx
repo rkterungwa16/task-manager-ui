@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import { mapToCssProperties, StyleProps } from "../../../utils";
 export interface ButtonProps {
   children?: React.ReactNode;
@@ -25,7 +27,7 @@ export const Button = (props: ButtonProps) => (
     </button>
     <style jsx>{`
        {
-        ${mapToCssProperties(props.style)}
+        ${props.style ? mapToCssProperties(props.style) : ""}
       }
       :hover {
         ${props.hoverStyle ? mapToCssProperties(props.hoverStyle) : null}
@@ -38,3 +40,5 @@ export const Button = (props: ButtonProps) => (
     `}</style>
   </>
 );
+
+export default Button;
