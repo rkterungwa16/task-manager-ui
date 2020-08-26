@@ -1,4 +1,4 @@
-import { ActionStatus } from "../actions";
+import { ActionStatus, Action } from "../actions";
 
 enum Priority {
   low = 1,
@@ -8,12 +8,13 @@ enum Priority {
 }
 export interface TaskType {
   _id?: string;
-  description?: string;
+  description: string;
   priority?: Priority;
   userId?: string;
   project?: string;
   label?: string[];
   dueDate?: string;
+  completed?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -24,6 +25,7 @@ export interface TaskState {
   code: number;
   actions: {
     fetchProjectTasks: ActionStatus;
+    createProjectTask: ActionStatus;
   };
 }
 
@@ -55,6 +57,10 @@ export const defaultTasksState: TaskState = {
   code: 0,
   actions: {
     fetchProjectTasks: {
+      isRequesting: false,
+      error: ""
+    },
+    createProjectTask: {
       isRequesting: false,
       error: ""
     }

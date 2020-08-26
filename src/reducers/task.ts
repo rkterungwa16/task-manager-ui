@@ -46,6 +46,48 @@ export function tasksReducer(
           }
         }
       };
+
+    case TaskActions.CREATE_TASK:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            ...state.actions.createProjectTask,
+            isRequesting: true
+          }
+        }
+      };
+
+    case TaskActions.CREATE_TASK_SUCCESS:
+      const { data: projectTask } = action;
+      const tasks = state.tasks.concat(projectTask.data.tasks);
+      return {
+        ...state,
+        tasks,
+        code: projectTasks.code,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            ...state.actions.createProjectTask,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case TaskActions.CREATE_TASK_FAILURE:
+      const { error: createProjectTaskError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            isRequesting: false,
+            error: createProjectTaskError
+          }
+        }
+      };
     default:
       return state;
   }
