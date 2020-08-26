@@ -23,7 +23,7 @@ const taskCheckboxStyle = {
 };
 
 export interface TaskProps {
-  content?: string;
+  description?: string;
 }
 export const Task = (props: TaskProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -36,7 +36,7 @@ export const Task = (props: TaskProps) => {
             {taskIsComplete && <CheckBoxMark />}
             <FormInput type="checkbox" style={taskCheckboxStyle} />
           </CheckboxWrapper>
-          <Text text={props.content} style={taskTextStyle} />
+          <Text text={props.description} style={taskTextStyle} />
           <TaskItemIconWrapper>
             <Button style={taskIconStyle} hoverStyle={taskIconHoverStyle}>
               <EditIcon fontSize="22px" color="#8d8d8d" />
@@ -72,7 +72,7 @@ export const TaskList = (props: TaskListProps) => (
   <>
     <ul>
       {props.tasks.map(task => (
-        <Task key={task._id} content={task.content} />
+        <Task key={task._id} description={task.description} />
       ))}
     </ul>
     <style jsx>
@@ -130,7 +130,7 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
           display: flex;
           width: 70px;
           align-items: center;
-          justify-content: space-evenly;
+          justify-description: space-evenly;
           position: absolute;
           margin-bottom: 5px;
           right: 400px;
@@ -186,7 +186,7 @@ export const ReminderWrapper = (props: ReminderWrapperProps) => {
            {
             width: 84%;
             display: flex;
-            justify-content: flex-end;
+            justify-description: flex-end;
             color: #c23d38;
           }
         `}

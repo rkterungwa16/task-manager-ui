@@ -8,3 +8,4 @@ export * from "./Spinner";
 export * from "./Labels";
 export * from "./Row";
 export * from "./Switch";
+export * from "./Tooltip";

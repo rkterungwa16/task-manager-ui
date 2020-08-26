@@ -7,7 +7,7 @@ import TaskProjectIcon from "react-ionicons/lib/IosDocumentOutline";
 import AddCollaboratorIcon from "react-ionicons/lib/IosPersonAddOutline";
 import AddTaskCloseIcon from "react-ionicons/lib/IosClose";
 
-import { Text, FormInput, Button } from "../SharedComponents";
+import { Text, FormInput, Button, Tooltip } from "../SharedComponents";
 
 import {
   taskInputStyle,
@@ -44,18 +44,20 @@ export const AddTask = (props: AddTaskProps) => {
             />
           </Button>
         ) : (
-          <Button
-            style={addTaskIconStyle}
-            hoverStyle={addTaskIconHoverStyle}
-            focusStyle={addTaskIconFocusStyle}
-          >
-            <AddIcon
-              onClick={() => {
-                setOpen(true);
-              }}
-              fontSize="30px"
-            />
-          </Button>
+          <Tooltip text="Add Task">
+            <Button
+              style={addTaskIconStyle}
+              hoverStyle={addTaskIconHoverStyle}
+              focusStyle={addTaskIconFocusStyle}
+            >
+              <AddIcon
+                onClick={() => {
+                  setOpen(true);
+                }}
+                fontSize="30px"
+              />
+            </Button>
+          </Tooltip>
         )}
         <Text text="Add Task" />
       </AddTaskLabel>

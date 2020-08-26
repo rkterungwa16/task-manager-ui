@@ -75,6 +75,7 @@ export const addTaskSaveButton = {
 };
 
 export const addTaskIconStyle = {
+  position: "relative",
   width: "25px",
   height: "25px",
   borderRadius: "50%",

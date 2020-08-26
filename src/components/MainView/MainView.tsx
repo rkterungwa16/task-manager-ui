@@ -69,7 +69,7 @@ export const MainView = () => {
         </TasksHeader>
         {!currentProject.tasks.length ||
         (currentProject.tasks.length === 1 &&
-          !currentProject.tasks[0].content) ? (
+          !currentProject.tasks[0].description) ? (
           <Wrapper>
             <Text
               text="No tasks yet. Go on! Create one!"

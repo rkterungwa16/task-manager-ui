@@ -8,7 +8,7 @@ enum Priority {
 }
 export interface TaskType {
   _id?: string;
-  content?: string;
+  description?: string;
   priority?: Priority;
   userId?: string;
   project?: string;
@@ -31,7 +31,7 @@ export const defaultTasksState: TaskState = {
   tasks: [
     {
       _id: "",
-      content: "",
+      description: "",
       priority: null,
       userId: "",
       project: "",
@@ -43,7 +43,7 @@ export const defaultTasksState: TaskState = {
   ],
   task: {
     _id: "",
-    content: "",
+    description: "",
     priority: null,
     userId: "",
     project: "",
