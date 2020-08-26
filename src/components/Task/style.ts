@@ -59,6 +59,7 @@ export const addTaskPillsHoverStyle = {
 };
 
 export const addTaskSaveButton = {
+  position: "relative",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

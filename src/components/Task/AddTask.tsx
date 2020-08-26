@@ -59,7 +59,6 @@ export const AddTask = (props: AddTaskProps) => {
             </Button>
           </Tooltip>
         )}
-        <Text text="Add Task" />
       </AddTaskLabel>
       {isOpen ? (
         <AddTaskInputWrapper>
@@ -75,30 +74,41 @@ export const AddTask = (props: AddTaskProps) => {
           />
           <AddTaskExtraFields>
             <AddTaskExtraFieldsPills>
-              <Button
-                style={addTaskPillsStyle}
-                hoverStyle={addTaskPillsHoverStyle}
-              >
-                <ScheduleTaskIcon fontSize="25px" />
-              </Button>
-              <Button
-                style={addTaskPillsStyle}
-                hoverStyle={addTaskPillsHoverStyle}
-              >
-                <TaskProjectIcon fontSize="25px" />
-              </Button>
-              <Button
-                style={addTaskPillsStyle}
-                hoverStyle={addTaskPillsHoverStyle}
-              >
-                <TaskPriorityIcon fontSize="25px" />
-              </Button>
-              <Button
-                style={addTaskPillsStyle}
-                hoverStyle={addTaskPillsHoverStyle}
-              >
-                <AddCollaboratorIcon fontSize="25px" />
-              </Button>
+              <Tooltip text="Schedule" top={40}>
+                <Button
+                  style={addTaskPillsStyle}
+                  hoverStyle={addTaskPillsHoverStyle}
+                >
+                  <ScheduleTaskIcon fontSize="25px" />
+                </Button>
+              </Tooltip>
+
+              <Tooltip text="Project" top={40}>
+                <Button
+                  style={addTaskPillsStyle}
+                  hoverStyle={addTaskPillsHoverStyle}
+                >
+                  <TaskProjectIcon fontSize="25px" />
+                </Button>
+              </Tooltip>
+
+              <Tooltip text="Priority: low, medium, high, highest" top={40}>
+                <Button
+                  style={addTaskPillsStyle}
+                  hoverStyle={addTaskPillsHoverStyle}
+                >
+                  <TaskPriorityIcon fontSize="25px" />
+                </Button>
+              </Tooltip>
+
+              <Tooltip text="Assign Task" top={40}>
+                <Button
+                  style={addTaskPillsStyle}
+                  hoverStyle={addTaskPillsHoverStyle}
+                >
+                  <AddCollaboratorIcon fontSize="25px" />
+                </Button>
+              </Tooltip>
             </AddTaskExtraFieldsPills>
             <Button style={addTaskSaveButton} text="save" />
           </AddTaskExtraFields>
