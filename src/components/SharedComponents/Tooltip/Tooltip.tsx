@@ -22,6 +22,7 @@ export const TooltipItem = (props: TooltipItemProps) => (
           top: ${props.top ? props.top : 30}px;
           z-index: 9999;
           font-size: 10px;
+          right: -20px;
         }
       `}
     </style>
