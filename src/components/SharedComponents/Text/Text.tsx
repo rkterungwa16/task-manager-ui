@@ -18,7 +18,7 @@ export const Text = (props: TextProps) => {
            {
             ${props.style
               ? mapToCssProperties({ display: "flex", ...props.style })
-              : null}
+              : ''}
           }
         `}
       </style>

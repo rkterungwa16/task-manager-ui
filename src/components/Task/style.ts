@@ -113,3 +113,8 @@ export const priorityDropdownStyle = {
   right: "-30px;",
   top: "25px;"
 };
+
+export const dueDateTextStyle = {
+  fontSize: "12px;",
+  fontWeight: "600;"
+}

@@ -4,7 +4,7 @@ import EditIcon from "react-ionicons/lib/MdCreate";
 
 import { Dropdown, FormInput, Text, Button } from "../SharedComponents";
 import { TaskType } from "../../models";
-import { taskTextStyle, taskIconHoverStyle, taskIconStyle } from "./style";
+import { taskTextStyle, taskIconHoverStyle, taskIconStyle, dueDateTextStyle } from "./style";
 
 // TODO: Checkbox mark position for all screen sizes
 export interface TaskInterface {
@@ -47,7 +47,7 @@ export const Task = (props: TaskProps) => {
           </TaskItemIconWrapper>
         </TaskItemInnerWrapper>
         <ReminderWrapper>
-          <Text text="Aug 7" />
+          <Text style={dueDateTextStyle}  text="Aug 7" />
         </ReminderWrapper>
       </li>
       <style jsx>

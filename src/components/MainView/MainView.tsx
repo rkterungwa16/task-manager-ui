@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Router from "next/router";
 
 import { Routes } from "../../routes/client";
-import { TaskList, AddTask } from "../Task";
+import { TaskList, AddTaskEditor } from "../Task";
 import { Text, FormInput, Button } from "../SharedComponents";
 import { TaskType, ProjectType } from "../../models";
 import { emptyProjectTextStyle } from "./style";
@@ -87,7 +87,7 @@ export const MainView = () => {
         ) : (
           <TaskList tasks={currentProject.tasks} />
         )}
-        <AddTask
+        <AddTaskEditor
           projectId={currentProject._id}
           // userId={currentProject.owner._id}
           createProjectTasks={createProjectTasks}
