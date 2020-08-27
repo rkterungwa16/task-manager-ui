@@ -101,15 +101,15 @@ export const addTaskIconFocusStyle = {
 
 export const priorityTextStyle = {
   fontSize: "11px"
-}
+};
 
 export const priorityDropdownItemStyle = {
   padding: "5px 5px;",
   display: "flex;"
-}
+};
 
 export const priorityDropdownStyle = {
   minWidth: "100px;",
   right: "0;",
   top: "25px;"
-}
+};

@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
-import { Dropdown, Text, DropdownItem, Separator } from "../SharedComponents";
-import { priorityTextStyle, priorityDropdownItemStyle, priorityDropdownStyle } from "./style";
-
+import { Dropdown, Text, DropdownItem } from "../SharedComponents";
+import {
+  priorityTextStyle,
+  priorityDropdownItemStyle,
+  priorityDropdownStyle
+} from "./style";
 
 export const priorities = [
   {
@@ -23,22 +26,21 @@ export const priorities = [
     name: "low",
     code: 4,
     color: "#fff"
-  },
-
-]
+  }
+];
 export interface PrioritiesProps {
   dropdownIsOpen?: boolean;
 }
 export const Priorities = (props: PrioritiesProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
-  const [code, setCode] = useState(4)
+  const [code, setCode] = useState(4);
 
   useEffect(() => {
     if (props.dropdownIsOpen !== dropdownIsOpen) {
-      openDropdown(props.dropdownIsOpen)
+      openDropdown(props.dropdownIsOpen);
     }
   }, [props.dropdownIsOpen]);
-  //
+
   return (
     <Dropdown
       style={priorityDropdownStyle}
@@ -46,25 +48,27 @@ export const Priorities = (props: PrioritiesProps) => {
         openDropdown(false);
       }}
     >
-      {
-        priorities.map((priority) => {
-          return (
-            <DropdownItem
-              key={`${priority.name}-${priority.color}`}
-              style={priority.code === code ? {...priorityDropdownItemStyle, backgroundColor: "#ededed"}: priorityDropdownItemStyle}
-              onClick={() => {
-                setCode(priority.code)
-              }}
-            >
-              <PriorityDot color={priority.color} />
-              <Text text={priority.name} style={priorityTextStyle} />
-            </DropdownItem>
-          )
-        })
-      }
+      {priorities.map(priority => {
+        return (
+          <DropdownItem
+            key={`${priority.name}-${priority.color}`}
+            style={
+              priority.code === code
+                ? { ...priorityDropdownItemStyle, backgroundColor: "#ededed" }
+                : priorityDropdownItemStyle
+            }
+            onClick={() => {
+              setCode(priority.code);
+            }}
+          >
+            <PriorityDot color={priority.color} />
+            <Text text={priority.name} style={priorityTextStyle} />
+          </DropdownItem>
+        );
+      })}
     </Dropdown>
-  )
-}
+  );
+};
 
 export interface PriorityDotProps {
   color?: string;
@@ -74,18 +78,16 @@ export const PriorityDot = (props: PriorityDotProps) => {
   return (
     <span>
       <style jsx>
-        {
-          `
-            {
-              background: ${props.color ? props.color : "#fff"};
-              height: 5px;
-              width: 5px;
-              border-radius: 50%;
-              margin-right: 10px;
-            }
-          `
-        }
+        {`
+           {
+            background: ${props.color ? props.color : "#fff"};
+            height: 5px;
+            width: 5px;
+            border-radius: 50%;
+            margin-right: 10px;
+          }
+        `}
       </style>
     </span>
-  )
-}
+  );
+};

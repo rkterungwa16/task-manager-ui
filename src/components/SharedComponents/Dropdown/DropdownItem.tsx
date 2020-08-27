@@ -1,5 +1,4 @@
-
-import { mapToCssProperties, StyleProps } from "../../../utils"
+import { mapToCssProperties, StyleProps } from "../../../utils";
 import { defaultDropdownItemStyle } from "./style";
 export interface DropdownItemProps {
   children?: React.ReactNode;
@@ -13,12 +12,13 @@ export const DropdownItem = (props: DropdownItemProps) => (
     <style jsx>
       {`
          {
-           ${
-              props.style ?
-              mapToCssProperties({...defaultDropdownItemStyle, ...props.style}) :
-              mapToCssProperties(defaultDropdownItemStyle)
-            }
-         }
+          ${props.style
+            ? mapToCssProperties({
+                ...defaultDropdownItemStyle,
+                ...props.style
+              })
+            : mapToCssProperties(defaultDropdownItemStyle)}
+        }
         :hover {
           background-color: #ededed;
         }

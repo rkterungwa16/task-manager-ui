@@ -46,21 +46,21 @@ export const AddTask = (props: AddTaskProps) => {
             />
           </Button>
         ) : (
-            <Tooltip text="Add Task">
-              <Button
-                style={addTaskIconStyle}
-                hoverStyle={addTaskIconHoverStyle}
-                focusStyle={addTaskIconFocusStyle}
-              >
-                <AddIcon
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                  fontSize="30px"
-                />
-              </Button>
-            </Tooltip>
-          )}
+          <Tooltip text="Add Task">
+            <Button
+              style={addTaskIconStyle}
+              hoverStyle={addTaskIconHoverStyle}
+              focusStyle={addTaskIconFocusStyle}
+            >
+              <AddIcon
+                onClick={() => {
+                  setOpen(true);
+                }}
+                fontSize="30px"
+              />
+            </Button>
+          </Tooltip>
+        )}
       </AddTaskLabel>
       {isOpen ? (
         <AddTaskInputWrapper>
@@ -106,9 +106,9 @@ export const AddTask = (props: AddTaskProps) => {
                     <TaskPriorityIcon fontSize="25px" />
                   </Button>
                 </Tooltip>
-                {
-                  priorityDropdownIsOpen && <Priorities dropdownIsOpen={priorityDropdownIsOpen} />
-                }
+                {priorityDropdownIsOpen && (
+                  <Priorities dropdownIsOpen={priorityDropdownIsOpen} />
+                )}
               </IconWrapper>
 
               <Tooltip text="Assign Task" top={40}>
@@ -275,13 +275,11 @@ export const IconWrapper = (props: IconWrapperProps) => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            position: relative
-          }
-        `
-      }
+      {`
+         {
+          position: relative;
+        }
+      `}
     </style>
   </div>
-)
+);

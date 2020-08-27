@@ -15,17 +15,13 @@ export const Dropdown = (props: DropdownProps) => {
   useClickOutside(dropdownRef, props.closeDropdown);
   return (
     <>
-      <div ref={dropdownRef}>
-        {props.children}
-      </div>
+      <div ref={dropdownRef}>{props.children}</div>
       <style jsx>
         {`
-          {
-            ${
-              props.style ?
-              mapToCssProperties({...defaultDropdownStyle, ...props.style}) :
-              mapToCssProperties(defaultDropdownStyle)
-            }
+           {
+            ${props.style
+              ? mapToCssProperties({ ...defaultDropdownStyle, ...props.style })
+              : mapToCssProperties(defaultDropdownStyle)}
           }
           @keyframes fadeIn {
             from {
