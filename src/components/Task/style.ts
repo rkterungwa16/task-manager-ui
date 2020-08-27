@@ -110,6 +110,6 @@ export const priorityDropdownItemStyle = {
 
 export const priorityDropdownStyle = {
   minWidth: "100px;",
-  right: "0;",
+  right: "-30px;",
   top: "25px;"
 };

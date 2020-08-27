@@ -107,7 +107,12 @@ export const AddTask = (props: AddTaskProps) => {
                   </Button>
                 </Tooltip>
                 {priorityDropdownIsOpen && (
-                  <Priorities dropdownIsOpen={priorityDropdownIsOpen} />
+                  <Priorities
+                    dropdownIsOpen={priorityDropdownIsOpen}
+                    closeDropdown={() => {
+                      openPriorityDropdown(false);
+                    }}
+                  />
                 )}
               </IconWrapper>
 

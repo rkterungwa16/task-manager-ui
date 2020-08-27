@@ -30,6 +30,7 @@ export const priorities = [
 ];
 export interface PrioritiesProps {
   dropdownIsOpen?: boolean;
+  closeDropdown?: () => void;
 }
 export const Priorities = (props: PrioritiesProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -44,9 +45,7 @@ export const Priorities = (props: PrioritiesProps) => {
   return (
     <Dropdown
       style={priorityDropdownStyle}
-      closeDropdown={() => {
-        openDropdown(false);
-      }}
+      closeDropdown={props.closeDropdown}
     >
       {priorities.map(priority => {
         return (
