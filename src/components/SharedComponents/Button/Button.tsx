@@ -37,6 +37,9 @@ export const Button = (props: ButtonProps) => (
           ? mapToCssProperties({ outline: "none", ...props.focusStyle })
           : mapToCssProperties({ outline: "none" })}
       }
+      :disabled {
+        background: #c23d3891;
+      }
     `}</style>
   </>
 );

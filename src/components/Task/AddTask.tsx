@@ -173,10 +173,9 @@ export const AddTask = (props: AddTaskProps) => {
             <Button
               style={addTaskSaveButton}
               onClick={() => {
-                // projectActions[props.action]();
                 props.createProjectTasks(task, props.projectId)
               }}
-              // disabled={props.description ? false : true}
+              disabled={task.description ? false : true}
             >
               {props.isRequesting ? <CircleSpinner height={10} /> : "Save"}
             </Button>
