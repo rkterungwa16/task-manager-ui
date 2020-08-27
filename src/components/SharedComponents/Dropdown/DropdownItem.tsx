@@ -14,6 +14,7 @@ export const DropdownItem = (props: DropdownItemProps) => (
           display: flex;
           align-items: center;
           cursor: pointer;
+          position: relative;
         }
         :hover {
           background-color: #ededed;

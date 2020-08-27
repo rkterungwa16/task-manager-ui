@@ -91,5 +91,12 @@ export const textBadgeStyle = {
   backgroundColor: "white;",
   display: "inline-block;",
   position: "absolute;",
-  right: "10px;"
+  right: "3px;"
+};
+
+export const projectDropdownItemTextStyle = {
+  fontSize: "16px",
+  color: "#8d8d8d",
+  fontWeight: "100",
+  marginLeft: "5px"
 };

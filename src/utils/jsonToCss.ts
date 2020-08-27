@@ -43,6 +43,10 @@ export interface StyleProps {
   transition?: string;
   opacity?: string;
   outline?: string;
+  animation?: string;
+  minWidth?: string;
+  position?: string;
+  rigth?: string;
   [x: string]: any;
 }
 
@@ -87,7 +91,11 @@ export const cssProperties = {
   cursor: "cursor",
   transition: "transition",
   opacity: "opacity",
-  outline: "outline"
+  outline: "outline",
+  animation: "animation",
+  minWidth: "min-width",
+  position: "position",
+  right: "right"
 };
 
 export const mapToCssProperties = (props: StyleProps) => {

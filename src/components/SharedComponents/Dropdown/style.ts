@@ -35,3 +35,15 @@ export const buttonStyle = {
   width: "70px",
   cursor: "pointer"
 };
+
+export const defaultDropdownStyle = {
+  animation: "fadeIn 200ms ease-out",
+  display: "block",
+  position: "absolute",
+  backgroundColor: "#fff",
+  minWidth: "210px",
+  right: "10px",
+  border: "0px solid rgba(0, 0, 0, 0.25)",
+  boxShadow: "rgba(0, 0, 0, 0.25) 0px 1px 4px",
+  borderRadius: "4px"
+}

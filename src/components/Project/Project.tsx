@@ -1,8 +1,11 @@
 import { useState } from "react";
 import MoreIcon from "react-ionicons/lib/IosMore";
+import ArchiveIcon from "react-ionicons/lib/IosArchiveOutline";
+import EditIcon from "react-ionicons/lib/IosCreateOutline";
+import DeleteIcon from "react-ionicons/lib/IosTrashOutline";
 
-import { Dropdown, Text } from "../SharedComponents";
-import { projectTextStyle, textBadgeStyle } from "./style";
+import { Dropdown, Text, DropdownItem, Separator } from "../SharedComponents";
+import { projectTextStyle, textBadgeStyle, projectDropdownItemTextStyle } from "./style";
 import { ProjectType, ProjectColorsType } from "../../models";
 import { useProjectsApiActions } from "../../hooks";
 import { ProjectModal } from "./ProjectModal";
@@ -63,7 +66,8 @@ export const Project = (props: ProjectProps) => {
             closeDropdown={() => {
               openDropdown(false);
             }}
-            handleEditProjectModalOpen={() => {
+          >
+            <DropdownItem onClick={() => {
               openDropdown(false);
               setIsModalOpen(prevState => {
                 return {
@@ -71,8 +75,20 @@ export const Project = (props: ProjectProps) => {
                   editProject: true
                 };
               });
-            }}
-          />
+            }}>
+              <EditIcon />
+              <Text text="Edit Project" style={projectDropdownItemTextStyle} />
+            </DropdownItem>
+            <Separator />
+            <DropdownItem>
+              <DeleteIcon />
+              <Text text="Delete Project" style={projectDropdownItemTextStyle} />
+            </DropdownItem>
+            <DropdownItem>
+              <ArchiveIcon />
+              <Text text="Archive Project" style={projectDropdownItemTextStyle} />
+            </DropdownItem>
+          </Dropdown>
         )}
       </li>
       {isModalOpen.editProject ? (
@@ -179,10 +195,10 @@ export interface ProjectItemInnerWrapperProps {
 export const ProjectItemInnerWrapper = (
   props: ProjectItemInnerWrapperProps
 ) => (
-  <>
-    <div>{props.children}</div>
-    <style jsx>
-      {`
+    <>
+      <div>{props.children}</div>
+      <style jsx>
+        {`
          {
           cursor: pointer;
           height: 30px;
@@ -194,9 +210,9 @@ export const ProjectItemInnerWrapper = (
           align-items: center;
         }
       `}
-    </style>
-  </>
-);
+      </style>
+    </>
+  );
 
 export interface ProjectItemIconWrapperProps {
   children?: React.ReactNode;
