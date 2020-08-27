@@ -47,3 +47,12 @@ export const defaultDropdownStyle = {
   boxShadow: "rgba(0, 0, 0, 0.25) 0px 1px 4px",
   borderRadius: "4px"
 }
+
+export const defaultDropdownItemStyle = {
+  padding: "10px 10px;",
+  textDecoration: "none;",
+  display: "flex;",
+  alignItems: "center;",
+  cursor: "pointer;",
+  position: "relative;"
+}

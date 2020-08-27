@@ -43,6 +43,7 @@ export const taskInputFocusStyle = {
 };
 
 export const addTaskPillsStyle = {
+  position: "relative",
   width: "33px",
   height: "33px",
   borderRadius: "50%",
@@ -97,3 +98,18 @@ export const addTaskIconHoverStyle = {
 export const addTaskIconFocusStyle = {
   outline: "none"
 };
+
+export const priorityTextStyle = {
+  fontSize: "11px"
+}
+
+export const priorityDropdownItemStyle = {
+  padding: "5px 5px;",
+  display: "flex;"
+}
+
+export const priorityDropdownStyle = {
+  minWidth: "100px;",
+  right: "0;",
+  top: "25px;"
+}

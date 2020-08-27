@@ -8,6 +8,7 @@ import AddCollaboratorIcon from "react-ionicons/lib/IosPersonAddOutline";
 import AddTaskCloseIcon from "react-ionicons/lib/IosClose";
 
 import { Text, FormInput, Button, Tooltip } from "../SharedComponents";
+import { Priorities } from "./Priority";
 
 import {
   taskInputStyle,
@@ -27,6 +28,7 @@ export interface AddTaskProps {
 
 export const AddTask = (props: AddTaskProps) => {
   const [isOpen, setOpen] = useState(false);
+  const [priorityDropdownIsOpen, openPriorityDropdown] = useState(false);
   return (
     <AddTaskWrapper>
       <AddTaskLabel>
@@ -44,21 +46,21 @@ export const AddTask = (props: AddTaskProps) => {
             />
           </Button>
         ) : (
-          <Tooltip text="Add Task">
-            <Button
-              style={addTaskIconStyle}
-              hoverStyle={addTaskIconHoverStyle}
-              focusStyle={addTaskIconFocusStyle}
-            >
-              <AddIcon
-                onClick={() => {
-                  setOpen(true);
-                }}
-                fontSize="30px"
-              />
-            </Button>
-          </Tooltip>
-        )}
+            <Tooltip text="Add Task">
+              <Button
+                style={addTaskIconStyle}
+                hoverStyle={addTaskIconHoverStyle}
+                focusStyle={addTaskIconFocusStyle}
+              >
+                <AddIcon
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                  fontSize="30px"
+                />
+              </Button>
+            </Tooltip>
+          )}
       </AddTaskLabel>
       {isOpen ? (
         <AddTaskInputWrapper>
@@ -92,14 +94,22 @@ export const AddTask = (props: AddTaskProps) => {
                 </Button>
               </Tooltip>
 
-              <Tooltip text="Priority: low, medium, high, highest" top={40}>
-                <Button
-                  style={addTaskPillsStyle}
-                  hoverStyle={addTaskPillsHoverStyle}
-                >
-                  <TaskPriorityIcon fontSize="25px" />
-                </Button>
-              </Tooltip>
+              <IconWrapper>
+                <Tooltip text="Priority: low, medium, high, highest" top={40}>
+                  <Button
+                    style={addTaskPillsStyle}
+                    hoverStyle={addTaskPillsHoverStyle}
+                    onClick={() => {
+                      openPriorityDropdown(!priorityDropdownIsOpen);
+                    }}
+                  >
+                    <TaskPriorityIcon fontSize="25px" />
+                  </Button>
+                </Tooltip>
+                {
+                  priorityDropdownIsOpen && <Priorities dropdownIsOpen={priorityDropdownIsOpen} />
+                }
+              </IconWrapper>
 
               <Tooltip text="Assign Task" top={40}>
                 <Button
@@ -257,3 +267,21 @@ export const AddTaskSaveButtonWrapper = (
     </div>
   );
 };
+
+export interface IconWrapperProps {
+  children?: React.ReactNode;
+}
+export const IconWrapper = (props: IconWrapperProps) => (
+  <div>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            position: relative
+          }
+        `
+      }
+    </style>
+  </div>
+)

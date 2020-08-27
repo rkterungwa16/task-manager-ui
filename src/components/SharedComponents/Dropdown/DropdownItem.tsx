@@ -1,6 +1,10 @@
+
+import { mapToCssProperties, StyleProps } from "../../../utils"
+import { defaultDropdownItemStyle } from "./style";
 export interface DropdownItemProps {
   children?: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  style?: StyleProps;
 }
 
 export const DropdownItem = (props: DropdownItemProps) => (
@@ -9,13 +13,12 @@ export const DropdownItem = (props: DropdownItemProps) => (
     <style jsx>
       {`
          {
-          padding: 10px 10px;
-          text-decoration: none;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-          position: relative;
-        }
+           ${
+              props.style ?
+              mapToCssProperties({...defaultDropdownItemStyle, ...props.style}) :
+              mapToCssProperties(defaultDropdownItemStyle)
+            }
+         }
         :hover {
           background-color: #ededed;
         }
