@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import AddIcon from "react-ionicons/lib/IosAdd";
 import ScheduleTaskIcon from "react-ionicons/lib/IosCalendarOutline";
@@ -7,8 +7,10 @@ import TaskProjectIcon from "react-ionicons/lib/IosDocumentOutline";
 import AddCollaboratorIcon from "react-ionicons/lib/IosPersonAddOutline";
 import AddTaskCloseIcon from "react-ionicons/lib/IosClose";
 
-import { Text, FormInput, Button, Tooltip } from "../SharedComponents";
+import { Text, FormInput, Button, Tooltip, CircleSpinner } from "../SharedComponents";
 import { Priorities } from "./Priority";
+import { TaskType } from "../../models"
+import { useProjectTasksApiActions } from "../../hooks";
 
 import {
   taskInputStyle,
@@ -22,13 +24,50 @@ import {
   addTaskIconStyle
 } from "./style";
 
+export enum Priority {
+  low = 4,
+  medium = 3,
+  high = 2,
+  highest = 1
+}
 export interface AddTaskProps {
   // isOpen?: false;
+  description?: string;
+  priority?: Priority;
+  userId?: string;
+  projectId?: string;
+  label?: string[];
+  completed?: boolean;
+  dueDate?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  createProjectTasks?: (task: TaskType, projectId: string) => void;
+  isRequesting?: boolean;
 }
 
 export const AddTask = (props: AddTaskProps) => {
   const [isOpen, setOpen] = useState(false);
   const [priorityDropdownIsOpen, openPriorityDropdown] = useState(false);
+  const [task, setTask] = useState({
+    description: "",
+    priority: null,
+    label: [""],
+  });
+
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>): any => {
+      const target = event.currentTarget;
+      const value =
+        target.type === "checkbox" ? target.checked : (target.value as any);
+
+      setTask(prevState => ({
+        ...prevState,
+        description: value
+      }));
+    },
+    [task.description]
+  );
+
   return (
     <AddTaskWrapper>
       <AddTaskLabel>
@@ -46,21 +85,21 @@ export const AddTask = (props: AddTaskProps) => {
             />
           </Button>
         ) : (
-          <Tooltip text="Add Task">
-            <Button
-              style={addTaskIconStyle}
-              hoverStyle={addTaskIconHoverStyle}
-              focusStyle={addTaskIconFocusStyle}
-            >
-              <AddIcon
-                onClick={() => {
-                  setOpen(true);
-                }}
-                fontSize="30px"
-              />
-            </Button>
-          </Tooltip>
-        )}
+            <Tooltip text="Add Task">
+              <Button
+                style={addTaskIconStyle}
+                hoverStyle={addTaskIconHoverStyle}
+                focusStyle={addTaskIconFocusStyle}
+              >
+                <AddIcon
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                  fontSize="30px"
+                />
+              </Button>
+            </Tooltip>
+          )}
       </AddTaskLabel>
       {isOpen ? (
         <AddTaskInputWrapper>
@@ -69,10 +108,10 @@ export const AddTask = (props: AddTaskProps) => {
             style={taskInputStyle}
             placeHolderStyle={taskInputPlaceholderStyle}
             focusStyle={taskInputFocusStyle}
-            name="content"
+            name="description"
             // error={errors.content}
-            // onChange={handleChange}
-            placeholder="e.g Buy gift tomorrow by 6pm errands p1 #Errands"
+            onChange={handleChange}
+            placeholder="e.g Buy gift tomorrow by 6pm errands highest priority #Errands"
           />
           <AddTaskExtraFields>
             <AddTaskExtraFieldsPills>
@@ -109,6 +148,12 @@ export const AddTask = (props: AddTaskProps) => {
                 {priorityDropdownIsOpen && (
                   <Priorities
                     dropdownIsOpen={priorityDropdownIsOpen}
+                    setPriority={(priority) => {
+                      setTask(prevState => ({
+                        ...prevState,
+                        priority
+                      }));
+                    }}
                     closeDropdown={() => {
                       openPriorityDropdown(false);
                     }}
@@ -125,7 +170,16 @@ export const AddTask = (props: AddTaskProps) => {
                 </Button>
               </Tooltip>
             </AddTaskExtraFieldsPills>
-            <Button style={addTaskSaveButton} text="save" />
+            <Button
+              style={addTaskSaveButton}
+              onClick={() => {
+                // projectActions[props.action]();
+                props.createProjectTasks(task, props.projectId)
+              }}
+              // disabled={props.description ? false : true}
+            >
+              {props.isRequesting ? <CircleSpinner height={10} /> : "Save"}
+            </Button>
           </AddTaskExtraFields>
         </AddTaskInputWrapper>
       ) : null}

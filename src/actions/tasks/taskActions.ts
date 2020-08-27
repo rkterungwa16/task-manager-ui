@@ -25,20 +25,3 @@ export const fetchProjectTasks = (id: string) => async (dispatch: any) => {
     );
   }
 };
-
-export const createProjectTasks = (task: TaskType) => async (dispatch: any) => {
-  dispatch(requestAction(TaskActions.CREATE_TASK));
-  try {
-    const url = apiEndPoints.tasks;
-    const authToken = window.localStorage.getItem("currentUser");
-    const response = await axios.post(url, task, {
-      headers: { Authorization: `Bearer ${authToken}` }
-    });
-
-    dispatch(withDataAction(TaskActions.CREATE_TASK_SUCCESS, response.data));
-  } catch (e) {
-    dispatch(
-      withErrorAction(TaskActions.CREATE_TASK_FAILURE, e.response.data.message)
-    );
-  }
-};

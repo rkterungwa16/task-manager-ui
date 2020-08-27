@@ -1,10 +1,14 @@
 import { ActionStatus } from "../actions";
+
+export interface UserType {
+  _id: string;
+}
 export interface ProjectType {
   _id?: string;
   title?: string;
   description?: string;
   color?: string;
-  owner?: string;
+  owner?: UserType;
   tasks?: string[];
   isFavourite?: boolean;
   isArchived?: boolean;
@@ -31,6 +35,7 @@ export interface ProjectState {
     fetchProjectColors: ActionStatus;
     editProject: ActionStatus;
     fetchTodaysTasks: ActionStatus;
+    createProjectTask: ActionStatus;
   };
 }
 
@@ -41,7 +46,7 @@ export const defaultProjectsState: ProjectState = {
       title: "",
       description: "",
       color: "",
-      owner: "",
+      owner: {_id: ""},
       tasks: [],
       isFavourite: false,
       isArchived: false,
@@ -56,7 +61,7 @@ export const defaultProjectsState: ProjectState = {
     title: "",
     description: "",
     color: "",
-    owner: "",
+    owner: {_id: ""},
     tasks: [],
     isFavourite: false,
     isArchived: false,
@@ -94,6 +99,10 @@ export const defaultProjectsState: ProjectState = {
       error: ""
     },
     fetchTodaysTasks: {
+      isRequesting: false,
+      error: ""
+    },
+    createProjectTask: {
       isRequesting: false,
       error: ""
     }

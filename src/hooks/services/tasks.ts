@@ -3,7 +3,7 @@ import { useGlobalStore } from "../../components/Provider/Provider";
 import {
   bindActions,
   fetchProjectTasks,
-  fetchTodaysTasks
+  fetchTodaysTasks,
 } from "../../actions";
 
 export const useProjectTasksApiActions: any = () => {

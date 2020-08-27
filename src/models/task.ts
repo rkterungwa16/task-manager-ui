@@ -25,7 +25,6 @@ export interface TaskState {
   code: number;
   actions: {
     fetchProjectTasks: ActionStatus;
-    createProjectTask: ActionStatus;
   };
 }
 
@@ -57,10 +56,6 @@ export const defaultTasksState: TaskState = {
   code: 0,
   actions: {
     fetchProjectTasks: {
-      isRequesting: false,
-      error: ""
-    },
-    createProjectTask: {
       isRequesting: false,
       error: ""
     }

@@ -13,7 +13,7 @@ const initialProjectState = {
   title: "",
   description: "",
   color: "",
-  owner: "",
+  owner: {_id: ""},
   tasks: [],
   isFavourite: false,
   isArchived: false,
@@ -30,8 +30,10 @@ export interface MainViewProps {
 }
 
 export const MainView = () => {
-  const { project } = useProjectsApiActions();
-  const { fetchTodaysTasks } = useProjectTasksApiActions();
+  const { project, createProjectTasks } = useProjectsApiActions();
+  const {
+    fetchTodaysTasks,
+  } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
   const [addTaskIsOpen, setAddTaskOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState(initialProjectState);
@@ -41,6 +43,12 @@ export const MainView = () => {
       setPathname(Router.pathname);
     }
   }, [pathname]);
+
+  const {
+    actions: {
+      createProjectTask: { isRequesting, error }
+    }
+  } = project;
 
   useEffect(() => {
     if (JSON.stringify(project.project) !== JSON.stringify(currentProject)) {
@@ -79,7 +87,12 @@ export const MainView = () => {
         ) : (
           <TaskList tasks={currentProject.tasks} />
         )}
-        <AddTask />
+        <AddTask
+          projectId={currentProject._id}
+          // userId={currentProject.owner._id}
+          createProjectTasks={createProjectTasks}
+          isRequesting={isRequesting}
+        />
       </div>
       <style jsx>
         {`

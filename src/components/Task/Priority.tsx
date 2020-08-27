@@ -5,6 +5,7 @@ import {
   priorityDropdownItemStyle,
   priorityDropdownStyle
 } from "./style";
+import { setPriority } from "os";
 
 export const priorities = [
   {
@@ -31,6 +32,7 @@ export const priorities = [
 export interface PrioritiesProps {
   dropdownIsOpen?: boolean;
   closeDropdown?: () => void;
+  setPriority?: (priority: number) => void;
 }
 export const Priorities = (props: PrioritiesProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -58,6 +60,7 @@ export const Priorities = (props: PrioritiesProps) => {
             }
             onClick={() => {
               setCode(priority.code);
+              props.setPriority(priority.code);
             }}
           >
             <PriorityDot color={priority.color} />

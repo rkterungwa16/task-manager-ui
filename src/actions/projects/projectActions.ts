@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as apiEndPoints from "../../routes/api";
 import { requestAction, withDataAction, withErrorAction } from "../actions";
-import { ProjectType } from "../../models";
+import { ProjectType, TaskType } from "../../models";
 import { ProjectActions } from "./actionTypes";
 
 export const fetchUserProjects = () => async (dispatch: any) => {
@@ -140,6 +140,23 @@ export const fetchTodaysTasks = () => async (dispatch: any) => {
         ProjectActions.FETCH_TODAYS_TASKS_FAILURE,
         e.response.data
       )
+    );
+  }
+};
+
+export const createProjectTasks = (task: TaskType, projectId: string) => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.CREATE_PROJECT_TASK));
+  try {
+    const url = `${apiEndPoints.tasks}/${projectId}`;
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.post(url, task, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+
+    dispatch(withDataAction(ProjectActions.CREATE_PROJECT_TASK_SUCCESS, response.data));
+  } catch (e) {
+    dispatch(
+      withErrorAction(ProjectActions.CREATE_PROJECT_TASK_FAILURE, e.response.data.message)
     );
   }
 };

@@ -279,6 +279,61 @@ export function projectsReducer(
           }
         }
       };
+
+    case ProjectActions.CREATE_PROJECT_TASK:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            ...state.actions.createProjectTask,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.CREATE_PROJECT_TASK_SUCCESS:
+      const { data: projectTask } = action;
+      const projects = state.projects.map((project) => {
+        if (project._id === projectTask.data.task.project) {
+          return {
+            ...project,
+            tasks: [...project.tasks, projectTask.data.task]
+          }
+        }
+        return project;
+      });
+      const project = {
+        ...state.project,
+        tasks: [...state.project.tasks, projectTask.data.task]
+      }
+      return {
+        ...state,
+        projects,
+        project,
+        code: projectTask.code,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            ...state.actions.createProjectTask,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.CREATE_PROJECT_TASK_FAILURE:
+      const { error: createProjectTaskError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          createProjectTask: {
+            isRequesting: false,
+            error: createProjectTaskError
+          }
+        }
+      };
     default:
       return state;
   }
