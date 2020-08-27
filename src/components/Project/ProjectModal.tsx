@@ -143,6 +143,7 @@ export const ProjectModal = (props: ProjectModalProps) => {
             onClick={() => {
               projectActions[props.action]();
             }}
+            disabled={currentProject.title ? false : true}
           >
             {isRequesting ? <CircleSpinner height={10} /> : "Save"}
           </Button>
