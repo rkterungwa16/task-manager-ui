@@ -8,6 +8,7 @@ import AddCollaboratorIcon from "react-ionicons/lib/IosPersonAddOutline";
 import { FormInput, Button, Tooltip, CircleSpinner } from "../SharedComponents";
 import { Priorities } from "./Priority";
 import { TaskType } from "../../models";
+import { Priority } from "./constants";
 
 import {
   taskInputStyle,
@@ -17,13 +18,6 @@ import {
   addTaskPillsStyle,
   taskEditorSaveButton
 } from "./style";
-
-export enum Priority {
-  low = 4,
-  medium = 3,
-  high = 2,
-  highest = 1
-}
 
 export interface TaskEditorProps {
   // isOpen?: false;
@@ -38,7 +32,7 @@ export interface TaskEditorProps {
   updatedAt?: string;
   createProjectTasks?: (task: TaskType, projectId: string) => void;
   isRequesting?: boolean;
-  type?: string;
+  type?: "edit" | "add";
   closeEditor?: () => void;
 }
 
@@ -59,7 +53,24 @@ export const TaskEditor = (props: TaskEditorProps) => {
         }));
       }
     }
-  }, [props.description]);
+    if (props.priority) {
+      if (props.priority !== task.priority) {
+        setTask(prevState => ({
+          ...prevState,
+          priority: props.priority
+        }));
+      }
+    }
+  }, [props.description, props.priority]);
+
+  const taskActions = {
+    edit: useCallback(() => {
+      // editTask(props.projectId, currentProject);
+    }, [props.projectId, JSON.stringify(task)]),
+    add: useCallback(() => {
+      props.createProjectTasks(task, props.projectId);
+    }, [JSON.stringify(task), props.projectId])
+  };
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): any => {
@@ -84,7 +95,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
         focusStyle={taskInputFocusStyle}
         name="description"
         // error={errors.content}
-        value={props.description}
+        value={task.description}
         onChange={handleChange}
         placeholder="e.g Buy gift tomorrow by 6pm errands highest priority #Errands"
       />
@@ -123,6 +134,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
             {priorityDropdownIsOpen && (
               <Priorities
                 dropdownIsOpen={priorityDropdownIsOpen}
+                priority={task.priority}
                 setPriority={priority => {
                   setTask(prevState => ({
                     ...prevState,
@@ -156,7 +168,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
           <Button
             style={taskEditorSaveButton}
             onClick={() => {
-              props.createProjectTasks(task, props.projectId);
+              taskActions[props.type]();
             }}
             disabled={task.description ? false : true}
           >

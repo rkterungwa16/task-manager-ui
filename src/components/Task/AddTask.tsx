@@ -95,6 +95,7 @@ export const AddTaskEditor = (props: AddTaskProps) => {
           description={props.description}
           createProjectTasks={props.createProjectTasks}
           projectId={props.projectId}
+          type="add"
         />
       ) : null}
     </AddTaskWrapper>

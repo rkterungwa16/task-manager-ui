@@ -5,7 +5,7 @@ import {
   priorityDropdownItemStyle,
   priorityDropdownStyle
 } from "./style";
-import { setPriority } from "os";
+import { Priority } from "./constants";
 
 export const priorities = [
   {
@@ -33,6 +33,7 @@ export interface PrioritiesProps {
   dropdownIsOpen?: boolean;
   closeDropdown?: () => void;
   setPriority?: (priority: number) => void;
+  priority?: Priority;
 }
 export const Priorities = (props: PrioritiesProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -43,6 +44,14 @@ export const Priorities = (props: PrioritiesProps) => {
       openDropdown(props.dropdownIsOpen);
     }
   }, [props.dropdownIsOpen]);
+
+  useEffect(() => {
+    if (props.priority) {
+      if (props.priority !== code) {
+        setCode(props.priority);
+      }
+    }
+  }, [props.priority]);
 
   return (
     <Dropdown style={priorityDropdownStyle} closeDropdown={props.closeDropdown}>

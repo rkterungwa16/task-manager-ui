@@ -11,6 +11,7 @@ import {
   dueDateTextStyle
 } from "./style";
 import { TaskEditor } from "./TaskEditor";
+import { Priority } from "./constants";
 
 // TODO: Checkbox mark position for all screen sizes
 export interface TaskInterface {
@@ -30,6 +31,12 @@ const taskCheckboxStyle = {
 
 export interface TaskProps {
   description?: string;
+  priority?: Priority;
+  userId?: string;
+  projectId?: string;
+  label?: string[];
+  completed?: boolean;
+  dueDate?: string;
 }
 export const Task = (props: TaskProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -42,6 +49,9 @@ export const Task = (props: TaskProps) => {
           <TaskEditor
             type="edit"
             description={props.description}
+            priority={props.priority}
+            projectId={props.projectId}
+            dueDate={props.dueDate}
             closeEditor={() => {
               setEditorOpen(false);
             }}
@@ -103,7 +113,13 @@ export const TaskList = (props: TaskListProps) => (
   <>
     <ul>
       {props.tasks.map(task => (
-        <Task key={task._id} description={task.description} />
+        <Task
+          key={task._id}
+          description={task.description}
+          priority={task.priority}
+          dueDate={task.dueDate}
+          projectId={task.project}
+        />
       ))}
     </ul>
     <style jsx>
