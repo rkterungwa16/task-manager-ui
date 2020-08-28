@@ -15,7 +15,7 @@ import {
   taskInputPlaceholderStyle,
   addTaskPillsHoverStyle,
   addTaskPillsStyle,
-  addTaskSaveButton,
+  taskEditorSaveButton,
 } from "./style";
 
 export enum Priority {
@@ -38,6 +38,8 @@ export interface TaskEditorProps {
   updatedAt?: string;
   createProjectTasks?: (task: TaskType, projectId: string) => void;
   isRequesting?: boolean;
+  type?: string;
+  closeEditor?: () => void;
 }
 
 export const TaskEditor = (props: TaskEditorProps) => {
@@ -47,6 +49,17 @@ export const TaskEditor = (props: TaskEditorProps) => {
     priority: null,
     label: [""],
   });
+
+  useEffect(() => {
+    if (props.description) {
+      if (props.description !== task.description) {
+        setTask(prevState => ({
+          ...prevState,
+          description: props.description
+        }));
+      }
+    }
+  }, [props.description])
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): any => {
@@ -61,7 +74,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
     },
     [task.description]
   );
-  console.log('herre -->')
+
   return (
     <TaskEditorInputWrapper>
       <FormInput
@@ -132,15 +145,26 @@ export const TaskEditor = (props: TaskEditorProps) => {
             </Button>
           </Tooltip>
         </TaskEditorExtraFieldsPills>
-        <Button
-          style={addTaskSaveButton}
-          onClick={() => {
-            props.createProjectTasks(task, props.projectId)
-          }}
-          disabled={task.description ? false : true}
-        >
-          {props.isRequesting ? <CircleSpinner height={10} /> : "Save"}
-        </Button>
+        <ButtonWrapper>
+          {
+            props.type === "edit" ?
+              <Button
+                style={taskEditorSaveButton}
+                text="close"
+                onClick={props.closeEditor}
+              /> :
+              null
+          }
+          <Button
+            style={taskEditorSaveButton}
+            onClick={() => {
+              props.createProjectTasks(task, props.projectId)
+            }}
+            disabled={task.description ? false : true}
+          >
+            {props.isRequesting ? <CircleSpinner height={10} /> : "Save"}
+          </Button>
+        </ButtonWrapper>
       </TaskEditorExtraFields>
     </TaskEditorInputWrapper>
   )
@@ -254,3 +278,18 @@ export const IconWrapper = (props: IconWrapperProps) => (
     </style>
   </div>
 );
+
+export const ButtonWrapper = (props) => (
+  <div>
+    {props.children}
+    <style jsx>
+      {
+        `
+          {
+            display: flex;
+          }
+        `
+      }
+    </style>
+  </div>
+)

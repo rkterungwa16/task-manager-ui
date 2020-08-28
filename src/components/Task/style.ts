@@ -59,7 +59,7 @@ export const addTaskPillsHoverStyle = {
   backgroundColor: "#efefef"
 };
 
-export const addTaskSaveButton = {
+export const taskEditorSaveButton = {
   position: "relative",
   display: "flex",
   justifyContent: "center",
@@ -71,6 +71,7 @@ export const addTaskSaveButton = {
   lineHeight: "normal",
   letterSpacing: "2px",
   backgroundColor: "#c23d38",
+  marginLeft: "10px",
   color: "#FFFFFF",
   width: "60px",
   cursor: "pointer"
