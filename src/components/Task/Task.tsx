@@ -4,8 +4,13 @@ import EditIcon from "react-ionicons/lib/MdCreate";
 
 import { Dropdown, FormInput, Text, Button } from "../SharedComponents";
 import { TaskType } from "../../models";
-import { taskTextStyle, taskIconHoverStyle, taskIconStyle, dueDateTextStyle } from "./style";
-import { TaskEditor } from "./TaskEditor"
+import {
+  taskTextStyle,
+  taskIconHoverStyle,
+  taskIconStyle,
+  dueDateTextStyle
+} from "./style";
+import { TaskEditor } from "./TaskEditor";
 
 // TODO: Checkbox mark position for all screen sizes
 export interface TaskInterface {
@@ -33,48 +38,48 @@ export const Task = (props: TaskProps) => {
   return (
     <>
       <li>
-        {
-          editorIsOpen ?
-            <TaskEditor
-              type="edit"
-              description={props.description}
-              closeEditor={() => {
-                setEditorOpen(false);
-              }}
-            /> :
-            <>
-              <TaskItemInnerWrapper>
-                <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
-                  {taskIsComplete && <CheckBoxMark />}
-                  <FormInput type="checkbox" style={taskCheckboxStyle} />
-                </CheckboxWrapper>
-                <Text
+        {editorIsOpen ? (
+          <TaskEditor
+            type="edit"
+            description={props.description}
+            closeEditor={() => {
+              setEditorOpen(false);
+            }}
+          />
+        ) : (
+          <>
+            <TaskItemInnerWrapper>
+              <CheckboxWrapper onClick={() => setTaskStatus(!taskIsComplete)}>
+                {taskIsComplete && <CheckBoxMark />}
+                <FormInput type="checkbox" style={taskCheckboxStyle} />
+              </CheckboxWrapper>
+              <Text
+                onClick={() => {
+                  setEditorOpen(true);
+                }}
+                text={props.description}
+                style={taskTextStyle}
+              />
+              <TaskItemIconWrapper>
+                <Button
+                  style={taskIconStyle}
+                  hoverStyle={taskIconHoverStyle}
                   onClick={() => {
                     setEditorOpen(true);
                   }}
-                  text={props.description}
-                  style={taskTextStyle}
-                />
-                <TaskItemIconWrapper>
-                  <Button
-                    style={taskIconStyle}
-                    hoverStyle={taskIconHoverStyle}
-                    onClick={() => {
-                      setEditorOpen(true)
-                    }}
-                  >
-                    <EditIcon fontSize="22px" color="#8d8d8d" />
-                  </Button>
-                  <Button style={taskIconStyle} hoverStyle={taskIconHoverStyle}>
-                    <CalendarIcon fontSize="25px" color="#8d8d8d" />
-                  </Button>
-                </TaskItemIconWrapper>
-              </TaskItemInnerWrapper>
-              <ReminderWrapper>
-                <Text style={dueDateTextStyle} text="Aug 7" />
-              </ReminderWrapper>
-            </>
-        }
+                >
+                  <EditIcon fontSize="22px" color="#8d8d8d" />
+                </Button>
+                <Button style={taskIconStyle} hoverStyle={taskIconHoverStyle}>
+                  <CalendarIcon fontSize="25px" color="#8d8d8d" />
+                </Button>
+              </TaskItemIconWrapper>
+            </TaskItemInnerWrapper>
+            <ReminderWrapper>
+              <Text style={dueDateTextStyle} text="Aug 7" />
+            </ReminderWrapper>
+          </>
+        )}
       </li>
       <style jsx>
         {`
@@ -98,10 +103,7 @@ export const TaskList = (props: TaskListProps) => (
   <>
     <ul>
       {props.tasks.map(task => (
-        <Task
-          key={task._id}
-          description={task.description}
-        />
+        <Task key={task._id} description={task.description} />
       ))}
     </ul>
     <style jsx>

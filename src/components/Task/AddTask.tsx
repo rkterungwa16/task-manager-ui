@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import AddIcon from "react-ionicons/lib/IosAdd";
 import AddTaskCloseIcon from "react-ionicons/lib/IosClose";
 
-import {  Button, Tooltip } from "../SharedComponents";
+import { Button, Tooltip } from "../SharedComponents";
 import { TaskType } from "../../models";
 import { TaskEditor } from "./TaskEditor";
 
@@ -39,7 +39,7 @@ export const AddTaskEditor = (props: AddTaskProps) => {
   const [task, setTask] = useState({
     description: "",
     priority: null,
-    label: [""],
+    label: [""]
   });
 
   const handleChange = useCallback(
@@ -73,21 +73,21 @@ export const AddTaskEditor = (props: AddTaskProps) => {
             />
           </Button>
         ) : (
-            <Tooltip text="Add Task">
-              <Button
-                style={addTaskIconStyle}
-                hoverStyle={addTaskIconHoverStyle}
-                focusStyle={addTaskIconFocusStyle}
-              >
-                <AddIcon
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                  fontSize="30px"
-                />
-              </Button>
-            </Tooltip>
-          )}
+          <Tooltip text="Add Task">
+            <Button
+              style={addTaskIconStyle}
+              hoverStyle={addTaskIconHoverStyle}
+              focusStyle={addTaskIconFocusStyle}
+            >
+              <AddIcon
+                onClick={() => {
+                  setOpen(true);
+                }}
+                fontSize="30px"
+              />
+            </Button>
+          </Tooltip>
+        )}
       </AddTaskLabel>
       {isOpen ? (
         <TaskEditor
@@ -148,4 +148,3 @@ export const AddTaskLabel = (props: AddTaskLabelProps) => {
     </div>
   );
 };
-

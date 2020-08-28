@@ -294,19 +294,19 @@ export function projectsReducer(
 
     case ProjectActions.CREATE_PROJECT_TASK_SUCCESS:
       const { data: projectTask } = action;
-      const projects = state.projects.map((project) => {
+      const projects = state.projects.map(project => {
         if (project._id === projectTask.data.task.project) {
           return {
             ...project,
             tasks: [...project.tasks, projectTask.data.task]
-          }
+          };
         }
         return project;
       });
       const project = {
         ...state.project,
         tasks: [...state.project.tasks, projectTask.data.task]
-      }
+      };
       return {
         ...state,
         projects,

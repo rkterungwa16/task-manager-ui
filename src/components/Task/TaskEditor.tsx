@@ -7,7 +7,7 @@ import AddCollaboratorIcon from "react-ionicons/lib/IosPersonAddOutline";
 
 import { FormInput, Button, Tooltip, CircleSpinner } from "../SharedComponents";
 import { Priorities } from "./Priority";
-import { TaskType } from "../../models"
+import { TaskType } from "../../models";
 
 import {
   taskInputStyle,
@@ -15,7 +15,7 @@ import {
   taskInputPlaceholderStyle,
   addTaskPillsHoverStyle,
   addTaskPillsStyle,
-  taskEditorSaveButton,
+  taskEditorSaveButton
 } from "./style";
 
 export enum Priority {
@@ -47,7 +47,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
   const [task, setTask] = useState({
     description: "",
     priority: null,
-    label: [""],
+    label: [""]
   });
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
         }));
       }
     }
-  }, [props.description])
+  }, [props.description]);
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>): any => {
@@ -123,7 +123,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
             {priorityDropdownIsOpen && (
               <Priorities
                 dropdownIsOpen={priorityDropdownIsOpen}
-                setPriority={(priority) => {
+                setPriority={priority => {
                   setTask(prevState => ({
                     ...prevState,
                     priority
@@ -146,19 +146,17 @@ export const TaskEditor = (props: TaskEditorProps) => {
           </Tooltip>
         </TaskEditorExtraFieldsPills>
         <ButtonWrapper>
-          {
-            props.type === "edit" ?
-              <Button
-                style={taskEditorSaveButton}
-                text="close"
-                onClick={props.closeEditor}
-              /> :
-              null
-          }
+          {props.type === "edit" ? (
+            <Button
+              style={taskEditorSaveButton}
+              text="close"
+              onClick={props.closeEditor}
+            />
+          ) : null}
           <Button
             style={taskEditorSaveButton}
             onClick={() => {
-              props.createProjectTasks(task, props.projectId)
+              props.createProjectTasks(task, props.projectId);
             }}
             disabled={task.description ? false : true}
           >
@@ -167,8 +165,8 @@ export const TaskEditor = (props: TaskEditorProps) => {
         </ButtonWrapper>
       </TaskEditorExtraFields>
     </TaskEditorInputWrapper>
-  )
-}
+  );
+};
 
 export interface AddTaskInputWrapperProps {
   children?: React.ReactNode;
@@ -279,17 +277,15 @@ export const IconWrapper = (props: IconWrapperProps) => (
   </div>
 );
 
-export const ButtonWrapper = (props) => (
+export const ButtonWrapper = props => (
   <div>
     {props.children}
     <style jsx>
-      {
-        `
-          {
-            display: flex;
-          }
-        `
-      }
+      {`
+         {
+          display: flex;
+        }
+      `}
     </style>
   </div>
-)
+);

@@ -144,7 +144,9 @@ export const fetchTodaysTasks = () => async (dispatch: any) => {
   }
 };
 
-export const createProjectTasks = (task: TaskType, projectId: string) => async (dispatch: any) => {
+export const createProjectTasks = (task: TaskType, projectId: string) => async (
+  dispatch: any
+) => {
   dispatch(requestAction(ProjectActions.CREATE_PROJECT_TASK));
   try {
     const url = `${apiEndPoints.tasks}/${projectId}`;
@@ -153,10 +155,15 @@ export const createProjectTasks = (task: TaskType, projectId: string) => async (
       headers: { Authorization: `Bearer ${authToken}` }
     });
 
-    dispatch(withDataAction(ProjectActions.CREATE_PROJECT_TASK_SUCCESS, response.data));
+    dispatch(
+      withDataAction(ProjectActions.CREATE_PROJECT_TASK_SUCCESS, response.data)
+    );
   } catch (e) {
     dispatch(
-      withErrorAction(ProjectActions.CREATE_PROJECT_TASK_FAILURE, e.response.data.message)
+      withErrorAction(
+        ProjectActions.CREATE_PROJECT_TASK_FAILURE,
+        e.response.data.message
+      )
     );
   }
 };

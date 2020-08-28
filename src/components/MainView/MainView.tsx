@@ -13,7 +13,7 @@ const initialProjectState = {
   title: "",
   description: "",
   color: "",
-  owner: {_id: ""},
+  owner: { _id: "" },
   tasks: [],
   isFavourite: false,
   isArchived: false,
@@ -31,9 +31,7 @@ export interface MainViewProps {
 
 export const MainView = () => {
   const { project, createProjectTasks } = useProjectsApiActions();
-  const {
-    fetchTodaysTasks,
-  } = useProjectTasksApiActions();
+  const { fetchTodaysTasks } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
   const [addTaskIsOpen, setAddTaskOpen] = useState(false);
   const [currentProject, setCurrentProject] = useState(initialProjectState);

@@ -45,10 +45,7 @@ export const Priorities = (props: PrioritiesProps) => {
   }, [props.dropdownIsOpen]);
 
   return (
-    <Dropdown
-      style={priorityDropdownStyle}
-      closeDropdown={props.closeDropdown}
-    >
+    <Dropdown style={priorityDropdownStyle} closeDropdown={props.closeDropdown}>
       {priorities.map(priority => {
         return (
           <DropdownItem
