@@ -36,26 +36,6 @@ export interface AddTaskProps {
 
 export const AddTaskEditor = (props: AddTaskProps) => {
   const [isOpen, setOpen] = useState(false);
-  const [task, setTask] = useState({
-    description: "",
-    priority: null,
-    label: [""]
-  });
-
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): any => {
-      const target = event.currentTarget;
-      const value =
-        target.type === "checkbox" ? target.checked : (target.value as any);
-
-      setTask(prevState => ({
-        ...prevState,
-        description: value
-      }));
-    },
-    [task.description]
-  );
-
   return (
     <AddTaskWrapper>
       <AddTaskLabel>
