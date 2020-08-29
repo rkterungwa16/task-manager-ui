@@ -1,5 +1,6 @@
 import { AnyAction, ProjectActions, WithData, WithError } from "../actions";
 import { defaultProjectsState, ProjectState } from "../models";
+import { modifyTasks } from "./utils";
 
 export function projectsReducer(
   state: ProjectState = defaultProjectsState,
@@ -331,6 +332,64 @@ export function projectsReducer(
           createProjectTask: {
             isRequesting: false,
             error: createProjectTaskError
+          }
+        }
+      };
+
+    case ProjectActions.EDIT_PROJECT_TASK:
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          editProjectTask: {
+            ...state.actions.editProjectTask,
+            isRequesting: true
+          }
+        }
+      };
+
+    case ProjectActions.EDIT_PROJECT_TASK_SUCCESS:
+      const { data: editedProjectTask } = action;
+
+      const editedProjects = state.projects.map(project => {
+        if (project._id === editedProjectTask.data.task.project) {
+          return {
+            ...project,
+            tasks: modifyTasks(project, editedProjectTask)
+          };
+        }
+        return project;
+      });
+
+      const editedTaskProject = {
+        ...state.project,
+        tasks: modifyTasks(state.project, editedProjectTask)
+      };
+
+      return {
+        ...state,
+        projects: editedProjects,
+        project: editedTaskProject,
+        code: editedProjectTask.code,
+        actions: {
+          ...state.actions,
+          editProjectTask: {
+            ...state.actions.editProjectTask,
+            isRequesting: false,
+            error: ""
+          }
+        }
+      };
+
+    case ProjectActions.EDIT_PROJECT_TASK_FAILURE:
+      const { error: editProjectTaskError } = action as WithError<string>;
+      return {
+        ...state,
+        actions: {
+          ...state.actions,
+          editProjectTask: {
+            isRequesting: false,
+            error: editProjectTaskError
           }
         }
       };

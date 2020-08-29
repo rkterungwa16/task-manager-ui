@@ -21,6 +21,7 @@ import {
 
 export interface TaskEditorProps {
   // isOpen?: false;
+  id?: string;
   description?: string;
   priority?: Priority;
   userId?: string;
@@ -31,6 +32,7 @@ export interface TaskEditorProps {
   createdAt?: string;
   updatedAt?: string;
   createProjectTasks?: (task: TaskType, projectId: string) => void;
+  editProjectTask?: (task: TaskType, projectId: string, taskId: string) => void;
   isRequesting?: boolean;
   type?: "edit" | "add";
   closeEditor?: () => void;
@@ -65,7 +67,7 @@ export const TaskEditor = (props: TaskEditorProps) => {
 
   const taskActions = {
     edit: useCallback(() => {
-      // editTask(props.projectId, currentProject);
+      props.editProjectTask(task, props.projectId, props.id);
     }, [props.projectId, JSON.stringify(task)]),
     add: useCallback(() => {
       props.createProjectTasks(task, props.projectId);

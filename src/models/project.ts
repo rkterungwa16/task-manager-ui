@@ -1,4 +1,5 @@
 import { ActionStatus } from "../actions";
+import { TaskType } from "./";
 
 export interface UserType {
   _id: string;
@@ -9,7 +10,7 @@ export interface ProjectType {
   description?: string;
   color?: string;
   owner?: UserType;
-  tasks?: string[];
+  tasks?: TaskType[];
   isFavourite?: boolean;
   isArchived?: boolean;
   isDeleted?: boolean;
@@ -36,6 +37,7 @@ export interface ProjectState {
     editProject: ActionStatus;
     fetchTodaysTasks: ActionStatus;
     createProjectTask: ActionStatus;
+    editProjectTask: ActionStatus;
   };
 }
 
@@ -47,7 +49,12 @@ export const defaultProjectsState: ProjectState = {
       description: "",
       color: "",
       owner: { _id: "" },
-      tasks: [],
+      tasks: [
+        {
+          _id: "",
+          description: ""
+        }
+      ],
       isFavourite: false,
       isArchived: false,
       isDeleted: false,
@@ -103,6 +110,10 @@ export const defaultProjectsState: ProjectState = {
       error: ""
     },
     createProjectTask: {
+      isRequesting: false,
+      error: ""
+    },
+    editProjectTask: {
       isRequesting: false,
       error: ""
     }

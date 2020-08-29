@@ -30,7 +30,11 @@ export interface MainViewProps {
 }
 
 export const MainView = () => {
-  const { project, createProjectTasks } = useProjectsApiActions();
+  const {
+    project,
+    createProjectTasks,
+    editProjectTask
+  } = useProjectsApiActions();
   const { fetchTodaysTasks } = useProjectTasksApiActions();
   const [pathname, setPathname] = useState("");
   const [addTaskIsOpen, setAddTaskOpen] = useState(false);
@@ -44,7 +48,11 @@ export const MainView = () => {
 
   const {
     actions: {
-      createProjectTask: { isRequesting, error }
+      createProjectTask: { isRequesting, error },
+      editProjectTask: {
+        isRequesting: isEditingProjectTask,
+        error: editingTaskError
+      }
     }
   } = project;
 
@@ -83,7 +91,11 @@ export const MainView = () => {
             />
           </Wrapper>
         ) : (
-          <TaskList tasks={currentProject.tasks} />
+          <TaskList
+            tasks={currentProject.tasks}
+            editProjectTask={editProjectTask}
+            isRequesting={isEditingProjectTask}
+          />
         )}
         <AddTaskEditor
           projectId={currentProject._id}

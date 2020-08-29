@@ -30,6 +30,7 @@ const taskCheckboxStyle = {
 };
 
 export interface TaskProps {
+  id?: string;
   description?: string;
   priority?: Priority;
   userId?: string;
@@ -37,6 +38,8 @@ export interface TaskProps {
   label?: string[];
   completed?: boolean;
   dueDate?: string;
+  editProjectTask?: (task: TaskType, projectId: string, taskId: string) => void;
+  isRequesting?: boolean;
 }
 export const Task = (props: TaskProps) => {
   const [dropdownIsOpen, openDropdown] = useState(false);
@@ -47,6 +50,7 @@ export const Task = (props: TaskProps) => {
       <li>
         {editorIsOpen ? (
           <TaskEditor
+            id={props.id}
             type="edit"
             description={props.description}
             priority={props.priority}
@@ -55,6 +59,8 @@ export const Task = (props: TaskProps) => {
             closeEditor={() => {
               setEditorOpen(false);
             }}
+            isRequesting={props.isRequesting}
+            editProjectTask={props.editProjectTask}
           />
         ) : (
           <>
@@ -107,6 +113,9 @@ export const Task = (props: TaskProps) => {
 
 export interface TaskListProps {
   tasks: TaskType[];
+  editProjectTask?: (task: TaskType, projectId: string, taskId: string) => void;
+  isRequesting?: boolean;
+  error?: string;
 }
 
 export const TaskList = (props: TaskListProps) => (
@@ -115,10 +124,13 @@ export const TaskList = (props: TaskListProps) => (
       {props.tasks.map(task => (
         <Task
           key={task._id}
+          id={task._id}
           description={task.description}
           priority={task.priority}
           dueDate={task.dueDate}
           projectId={task.project}
+          isRequesting={props.isRequesting}
+          editProjectTask={props.editProjectTask}
         />
       ))}
     </ul>

@@ -167,3 +167,31 @@ export const createProjectTasks = (task: TaskType, projectId: string) => async (
     );
   }
 };
+
+export const editProjectTask = (
+  task: TaskType,
+  projectId: string,
+  taskId: string
+) => async (dispatch: any) => {
+  dispatch(requestAction(ProjectActions.EDIT_PROJECT_TASK));
+  try {
+    const url = apiEndPoints.taskEdit
+      .replace(":taskId", taskId)
+      .replace(":projectId", projectId);
+    const authToken = window.localStorage.getItem("currentUser");
+    const response = await axios.put(url, task, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+
+    dispatch(
+      withDataAction(ProjectActions.EDIT_PROJECT_TASK_SUCCESS, response.data)
+    );
+  } catch (e) {
+    dispatch(
+      withErrorAction(
+        ProjectActions.EDIT_PROJECT_TASK_FAILURE,
+        e.response.data.message
+      )
+    );
+  }
+};

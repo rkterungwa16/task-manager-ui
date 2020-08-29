@@ -7,7 +7,8 @@ import {
   fetchUserProject,
   fetchProjectColors,
   editProject,
-  createProjectTasks
+  createProjectTasks,
+  editProjectTask
 } from "../../actions";
 
 export const useProjectsApiActions: any = () => {
@@ -20,7 +21,8 @@ export const useProjectsApiActions: any = () => {
       addProject,
       fetchProjectColors,
       editProject,
-      createProjectTasks
+      createProjectTasks,
+      editProjectTask
     },
     dispatch
   );
