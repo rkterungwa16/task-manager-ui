@@ -116,6 +116,7 @@ export const MainView = () => {
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-y: auto;
           }
           @media screen and (max-width: 600px) {
              {
