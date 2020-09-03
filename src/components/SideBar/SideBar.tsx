@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Router from "next/router";
 
 import { SideBarHeader } from "./SideBarHeader";
 import { SideBarProjectLists } from "./SideBarProjectLists";
 import { CircleSpinner } from "../SharedComponents";
 import { ProjectType, ProjectColorsType } from "../../models";
-import { Routes } from "../../routes/client";
 import { useProjectsApiActions } from "../../hooks";
 
 const initialProjectState = {
@@ -13,7 +12,9 @@ const initialProjectState = {
   title: "",
   description: "",
   color: "",
-  owner: "",
+  owner: {
+    _id: ""
+  },
   tasks: [],
   isFavourite: false,
   isArchived: false,
@@ -21,7 +22,7 @@ const initialProjectState = {
   collaborators: [],
   createdAt: "",
   updatedAt: ""
-};
+} as ProjectType;
 
 const initialColorsState = [
   {
@@ -30,7 +31,7 @@ const initialColorsState = [
   }
 ];
 
-const initialProjectsState = [initialProjectState];
+const initialProjectsState = [initialProjectState] as ProjectType[];
 
 export interface SideBarProps {
   colors?: ProjectColorsType[];

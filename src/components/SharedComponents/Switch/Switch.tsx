@@ -1,3 +1,4 @@
+import * as React from "react";
 export interface SwitchProps {
   inputRef?: React.Ref<any> | React.RefObject<any>;
   name?: string;

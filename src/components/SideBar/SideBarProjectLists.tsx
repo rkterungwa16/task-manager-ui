@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ProjectList } from "../Project";
 import { ProjectType } from "../../models";
 import { Text } from "../SharedComponents";
