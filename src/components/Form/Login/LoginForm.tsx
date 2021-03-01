@@ -8,7 +8,7 @@ import {
   LinkButton,
   Text,
   Wrapper
-} from "../../SharedComponents";
+} from "../../";
 
 import {
   alreadyHaveAnAccountTextStyle,
