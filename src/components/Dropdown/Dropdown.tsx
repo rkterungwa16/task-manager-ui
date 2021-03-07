@@ -15,7 +15,11 @@ export const Dropdown = (props: DropdownProps) => {
   useClickOutside(dropdownRef, props.closeDropdown);
   return (
     <>
-      <div ref={dropdownRef}>{props.children}</div>
+      <div
+        ref={dropdownRef}
+        role="menu"
+        tabIndex={-1}
+      >{props.children}</div>
       <style jsx>
         {`
            {

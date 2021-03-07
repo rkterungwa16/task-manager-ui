@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { createPortal } from "react-dom";
 
-import { Button } from "../SharedComponents";
+import { Button } from "../";
 
 export const ToastContext = createContext(null);
 
