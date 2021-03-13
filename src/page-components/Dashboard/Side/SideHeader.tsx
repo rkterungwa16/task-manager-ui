@@ -57,15 +57,14 @@ export const SideBarHeader = (props: SideBarHeaderProps) => {
           <Text style={textStyle}>Overdue</Text>
         </TextWrapper>
         <TextWrapper>
-          <ProjectsIcon fontSize="20px" />
+          {props.openProjectList && (
+            <ArrowDown onClick={props.onClick} fontSize="30px" />
+          )}
+          {!props.openProjectList && (
+            <ArrowForward onClick={props.onClick} fontSize="30px" />
+          )}
           <Text style={textStyle}>Projects</Text>
           <IconWrapper>
-            {props.openProjectList && (
-              <ArrowDown onClick={props.onClick} fontSize="20px" />
-            )}
-            {!props.openProjectList && (
-              <ArrowForward onClick={props.onClick} fontSize="20px" />
-            )}
             <Add fontSize="30px" onClick={() => setModalOpen(true)} />
           </IconWrapper>
         </TextWrapper>
@@ -179,6 +178,7 @@ export const TextWrapper = (props: TextWrapperProps) => {
             align-items: center;
             padding-top: 5px;
             padding-bottom: 5px;
+            width: 100%;
           }
         `}
       </style>

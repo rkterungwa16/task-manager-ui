@@ -9,6 +9,7 @@ export interface ButtonProps {
   hoverStyle?: StyleProps;
   focusStyle?: StyleProps;
   disabled?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 export interface ButtonStyleProps {
@@ -21,7 +22,11 @@ export interface ButtonStyleProps {
 
 export const Button = (props: ButtonProps) => (
   <>
-    <button disabled={props.disabled} onClick={props.onClick}>
+    <button
+      disabled={props.disabled}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.children}
       {props.text}
     </button>
@@ -43,5 +48,9 @@ export const Button = (props: ButtonProps) => (
     `}</style>
   </>
 );
+
+Button.defaultProps = {
+  type: "button"
+}
 
 export default Button;
