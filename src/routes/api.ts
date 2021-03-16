@@ -1,7 +1,6 @@
-export const register = "http://localhost:3300/api/v1/register/";
-export const login = "http://localhost:3300/api/v1/login/";
-export const projects = "http://localhost:3300/api/v1/projects";
-export const tasks = "http://localhost:3300/api/v1/tasks";
-export const colors = "http://localhost:3300/api/v1/colors";
-export const taskEdit =
-  "http://localhost:3300/api/v1/task/:taskId/project/:projectId";
+export const register = `${process.env.NEXT_BASE_URL}register/`;
+export const login = `${process.env.NEXT_BASE_URL}login/`;
+export const projects = `${process.env.NEXT_BASE_URL}projects`;
+export const tasks = `${process.env.NEXT_BASE_URL}tasks`;
+export const colors = `${process.env.NEXT_BASE_URL}colors`;
+export const taskEdit = `${process.env.NEXT_BASE_URL}task/:taskId/project/:projectId`;

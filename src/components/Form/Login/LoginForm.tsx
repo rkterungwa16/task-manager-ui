@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import Link from "next/link";
+import { signIn, useSession } from 'next-auth/client';
 import {
   Button,
   CircleSpinner,
@@ -35,6 +36,8 @@ export const LoginForm = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { user, authenticateUser } = useUserApiActions();
+  const router = useRouter();
+
   const { handleChange, formValues, errors } = useFormValidation(
     defaultLoginState,
     stateValidatorSchema
@@ -45,7 +48,10 @@ export const LoginForm = () => {
       window.localStorage.setItem("currentUser", user.token);
       Router.push(Routes.Overdue);
     }
-  }, [user.token]);
+    if (router.query.error) {
+      setError(router.query.error as string);
+    }
+  }, [user.token, router]);
 
   useEffect(() => {
     const hasEmptyFormInput = Object.keys(formValues).some(value => {
@@ -76,7 +82,12 @@ export const LoginForm = () => {
   }, [JSON.stringify(user.actions.authenticateUser)]);
 
   const handleSubmit = () => {
-    authenticateUser(formValues);
+    // authenticateUser(formValues);
+    console.log("form values ---->>>", formValues);
+    signIn("credentials", {
+      ...formValues,
+      callbackUrl: `${window.location.origin}/dashboard`
+    })
   };
 
   return (
@@ -117,6 +128,7 @@ export const LoginForm = () => {
               style={buttonStyle}
               onClick={handleSubmit}
               disabled={buttonDisabled}
+              type="submit"
             >
               {user.actions.authenticateUser.isRequesting ? (
                 <CircleSpinner height={20} />

@@ -190,7 +190,6 @@ export const TaskItemIconWrapper = (props: TaskItemIconWrapperProps) => (
           width: 70px;
           align-items: center;
           justify-description: space-evenly;
-          position: absolute;
           margin-bottom: 5px;
           right: 400px;
         }
