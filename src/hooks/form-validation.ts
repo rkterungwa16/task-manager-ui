@@ -52,6 +52,7 @@ export function useFormValidation(
           : "";
       }
 
+      console.log("formValues___", formValues);
       if (field.isEqual) {
         error = !field.isEqual.func(
           formValues.password,
@@ -71,7 +72,9 @@ export function useFormValidation(
       const value = target.value;
       const name = target.name;
 
-      const error = validateFormFields(name, value);
+      console.log("name", name);
+      console.log("value", value);
+      const error = validateFormFields(name, value.trim());
 
       setValues(prevState => ({ ...prevState, [name]: value }));
       setErrors(prevState => ({ ...prevState, [name]: error }));

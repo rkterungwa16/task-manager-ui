@@ -8,11 +8,9 @@ export interface DropdownItemProps {
 
 export const DropdownItem = (props: DropdownItemProps) => (
   <>
-    <div
-      onClick={props.onClick}
-      role="menuitem"
-      tabIndex={0}
-    >{props.children}</div>
+    <div onClick={props.onClick} role="menuitem" tabIndex={0}>
+      {props.children}
+    </div>
     <style jsx>
       {`
          {
